@@ -1,12 +1,16 @@
 import React from "react";
 import { Component } from "react";
+import Start from "./Start";
 
 class MainPage extends Component {
-    constructor(props) {
-        super(props)
+    
+    selectPage(page) {
+        return <Start/>
     }
     render() {
-        return <div>MainPage</div>
+        return <div>
+            {this.selectPage()}
+        </div>
     }
 }
 
