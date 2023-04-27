@@ -1,0 +1,11 @@
+.appPage {
+    display: flex;
+}
+.photo {
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    margin-left: 270%;
+    margin-top: 40%;
+    font-size: 200%;
+}

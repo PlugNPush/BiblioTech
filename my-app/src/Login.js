@@ -6,9 +6,11 @@ class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {firstName : '', lastName : '', email : '', password : ''}
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
     handleSubmit(event) {
         event.preventDefault()
+        this.props.goAppPage()
         //appel à la bdd
     }
     render() {

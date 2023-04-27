@@ -1,0 +1,16 @@
+.navbar {
+    display: block;
+    font-size: 300%;
+    color: blueviolet;
+    padding-top: 1%;
+}
+.separatorBar {
+    padding-bottom: 1%;
+}
+.homeIcon:hover {
+    font-size: 150%;
+}
+
+.pastIcon:hover {
+    font-size: 150%;
+}

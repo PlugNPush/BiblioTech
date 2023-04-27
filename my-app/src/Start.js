@@ -8,6 +8,7 @@ class Start extends Component {
     constructor(props) {
         super(props)
         this.state = {choice : undefined}
+        console.log("Start" +this.props)
     }
     accueil() {
         if(this.state.choice === undefined) {
@@ -16,19 +17,9 @@ class Start extends Component {
             <button className="buttonAccueil" onClick={() => this.setState({choice : 'SignIn'})}>Inscription</button>
             </div>
         } else if(this.state.choice === "Login") {
-            return <Login/>
+            return <Login goAppPage={this.props.goAppPage}/>
         } else if(this.state.choice === "SignIn") {
-            return <SignIn/>
-        } else {
-            return <Login/>
-        }
-    }
-    choosePage(page) {
-        if(page === "Login") {
-            return <Login/>
-        }
-        if(page === "SignIn") {
-            return <SignIn/>
+            return <SignIn goAppPage={this.props.goAppPage}/>
         }
     }
     render() {
