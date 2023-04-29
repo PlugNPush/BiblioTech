@@ -1,0 +1,12 @@
+
+
+.titreHistoricPage {
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    margin-left: 175%;
+    margin-top: 20%;
+    margin-bottom: 10%;
+    font-size: 200%;
+    white-space: nowrap;
+}

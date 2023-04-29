@@ -8,7 +8,6 @@ class Start extends Component {
     constructor(props) {
         super(props)
         this.state = {choice : undefined}
-        console.log("Start" +this.props)
     }
     accueil() {
         if(this.state.choice === undefined) {

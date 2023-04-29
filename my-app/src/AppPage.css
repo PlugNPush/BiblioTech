@@ -9,3 +9,12 @@
     margin-top: 40%;
     font-size: 200%;
 }
+.camera {
+    margin-left: 294%;
+    margin-top: 20%;
+    font-size: 600%;
+    color: blueviolet;
+}
+.camera:hover {
+    transform: scale(1.2);
+}
