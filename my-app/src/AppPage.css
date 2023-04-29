@@ -18,3 +18,10 @@
 .camera:hover {
     transform: scale(1.2);
 }
+#photoAdded {
+    font-weight: bold;
+    margin-left: 296%;
+    white-space: nowrap;
+    text-decoration: underline;
+    color: red;
+}

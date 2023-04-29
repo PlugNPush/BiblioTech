@@ -10,7 +10,7 @@ class Home extends Component {
     }
     photoAdded() {
         if(this.state.addPhoto) {
-            return <div>
+            return <div id="photoAdded">
                 Photo Ajoutée
             </div>
         }

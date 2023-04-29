@@ -2,6 +2,7 @@ import React from "react";
 import { Component } from "react";
 import NavBar from "./NavBar";
 import Home from "./Home";
+import Start from "./Start"
 import "./AppPage.css"
 import HistoricPage from "./HistoricPage";
 
@@ -11,6 +12,7 @@ class AppPage extends Component {
         this.state = {page : "home"}
         this.goHomePage = this.goHomePage.bind(this)
         this.goHistoricPage = this.goHistoricPage.bind(this)
+        this.logOut = this.logOut.bind(this)
         this.selectPage = this.selectPage.bind(this)
     }
     goHomePage() {
@@ -18,6 +20,9 @@ class AppPage extends Component {
     }
     goHistoricPage() {
         this.setState({page : "historic"})
+    }
+    logOut() {
+        window.location.reload()
     }
     selectPage() {
         if(this.state.page === "home") {
@@ -29,8 +34,8 @@ class AppPage extends Component {
     }
     render() {
         return <div className="appPage">
-            <div>Logo App A mettre
-                <NavBar goHomePage={this.goHomePage} goHistoricPage={this.goHistoricPage}/>
+            <div>
+                <NavBar goHomePage={this.goHomePage} goHistoricPage={this.goHistoricPage} logOut={this.logOut}/>
             </div>
             <div>
                 {this.selectPage()}

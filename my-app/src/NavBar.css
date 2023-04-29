@@ -2,15 +2,26 @@
     display: block;
     font-size: 300%;
     color: blueviolet;
-    padding-top: 1%;
+    padding-top: 10%;
+    border: 4px solid blueviolet;
+    border-radius: 5px;
+    padding: 10px;
 }
 .separatorBar {
-    padding-bottom: 1%;
+    padding-bottom: 10%;
 }
 .homeIcon:hover {
     font-size: 150%;
 }
 
 .pastIcon:hover {
+    font-size: 150%;
+}
+.exitIcon {
+    margin-top: 10%;
+    margin-left: 8%;
+}
+
+.exitIcon:hover {
     font-size: 150%;
 }
