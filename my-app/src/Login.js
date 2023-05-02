@@ -8,9 +8,25 @@ class Login extends Component {
         this.state = {firstName : '', lastName : '', email : '', password : ''}
         this.handleSubmit = this.handleSubmit.bind(this)
     }
+    wrongPassword() {
+        if(this.state.wrongPassword) {
+            return <div className="wrongPassword">
+                Mauvais mot de passe
+            </div>
+        }
+    }
     handleSubmit(event) {
         event.preventDefault()
-        this.props.goAppPage()
+        console.log(Math.random())
+        if(Math.random() <= 0.5) {
+            this.setState({wrongPassword : true})
+            setTimeout(() => {
+                this.setState({wrongPassword : false})
+            }, 3000)
+        }
+        else {
+            this.props.goAppPage()
+        }
         //appel à la bdd
     }
     render() {
@@ -26,6 +42,7 @@ class Login extends Component {
             </label>
             <button className="submit" type="submit">Sign Up</button>
         </form>
+        {this.wrongPassword()}
       </div>
     }
 }

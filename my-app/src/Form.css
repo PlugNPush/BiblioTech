@@ -34,3 +34,8 @@ label {
 .submit:hover {
     background-color: #0062cc;
   }
+.wrongPassword {
+  color: red;
+  text-align: center;
+  margin-top: 1%;
+}

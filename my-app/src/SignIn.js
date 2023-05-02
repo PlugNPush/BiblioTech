@@ -5,13 +5,27 @@ import "./Form.css"
 class SignIn extends Component {
     constructor(props) {
         super(props)
-        this.state = {firstName : '', lastName : '', email : '', password : ''}
+        this.state = {firstName : '', lastName : '', email : '', password : '', wrongPassword : false}
         this.handleSubmit = this.handleSubmit.bind(this)
+    }
+    wrongPassword() {
+        if(this.state.wrongPassword) {
+            return <div className="wrongPassword">
+                Mauvais mot de passe
+            </div>
+        }
     }
     handleSubmit(event) {
         event.preventDefault()
-        this.props.goAppPage()
-        //appel à la bdd
+        if(Math.random() <= 0.5) {
+            this.setState({wrongPassword : true})
+            setTimeout(() => {
+                this.setState({wrongPassword : false})
+            }, 3000)
+        }
+        else {
+            this.props.goAppPage()
+        }
     }
     render() {
         return <div>
@@ -34,6 +48,7 @@ class SignIn extends Component {
             </label>
             <button className="submit" type="submit">Sign Up</button>
         </form>
+        {this.wrongPassword()}
       </div>
     }
 }
