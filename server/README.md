@@ -15,6 +15,7 @@ Installer un mysql database server : https://dev.mysql.com/downloads/mysql/
 
 Create a file data_base.js in the folder setup/routes/
 With the following content : 
+```js
 const data_db = {
     database : "db_master_project",
     username : "",
@@ -23,3 +24,4 @@ const data_db = {
 }
 
 module.exports = data_db;
+```
