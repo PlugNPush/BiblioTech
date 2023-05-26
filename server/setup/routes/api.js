@@ -50,5 +50,16 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.post("/signin", async(req, res) => {
+    const {username, email, password} = req.body;
+    const query = await sequelize.query(
+        `Select * from user where email = '${email}';`
+    )
+    if(query[0].length !== 0) {
+        res.status(401).json({message: "email deja present"})
+    }
+    await sequelize.query( `insert into user (username, email, password) values ('${username}', '${email}', '${password}')`)
+    res.status(200).json({message:"Values inserted"})
+})
 
 module.exports = router;
