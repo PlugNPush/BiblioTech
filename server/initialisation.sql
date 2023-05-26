@@ -14,8 +14,8 @@ create table if not exists book (
     author varchar(255) DEFAULT '' not null,
     year varchar(255) DEFAULT '' not null,
     primary key (title, owner),
-    constraint fk_book foreign key (owner) references users(email)
+    constraint fk_book foreign key (owner) references user(email)
 );
 
-select * from users;
+select * from user;
 select * from book;
