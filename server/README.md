@@ -13,7 +13,7 @@ Installer un mysql database server : https://dev.mysql.com/downloads/mysql/
 
 # Set up environment 
 
-Create a file data_base.js in the folder setup/routes/
+Create a file .data_db.js in the folder setup/routes/
 With the following content : 
 ```js
 const data_db = {

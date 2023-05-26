@@ -31,10 +31,10 @@ router.use((req, res, next) => {
 });
 
 router.post("/login", async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   const user = await sequelize.query(
-    `SELECT * FROM users WHERE username = '${username}'`
+    `SELECT * FROM user WHERE email = '${email}'`
   );
   
   if (user[0].length === 0) {

@@ -13,6 +13,12 @@ create table if not exists book (
     owner varchar(255) not null,
     author varchar(255) DEFAULT '' not null,
     year varchar(255) DEFAULT '' not null,
+    type varchar(255) DEFAULT '' not null,
+    iban varchar(255) DEFAULT '' not null,
+    nbBooks int DEFAULT 1,
+    publisher varchar(255) not null,
+    price_old varchar(255),
+    price_new varchar(255),
     primary key (title, owner),
     constraint fk_book foreign key (owner) references user(email)
 );
