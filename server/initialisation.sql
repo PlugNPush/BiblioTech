@@ -1,7 +1,7 @@
 create database if not exists db_master_project;
 use db_master_project;
 
-create table if not exists users (
+create table if not exists user (
     username varchar(255) not null,
     email varchar(255) not null,
     password varchar(255) not null,
@@ -9,20 +9,13 @@ create table if not exists users (
 );
 
 create table if not exists book (
-    title varchar(255) not null,
-    author varchar(255) not null,
-    year varchar(255) not null,
-    primary key (title)
-)
-
-create table if not exists library (
-    email_owner varchar(255) not null,
-    book varchar(255) not null,
-    primary key (owner, book),
-    foreign key (owner) references users(email),
-    foreign key (book) references book(title)
-)
+    title varchar(255) DEFAULT '' not null,
+    owner varchar(255) not null,
+    author varchar(255) DEFAULT '' not null,
+    year varchar(255) DEFAULT '' not null,
+    primary key (title, owner),
+    constraint fk_book foreign key (owner) references users(email)
+);
 
 select * from users;
-select * from user_cart;
-select * from reservations;
+select * from book;
