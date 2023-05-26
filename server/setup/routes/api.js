@@ -62,6 +62,24 @@ router.post("/addBook", async (req, res) => {
 });
 
 
+router.get("/getBooksFromOwner/:owner", async (req, res) => {
+  const { owner } = req.params;
+  try {
+    const books = await sequelize.query(
+      `SELECT * FROM book WHERE owner = ?`,
+      {
+        replacements: [owner],
+        type: Sequelize.QueryTypes.SELECT
+      }
+    );
+    res.status(200).json(books);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+
+
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
