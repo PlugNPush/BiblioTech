@@ -3,7 +3,7 @@ const router = express.Router();
 
 const data_db = require('./.data_db.js');
 
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 const { status } = require("express/lib/response");
 
 const bcrypt = require('bcrypt');
@@ -30,6 +30,38 @@ router.use((req, res, next) => {
   next();
 });
 
+const Book = sequelize.define('Book', {
+  title: DataTypes.STRING,
+  owner: DataTypes.STRING,
+  author: DataTypes.STRING,
+  year: DataTypes.STRING,
+  type: DataTypes.STRING,
+  iban: DataTypes.STRING,
+  nbBooks: DataTypes.INTEGER,
+  publisher: DataTypes.STRING,
+  price_old: DataTypes.STRING,
+  price_new: DataTypes.STRING,
+}, {
+  // Other model options go here
+});
+
+router.post("/addBook", async (req, res) => {
+  const { title, owner, author, year, type, iban, publisher} = req.body;
+  try {
+    const result = await sequelize.query(
+      `INSERT INTO book (title, owner, author, year, type, iban, publisher) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      {
+        replacements: [title, owner, author, year, type, iban, publisher],
+        type: Sequelize.QueryTypes.INSERT
+      }
+    );
+    res.status(200).json({ message: "Book added successfully" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -49,6 +81,5 @@ router.post("/login", async (req, res) => {
     }
   }
 });
-
 
 module.exports = router;

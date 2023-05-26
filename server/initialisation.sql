@@ -8,6 +8,8 @@ create table if not exists user (
     primary key (email)
 );
 
+
+
 create table if not exists book (
     title varchar(255) DEFAULT '' not null,
     owner varchar(255) not null,
@@ -22,6 +24,3 @@ create table if not exists book (
     primary key (title, owner),
     constraint fk_book foreign key (owner) references user(email)
 );
-
-select * from user;
-select * from book;
