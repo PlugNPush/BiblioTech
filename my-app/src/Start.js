@@ -16,9 +16,9 @@ class Start extends Component {
             <button className="buttonAccueil" onClick={() => this.setState({choice : 'SignIn'})}>Inscription</button>
             </div>
         } else if(this.state.choice === "Login") {
-            return <Login goAppPage={this.props.goAppPage}/>
+            return <Login goAppPage={this.props.goAppPage} setEmail={this.props.setEmail}/>
         } else if(this.state.choice === "SignIn") {
-            return <SignIn goAppPage={this.props.goAppPage}/>
+            return <SignIn goAppPage={this.props.goAppPage} setEmail={this.props.setEmail}/>
         }
     }
     render() {

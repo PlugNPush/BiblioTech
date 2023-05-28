@@ -2,7 +2,6 @@ import React from "react";
 import { Component } from "react";
 import NavBar from "./NavBar";
 import Home from "./Home";
-import Start from "./Start"
 import "./AppPage.css"
 import HistoricPage from "./HistoricPage";
 
@@ -26,10 +25,10 @@ class AppPage extends Component {
     }
     selectPage() {
         if(this.state.page === "home") {
-            return <Home/>
+            return <Home getEmail={this.props.getEmail}/>
         }
         if(this.state.page === "historic") {
-            return <HistoricPage/>
+            return <HistoricPage getEmail={this.props.getEmail}/>
         }
     }
     render() {

@@ -2,7 +2,8 @@ create database if not exists db_master_project;
 use db_master_project;
 
 create table if not exists user (
-    username varchar(255) not null,
+    firstname varchar(255) not null,
+    lastname varchar(255) not null,
     email varchar(255) not null,
     password varchar(255) not null,
     primary key (email)

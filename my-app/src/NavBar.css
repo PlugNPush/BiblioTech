@@ -8,20 +8,37 @@
     padding: 10px;
 }
 .separatorBar {
-    padding-bottom: 10%;
-}
-.homeIcon:hover {
-    font-size: 150%;
+    padding-bottom: 20%;
 }
 
 .pastIcon:hover {
     font-size: 150%;
+    margin-left: 0%;
+    margin-right: 25%;
+}
+.pastIcon{
+    transform: scale(1.75);
+    margin-left: 25%;
+    margin-bottom: 20%;
 }
 .exitIcon {
     margin-top: 10%;
     margin-left: 8%;
+    transform: scale(1.5);
+    margin-left: 34%;
 }
 
 .exitIcon:hover {
     font-size: 150%;
+    margin-left: 0%;
+    margin-right: 75%;
+}
+
+.logoApp {
+    height: min-content;
+}
+.logoApp:hover {
+    height: 150%;
+    transform: scale(1.5);
+    padding-top: 10%;
 }

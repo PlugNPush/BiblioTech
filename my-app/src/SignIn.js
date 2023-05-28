@@ -1,31 +1,42 @@
 import React from "react";
 import { Component } from "react";
 import "./Form.css"
+import axios from 'axios'
 
 class SignIn extends Component {
     constructor(props) {
         super(props)
-        this.state = {firstName : '', lastName : '', email : '', password : '', wrongPassword : false}
+        this.state = {firstName : '', lastName : '', email : '', password : '', badEmail : false}
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-    wrongPassword() {
-        if(this.state.wrongPassword) {
+    badEmail() {
+        if(this.state.badEmail) {
             return <div className="wrongPassword">
-                Mauvais mot de passe
+                Email déjà pris
             </div>
         }
     }
     handleSubmit(event) {
         event.preventDefault()
-        if(Math.random() <= 0.5) {
-            this.setState({wrongPassword : true})
+        axios.post("http://localhost:8100/api/signin", 
+            {firstname: this.state.firstName, lastname: this.state.lastName, email: this.state.email, password: this.state.password})
+        .then((res) => {
+            if(res.status === 200) {
+                this.props.setEmail(this.state.email)
+                this.props.goAppPage()
+            } else {
+                this.setState({badEmail : true})
+                setTimeout(() => {
+                    this.setState({badEmail : false})
+                }, 3000)
+            }
+        })
+        .catch((res) => {
+            this.setState({badEmail : true})
             setTimeout(() => {
-                this.setState({wrongPassword : false})
+                this.setState({badEmail : false})
             }, 3000)
-        }
-        else {
-            this.props.goAppPage()
-        }
+        })
     }
     render() {
         return <div>
@@ -48,7 +59,7 @@ class SignIn extends Component {
             </label>
             <button className="submit" type="submit">Sign Up</button>
         </form>
-        {this.wrongPassword()}
+        {this.badEmail()}
       </div>
     }
 }

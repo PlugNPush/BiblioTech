@@ -1,33 +1,42 @@
 import React from "react";
 import { Component } from "react";
+import axios from "axios";
 import "./Form.css"
 
 class Login extends Component {
     constructor(props) {
         super(props)
-        this.state = {firstName : '', lastName : '', email : '', password : ''}
+        this.state = {email : '', password : '', wrongPassword: false}
         this.handleSubmit = this.handleSubmit.bind(this)
     }
     wrongPassword() {
         if(this.state.wrongPassword) {
             return <div className="wrongPassword">
-                Mauvais mot de passe
+                Mauvais email/mot de passe
             </div>
         }
     }
     handleSubmit(event) {
         event.preventDefault()
-        console.log(Math.random())
-        if(Math.random() <= 0.5) {
+        axios.post("http://localhost:8100/api/login", 
+            {email: this.state.email, password: this.state.password})
+        .then((res) => {
+            if(res.status === 200) {
+                this.props.setEmail(this.state.email)
+                this.props.goAppPage()
+            } else {
+                this.setState({wrongPassword : true})
+                setTimeout(() => {
+                    this.setState({wrongPassword : false})
+                }, 3000)
+            }
+        })
+        .catch((res) => {
             this.setState({wrongPassword : true})
             setTimeout(() => {
                 this.setState({wrongPassword : false})
             }, 3000)
-        }
-        else {
-            this.props.goAppPage()
-        }
-        //appel à la bdd
+        })
     }
     render() {
         return <div>

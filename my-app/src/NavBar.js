@@ -1,9 +1,9 @@
 import React from "react";
 import { Component } from "react";
-import {AiFillHome} from "react-icons/ai"
 import {BiHistory} from "react-icons/bi"
 import {ImExit} from "react-icons/im"
 import "./NavBar.css"
+import logo from "./logo.png"
 
 class NavBar extends Component {
     constructor(props) {
@@ -12,10 +12,9 @@ class NavBar extends Component {
     render() {
         return <div className="navbar">
             <div className="logoApp">
-                Logo
+                <img src={logo} alt="Logo" onClick={() => {this.props.goHomePage()}}/>
             </div>
             <div className="homeIcon">
-                <AiFillHome onClick={() => {this.props.goHomePage()}}/>
             </div>
             <div className="separatorBar">
 
