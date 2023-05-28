@@ -8,8 +8,13 @@ class HistoricPage extends Component {
     constructor(props) {
         super(props)
         this.state = {books : []}
+        this.updateBooks = this.updateBooks.bind(this)
+        this.getBooksOwner = this.getBooksOwner.bind(this)
     }
     componentDidMount() {
+        this.getBooksOwner()
+    }
+    updateBooks() {
         this.getBooksOwner()
     }
     getBooksOwner() {
@@ -29,13 +34,14 @@ class HistoricPage extends Component {
     render() {
         return <div className="historicPage">
             <div className="titreHistoricPage">
-                Liste des Livres scannés : {console.log("state", this.state.books)}
+                Liste des Livres scannés :
             </div>
             <div className="listeLivres"> 
             {
                 this.state.books.map(book => (
                     <Book key={book.title+this.props.getEmail} title={book.title} author={book.author} 
-                    iban= {book.iban} nbBooks={book.nbBooks} publisher={book.publisher} type={book.type} year={book.year}/>
+                    iban= {book.iban} nbBooks={book.nbBooks} publisher={book.publisher} type={book.type} year={book.year} 
+                    getEmail={this.props.getEmail} whenDelete={this.updateBooks}/>
                   ))
             }
             </div>

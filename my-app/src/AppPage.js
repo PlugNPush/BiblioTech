@@ -36,7 +36,7 @@ class AppPage extends Component {
             <div>
                 <NavBar goHomePage={this.goHomePage} goHistoricPage={this.goHistoricPage} logOut={this.logOut}/>
             </div>
-            <div>
+            <div className="choosePageSite">
                 {this.selectPage()}
             </div>
         </div>

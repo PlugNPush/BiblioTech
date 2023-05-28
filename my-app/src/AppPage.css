@@ -2,16 +2,22 @@
     display: flex;
 }
 .photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-weight: bold;
     text-align: center;
     display: flex;
-    margin-left: 270%;
-    margin-top: 40%;
     font-size: 200%;
+    white-space: nowrap;
+    margin-top: 5%;
+    margin-bottom: 3%;
 }
 .camera {
-    margin-left: 294%;
-    margin-top: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     font-size: 600%;
     color: blueviolet;
 }
@@ -20,8 +26,17 @@
 }
 #photoAdded {
     font-weight: bold;
-    margin-left: 296%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
     white-space: nowrap;
     text-decoration: underline;
     color: red;
+}
+.choosePageSite {
+    display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
 }

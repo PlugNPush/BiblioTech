@@ -83,18 +83,23 @@ router.post("/signin", async(req, res) => {
     catch(err) {
       res.status(400).json({message: "email deja present"})
     }
-})
+});
 
 router.post("/addbook", async (req, res) => {
   const { title, owner, author, year, type, iban, publisher} = req.body;
   try {
-    const result = await sequelize.query(
-      `INSERT INTO book (title, owner, author, year, type, iban, publisher) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      {
-        replacements: [title, owner, author, year, type, iban, publisher],
-        type: Sequelize.QueryTypes.INSERT
-      }
-    );
+    const checkBook = await sequelize.query(`Select * From Book where owner='${owner}' and title='${title}'`);
+    if(checkBook[0].length !== 0) {
+      await sequelize.query(`update book set nbBooks='${checkBook[0][0].nbBooks + 1}' where owner='${owner}' and title='${title}'`);
+    } else {
+      const result = await sequelize.query(
+        `INSERT INTO book (title, owner, author, year, type, iban, publisher) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        {
+          replacements: [title, owner, author, year, type, iban, publisher],
+          type: Sequelize.QueryTypes.INSERT
+        }
+      );
+    }
     res.status(200).json({ message: "Book added successfully" });
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -115,6 +120,27 @@ router.get("/getbooksfromowner/:owner", async (req, res) => {
     res.status(200).json(books);
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+});
+
+router.post("/deletebook", async (req, res) => {
+  const {title, owner} = req.body;
+  try {
+    const books = await sequelize.query(`Select * from book where owner='${owner}' and title='${title}'`);
+    if(books[0].length === 0) {
+      res.status(400).json({message: "livre inexistant"})
+      return
+    }
+    const nbBooks = books[0][0].nbBooks
+    if(nbBooks === 1) {
+      await sequelize.query(`delete from book where owner='${owner}' and title='${title}'`)
+    } else {
+      await sequelize.query(`update book set nbBooks='${nbBooks - 1}' where owner='${owner}' and title='${title}'`)
+    }
+    res.status(200).json({message: "livre supprime"})
+  }
+  catch(err) {
+    res.status(501).json({message: err})
   }
 });
 
