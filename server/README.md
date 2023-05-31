@@ -10,7 +10,7 @@ In order to initialize the database, type command line : /usr/local/mysql/bin/my
 
 Installer mysql workbench
 Installer un mysql database server : https://dev.mysql.com/downloads/mysql/
-
+Executer le fichier initialisation.sql
 # Set up environment 
 
 Create a file .data_db.js in the folder setup/routes/
