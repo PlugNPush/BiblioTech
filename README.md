@@ -6,7 +6,7 @@ Master Project M1
 - exécuter les lignes :
 ```zsh
 npm i
-npm run start
+npm start
 ```
 
 # Executer le back :
@@ -15,5 +15,5 @@ npm run start
 - exécuter dans un terminal la ligne :
 ```zsh
 npm i
-npm run start
+npm start
 ```
