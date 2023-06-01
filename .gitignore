@@ -1,11 +1,12 @@
-/server/node_modules
-/my-app/node_modules
-/server/package-lock.json
-/my-app/package-lock.json
-/server/setup/routes/.data_db.js
+# dependencies
+**/node_modules
+**/package-lock.json
 /my-app/.idea/*
 /.pnp
 .pnp.js
+
+# database
+/server/setup/routes/.data_db.js
 
 # testing
 /coverage
