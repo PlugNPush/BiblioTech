@@ -1,9 +1,14 @@
-import React from "react";
-import { Component } from "react";
-import Start from "./Start";
-import AppPage from "./AppPage"
+import React from "react"
+import { Component } from "react"
+
+import Start from "./connection/Start"
+import AppPage from "./home/AppPage"
 
 class MainPage extends Component {
+    /**
+     * @description select the page to display between the login page and the application page
+     * @call in App.js
+     */
     constructor(props) {
         super(props)
         this.state = {page : 'Login', email:""}

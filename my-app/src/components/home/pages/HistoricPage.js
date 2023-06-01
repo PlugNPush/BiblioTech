@@ -1,10 +1,16 @@
-import React from "react";
-import { Component } from "react";
-import "./HistoricPage.css"
-import Book from "./Book";
-import axios from "axios";
+import React from "react"
+import { Component } from "react"
+
+import Book from "./Book"
+import axios from "axios"
+
+import "./HistoricPage.scss"
 
 class HistoricPage extends Component {
+    /**
+     * @description page where the user can see the books he scanned
+     * @call in AppPage.js
+     */
     constructor(props) {
         super(props)
         this.state = {books : []}

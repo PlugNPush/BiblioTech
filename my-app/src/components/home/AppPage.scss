@@ -1,6 +1,7 @@
 .appPage {
     display: flex;
 }
+
 .photo {
     display: flex;
     flex-direction: column;
@@ -13,6 +14,7 @@
     margin-top: 5%;
     margin-bottom: 3%;
 }
+
 .camera {
     display: flex;
     flex-direction: column;
@@ -24,6 +26,7 @@
 .camera:hover {
     transform: scale(1.2);
 }
+
 #photoAdded {
     font-weight: bold;
     display: flex;
@@ -34,6 +37,7 @@
     text-decoration: underline;
     color: red;
 }
+
 .choosePageSite {
     display: flex;
   flex-direction: column;

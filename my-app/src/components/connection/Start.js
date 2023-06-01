@@ -1,10 +1,16 @@
-import React from "react";
-import { Component } from "react";
-import Login from "./Login";
-import SignIn from "./SignIn";
-import "./Start.css"
+import React from "react"
+import { Component } from "react"
+
+import Login from "./Login"
+import SignIn from "./SignIn"
+
+import "./Start.scss"
 
 class Start extends Component {
+    /**
+     * @description first page of the application, the user can choose between login and signin
+     * @call in MainPage.js
+     */
     constructor(props) {
         super(props)
         this.state = {choice : undefined}
@@ -27,4 +33,5 @@ class Start extends Component {
         </div>
     }
 }
+
 export default Start

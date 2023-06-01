@@ -1,9 +1,15 @@
-import axios from "axios";
-import React from "react";
-import { Component } from "react";
+import axios from "axios"
+import React from "react"
+import { Component } from "react"
 import {AiTwotoneDelete} from "react-icons/ai"
-import "./Book.css"
+
+import "./Book.scss"
+
 class Book extends Component {
+    /**
+     * @description display a book
+     * @call in HistoricPage.js
+     */
     constructor(props) {
         super(props)
     }
@@ -27,4 +33,5 @@ class Book extends Component {
         </div>
     }
 }
+
 export default Book

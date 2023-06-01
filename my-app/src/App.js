@@ -1,12 +1,12 @@
-import MainPage from "./MainPage";
-
+import MainPage from "./components/MainPage"
 
 function App() {
+  /**
+   * @call in index.js
+   */
   return (
-    <div>
-      <MainPage/>
-    </div>
-  );
+    <MainPage/>
+  )
 }
 
 export default App;

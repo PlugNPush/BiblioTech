@@ -1,9 +1,14 @@
-import React from "react";
-import { Component } from "react";
-import axios from "axios";
-import "./Form.css"
+import React from "react"
+import { Component } from "react"
+import axios from "axios"
+
+import "./Form.scss"
 
 class Login extends Component {
+    /**
+     * @description login page, the user can connect to the application
+     * @call in Start.js
+     */
     constructor(props) {
         super(props)
         this.state = {email : '', password : '', wrongPassword: false}
@@ -55,4 +60,5 @@ class Login extends Component {
       </div>
     }
 }
+
 export default Login

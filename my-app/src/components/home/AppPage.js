@@ -1,11 +1,17 @@
-import React from "react";
-import { Component } from "react";
-import NavBar from "./NavBar";
-import Home from "./Home";
-import "./AppPage.css"
-import HistoricPage from "./HistoricPage";
+import React from "react"
+import { Component } from "react"
+
+import NavBar from "./NavBar"
+import Home from "./pages/Home"
+import HistoricPage from "./pages/HistoricPage"
+
+import "./AppPage.scss"
 
 class AppPage extends Component {
+    /**
+     * @description define navbar and pages
+     * @call in MainPage.js
+     */
     constructor(props) {
         super(props)
         this.state = {page : "home"}
@@ -42,4 +48,5 @@ class AppPage extends Component {
         </div>
     }
 }
+
 export default AppPage

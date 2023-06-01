@@ -1,8 +1,12 @@
-import React from "react";
-import { Component } from "react";
+import React from "react"
+import { Component } from "react"
 import {MdAddAPhoto} from "react-icons/md"
 
 class Home extends Component {
+    /**
+     * @description home page, the user can take a photo
+     * @call in AppPage.js
+     */
     constructor(props) {
         super(props)
         this.state = {addPhoto : false}

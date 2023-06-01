@@ -1,6 +1,7 @@
 # dependencies
 **/node_modules
-**/package-lock.json
+/my-app/package-lock.json
+/server/package-lock.json
 /my-app/.idea/*
 /.pnp
 .pnp.js

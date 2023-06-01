@@ -1,9 +1,14 @@
-import React from "react";
-import { Component } from "react";
-import "./Form.css"
+import React from "react"
+import { Component } from "react"
 import axios from 'axios'
 
+import "./Form.scss"
+
 class SignIn extends Component {
+    /**
+     * @description form to sign in
+     * @call in Start.js
+     */
     constructor(props) {
         super(props)
         this.state = {firstName : '', lastName : '', email : '', password : '', badEmail : false}
@@ -63,4 +68,5 @@ class SignIn extends Component {
       </div>
     }
 }
+
 export default SignIn

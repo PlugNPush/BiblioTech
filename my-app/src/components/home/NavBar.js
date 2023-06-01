@@ -1,11 +1,16 @@
-import React from "react";
-import { Component } from "react";
+import React from "react"
+import { Component } from "react"
 import {BiHistory} from "react-icons/bi"
 import {ImExit} from "react-icons/im"
-import "./NavBar.css"
+
+import "./NavBar.scss"
 import logo from "./logo.png"
 
 class NavBar extends Component {
+    /**
+     * @description the navigation bar
+     * @call in AppPage.js
+     */
     constructor(props) {
         super(props)
     }
@@ -29,4 +34,5 @@ class NavBar extends Component {
         </div>
     }
 }
+
 export default NavBar
