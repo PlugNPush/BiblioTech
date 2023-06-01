@@ -22,15 +22,18 @@ class Book extends Component {
         })
     }
     render() {
-        return <div className="book">
-                -
-            <div className="infoBook">
-                {this.props.title}, {this.props.author}, {this.props.year}
-            </div>
-            <div className="deleteBook">
+        return <tr className="book">
+            <td className="titleBook">{this.props.title}</td>
+            <td className="authorBook">{this.props.author}</td>
+            <td className="ibanBook">{this.props.iban}</td>
+            <td className="nbBooksBook">{this.props.nbBooks}</td>
+            <td className="publisherBook">{this.props.publisher}</td>
+            <td className="typeBook">{this.props.type}</td>
+            <td className="yearBook">{this.props.year}</td>
+            <td className="deleteBook">
                 <AiTwotoneDelete onClick={() => this.deleteBook()}/>
-            </div>
-        </div>
+            </td>
+        </tr>
     }
 }
 

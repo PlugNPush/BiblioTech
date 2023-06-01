@@ -39,9 +39,7 @@ class AppPage extends Component {
     }
     render() {
         return <div className="appPage">
-            <div>
-                <NavBar goHomePage={this.goHomePage} goHistoricPage={this.goHistoricPage} logOut={this.logOut}/>
-            </div>
+            <NavBar goHomePage={this.goHomePage} goHistoricPage={this.goHistoricPage} logOut={this.logOut}/>
             <div className="choosePageSite">
                 {this.selectPage()}
             </div>

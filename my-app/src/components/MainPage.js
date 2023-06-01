@@ -29,9 +29,9 @@ class MainPage extends Component {
         this.setState({page : 'App'})
     }
     render() {
-        return <div>
+        return <React.Fragment>
             {this.selectPage()}
-        </div>
+        </React.Fragment>
     }
 }
 

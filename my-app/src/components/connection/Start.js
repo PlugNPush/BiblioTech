@@ -28,9 +28,9 @@ class Start extends Component {
         }
     }
     render() {
-        return <div>
+        return <React.Fragment>
             {this.accueil()}
-        </div>
+        </React.Fragment>
     }
 }
 

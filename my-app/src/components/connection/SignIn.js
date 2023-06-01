@@ -44,7 +44,7 @@ class SignIn extends Component {
         })
     }
     render() {
-        return <div>
+        return <React.Fragment>
         <form className="formCss" onSubmit={this.handleSubmit}>
             <label>
             First Name:
@@ -65,7 +65,7 @@ class SignIn extends Component {
             <button className="submit" type="submit">Sign Up</button>
         </form>
         {this.badEmail()}
-      </div>
+      </React.Fragment>
     }
 }
 

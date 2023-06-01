@@ -42,18 +42,29 @@ class HistoricPage extends Component {
             <div className="titreHistoricPage">
                 Liste des Livres scannés :
             </div>
-            <div className="listeLivres"> 
-            {
-                this.state.books.map(book => (
+            <table className="listeLivres"> 
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Auteur</th>
+                        <th>IBAN</th>
+                        <th>Nombre de livres</th>
+                        <th>Editeur</th>
+                        <th>Type</th>
+                        <th>Année</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {this.state.books.map(book => (
                     <Book key={book.title+this.props.getEmail} title={book.title} author={book.author} 
                     iban= {book.iban} nbBooks={book.nbBooks} publisher={book.publisher} type={book.type} year={book.year} 
                     getEmail={this.props.getEmail} whenDelete={this.updateBooks}/>
-                  ))
-            }
-            </div>
+                  ))}
+                </tbody>
+            </table>
         </div>
     }
-    
 }
 
 export default HistoricPage
