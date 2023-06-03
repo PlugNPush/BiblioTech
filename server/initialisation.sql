@@ -22,6 +22,7 @@ create table if not exists book (
     publisher varchar(255) not null,
     price_old varchar(255),
     price_new varchar(255),
+    rating int,
     primary key (title, owner),
     constraint fk_book foreign key (owner) references user(email)
 );
