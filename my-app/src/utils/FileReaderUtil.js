@@ -1,6 +1,6 @@
 import {getBookGoogle} from "./sendBook.js";
 
-function convertStringToListOfFile(listFile) {
+export function convertStringToListOfFile(listFile) {
     let filtered = listFile.replaceAll(/  +/g, ' ') //remove multiple spaces
     filtered = filtered.replaceAll(' ', '-') //remove multiple spaces
     return filtered.split("\n")
