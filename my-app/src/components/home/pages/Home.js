@@ -1,8 +1,8 @@
 import React from "react"
 import { Component } from "react"
 import {MdAddAPhoto} from "react-icons/md"
-import {readFileContent, convertStringToListOfFile} from "../../../utils/FileReaderUtil.js"
-import {getBookGoogle} from "../../../utils/sendBook";
+import {readFileContent, convertStringToListOfFile} from "utils/FileReaderUtil.js"
+import {getBookGoogle} from "utils/sendBook";
 
 class Home extends Component {
     /**
