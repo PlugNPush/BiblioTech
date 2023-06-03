@@ -11,6 +11,7 @@
     transform: scale(1);
     margin-bottom: 20%;
     display: flex;
+    transition: transform 0.2s;
 }
 .navbar > *:hover {
     transform: scale(1.2);

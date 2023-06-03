@@ -23,7 +23,13 @@
     font-size: 600%;
     color: blueviolet;
 }
-.camera:hover {
+
+.camera > * {
+    height: 100%;
+    width: 100%;
+    transition: transform 0.2s;
+}
+.camera > *:hover {
     transform: scale(1.2);
 }
 
@@ -43,4 +49,5 @@
   flex-direction: column;
   height: 100vh;
   width: 100%;
+  align-items: center;
 }
