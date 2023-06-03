@@ -26,7 +26,7 @@ class Home extends Component {
         }, 3000)
     }
     render() {
-        return <div>
+        return <React.Fragment>
             <div className="photo">
                 Photographiez!
             </div>
@@ -36,7 +36,7 @@ class Home extends Component {
             <div>
                 {this.photoAdded()}
             </div>
-        </div>
+        </React.Fragment>
     }
 }
 

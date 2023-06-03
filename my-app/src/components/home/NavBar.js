@@ -19,18 +19,12 @@ class NavBar extends Component {
             <div className="logoApp">
                 <img src={logo} alt="Logo" onClick={() => {this.props.goHomePage()}}/>
             </div>
-            <div className="homeIcon">
-            </div>
-            <div className="separatorBar">
-
-            </div>
             <div className="pastIcon">
                 <BiHistory onClick={() => {this.props.goHistoricPage()}}/>
             </div>
             <div className="exitIcon">
                 <ImExit onClick={() => {this.props.logOut()}}/>
             </div>
-            
         </div>
     }
 }
