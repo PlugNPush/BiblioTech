@@ -4,7 +4,7 @@ import {BiHistory} from "react-icons/bi"
 import {ImExit} from "react-icons/im"
 
 import "./NavBar.scss"
-import logo from "./logo.png"
+import logo from "assets/logo.png"
 
 class NavBar extends Component {
     /**

@@ -1,6 +1,9 @@
 # BiblioTech
 Master Project M1
 
+# Prérequis :
+VSCode : installer l'extension "Javascript and Typescript Nightly"
+
 # Executer le front :
 - exécuter les lignes :
 ```zsh
