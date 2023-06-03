@@ -1,6 +1,7 @@
 import React from "react"
 import { Component } from "react"
 import {MdAddAPhoto} from "react-icons/md"
+import {readFileContent} from "../../../utils/FileReaderUtil.js"
 
 class Home extends Component {
     /**
@@ -19,6 +20,13 @@ class Home extends Component {
             </div>
         }
     }
+    addFile() {
+        return <div>
+            <div className="loadFile">
+                <input type="file" onChange={readFileContent}/>
+            </div>
+        </div>
+    }
     addPhoto() {
         this.setState({addPhoto : true})
         setTimeout(() => {
@@ -36,6 +44,9 @@ class Home extends Component {
             <div>
                 {this.photoAdded()}
             </div>
+            <React.Fragment>
+                {this.addFile()}
+            </React.Fragment>
         </React.Fragment>
     }
 }
