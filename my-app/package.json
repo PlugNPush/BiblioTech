@@ -2,6 +2,17 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "description": "Web site created for users to scan their library",
+  "author": {
+    "name": "Romain Marques",
+    "author1": "Romain Marques",
+    "author2": "Vincent Marguet",
+    "author3": "Michael Nass",
+    "author4": "Loic Cassan",
+    "author5": "Thomas Miras Garcia",
+    "author6": "Logan Le Lay"
+  },
+  "repository": "https://github.com/PlugNPush/BiblioTech",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

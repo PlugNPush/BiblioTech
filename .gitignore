@@ -2,7 +2,7 @@
 **/node_modules
 /my-app/package-lock.json
 /server/package-lock.json
-/my-app/.idea/*
+**/.idea/*
 /.pnp
 .pnp.js
 
