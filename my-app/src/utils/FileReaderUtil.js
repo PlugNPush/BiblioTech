@@ -6,15 +6,13 @@ function convertStringToListOfFile(listFile) {
     return filtered.split("\n")
 }
 
-export function readFileContent(file) {
+export function readFileContent(file, owner) {
     const reader = new FileReader()
     reader.onload = (event) => {
         const fileContent = event.target.result
         const readBooks = convertStringToListOfFile(fileContent)
-        console.log("books", readBooks)
         for(let i in readBooks) {
-            console.log(i, readBooks[i])
-            getBookGoogle(readBooks[i])
+            getBookGoogle(readBooks[i], owner)
         }
     }
     reader.readAsText(file.target.files[0])

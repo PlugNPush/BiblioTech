@@ -25,7 +25,6 @@ class Book extends Component {
         return <tr className="book">
             <td className="titleBook">{this.props.title}</td>
             <td className="authorBook">{this.props.author}</td>
-            <td className="ibanBook">{this.props.iban}</td>
             <td className="nbBooksBook">{this.props.nbBooks}</td>
             <td className="publisherBook">{this.props.publisher}</td>
             <td className="typeBook">{this.props.type}</td>

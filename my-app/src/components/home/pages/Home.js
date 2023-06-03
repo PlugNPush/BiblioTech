@@ -23,7 +23,7 @@ class Home extends Component {
     addFile() {
         return <div>
             <div className="loadFile">
-                <input type="file" onChange={readFileContent}/>
+                <input type="file" onChange={(e)=>readFileContent(e, this.props.getEmail)}/>
             </div>
         </div>
     }
