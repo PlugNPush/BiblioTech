@@ -17,7 +17,7 @@ class NavBar extends Component {
     render() {
         return <div className="navbar">
             <div className="logoApp">
-                <img src={logo} alt="Logo" onClick={() => {this.props.goHomePage()}}/>
+                <img src={logo} alt="Logo" className="non-selectable" onClick={() => {this.props.goHomePage()}}/>
             </div>
             <div className="pastIcon">
                 <BiHistory onClick={() => {this.props.goHistoricPage()}}/>
