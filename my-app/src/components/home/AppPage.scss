@@ -2,48 +2,6 @@
     display: flex;
 }
 
-.photo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-weight: bold;
-    text-align: center;
-    display: flex;
-    font-size: 200%;
-    white-space: nowrap;
-    margin-top: 5%;
-    margin-bottom: 3%;
-}
-
-.camera {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    font-size: 600%;
-    color: blueviolet;
-}
-
-.camera > * {
-    height: 100%;
-    width: 100%;
-    transition: transform 0.2s;
-}
-.camera > *:hover {
-    transform: scale(1.2);
-}
-
-#photoAdded {
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2%;
-    white-space: nowrap;
-    text-decoration: underline;
-    color: red;
-}
-
 .choosePageSite {
     display: flex;
   flex-direction: column;

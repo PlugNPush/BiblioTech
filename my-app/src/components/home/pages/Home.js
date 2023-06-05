@@ -2,7 +2,9 @@ import React from "react"
 import { Component } from "react"
 import {MdAddAPhoto} from "react-icons/md"
 import {readFileContent, convertStringToListOfFile} from "utils/FileReaderUtil.js"
-import {getBookGoogle} from "utils/sendBook";
+import {getBookGoogle, addBook} from "utils/sendBook";
+
+import "./Home.scss"
 
 class Home extends Component {
     /**
@@ -11,7 +13,7 @@ class Home extends Component {
      */
     constructor(props) {
         super(props)
-        this.state = {addPhoto : false, book: ""}
+        this.state = {addPhoto : false, book: "", timer: null, searchResults: []}
         this.photoAdded = this.photoAdded.bind(this)
     }
     photoAdded() {
@@ -22,23 +24,58 @@ class Home extends Component {
         }
     }
     addFile() {
-        return <div>
-            <div className="loadFile">
-                <input type="file" onChange={(e)=>readFileContent(e, this.props.getEmail)}/>
+        return <div className="loadFile">
+            <input type="file" onChange={(e)=>readFileContent(e, this.props.getEmail)}/>
+        </div>
+    }
+    addBook() { // affiche une barre de recherche ainsi que le résultat en temps réel
+        return <div className="searchFile">
+            <input type="text" onChange={(e)=>this.handleSearch(e)}/>
+            <div className="searchResults">
+                {this.state.searchResults.map((result) => (
+                    <div className="card" key={result.id}>
+                        <div className="card-header">
+                            <img src={result.volumeInfo.imageLinks?result.volumeInfo.imageLinks.thumbnail:""} alt="book"/>
+                            <h5 className="card-title">{result.volumeInfo.title}</h5>
+                        </div>
+                        <div className="card-body">
+                            <p className="card-text">{result.volumeInfo.authors?result.volumeInfo.authors[0]:"unknown"}</p>
+                            <p className="card-text">{result.volumeInfo.publishedDate?result.volumeInfo.publishedDate:"unknown"}</p>
+                            <p className="card-text">{result.volumeInfo.categories?result.volumeInfo.categories[0]:"unknown"}</p>
+                            <p className="card-text">{result.volumeInfo.publisher?result.volumeInfo.publisher:"unknown"}</p>
+                            
+                        </div>
+                        <div className="card-footer">
+                            <button className="btn btn-primary" onClick={() => {
+                                const bookInfo = result.volumeInfo
+                                addBook(bookInfo.title, this.props.getEmail, bookInfo["authors"]?bookInfo.authors[0]:"unknown",
+                                    bookInfo["publishedDate"]?bookInfo.publishedDate:"unknown",
+                                    bookInfo["categories"]?bookInfo.categories[0]:"unknown",
+                                    bookInfo["publisher"]?bookInfo.publisher:"unknown")
+                            }}>Ajouter</button>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     }
-    addBook() {
-        return <div>
-            <div className="loadFile">
-                <input type="text" onChange={(e) => {this.setState({book: e.target.value})}}/>
-                <button  onClick={() => {
-                    console.log("book", this.state.book)
-                    const filtered = convertStringToListOfFile(this.state.book)
-                    getBookGoogle(filtered, this.props.getEmail)
-                }}>Ok</button>
-            </div>
-        </div>
+    handleSearch(e) {
+        // ajout d'un délai pour éviter de faire trop de requêtes
+        if(this.state.timer) {
+            clearTimeout(this.state.timer)
+        }
+        this.setState({timer: setTimeout(() => {
+            const filtered = convertStringToListOfFile(e.target.value)
+            if (filtered[0].length === 0) {
+                this.setState({searchResults: []})
+            } else {
+                getBookGoogle(filtered, this.props.getEmail).then((res) => {
+                    //console.log("res", res)
+                    this.setState({searchResults: res})
+                })               
+            }
+        }, 1000)})
+        //console.log("searchResults", this.state.searchResults)
     }
     addPhoto() {
         this.setState({addPhoto : true})
@@ -54,15 +91,9 @@ class Home extends Component {
             <div className="camera">
                 <MdAddAPhoto onClick={() => {this.addPhoto()}}/>
             </div>
-            <div>
-                {this.photoAdded()}
-            </div>
-            <React.Fragment>
-                {this.addFile()}
-            </React.Fragment>
-            <React.Fragment>
-                {this.addBook()}
-            </React.Fragment>
+            {this.photoAdded()}
+            {this.addFile()}
+            {this.addBook()}
         </React.Fragment>
     }
 }

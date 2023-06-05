@@ -1,15 +1,12 @@
 import axios from "axios";
 export function getBookGoogle(title, owner) {
-    axios.get("https://www.googleapis.com/books/v1/volumes?q=" + title)
+    return axios.get("https://www.googleapis.com/books/v1/volumes?q=" + title)
         .then((res) => {
-            const bookInfo = res.data.items[0].volumeInfo
-            addBook(bookInfo.title, owner, bookInfo["authors"]?bookInfo.authors[0]:"unknown",
-                bookInfo["publishedDate"]?bookInfo.publishedDate:"unknown",
-                bookInfo["categories"]?bookInfo.categories[0]:"unknown",
-                bookInfo["publisher"]?bookInfo.publisher:"unknown")
+            return res.data.items
         })
         .catch((err) => {
             console.log(err)
+            return []
         })
 }
 
