@@ -1,6 +1,7 @@
 import React from "react"
 import { Component } from "react"
 import {MdAddAPhoto} from "react-icons/md"
+import {RxValueNone} from "react-icons/rx"
 import {readFileContent, convertStringToListOfFile} from "utils/FileReaderUtil.js"
 import {getBookGoogle, addBook} from "utils/sendBook";
 
@@ -30,7 +31,14 @@ class Home extends Component {
     }
     addBook() { // affiche une barre de recherche ainsi que le résultat en temps réel
         return <div className="searchFile">
-            <input type="text" onChange={(e)=>this.handleSearch(e)}/>
+            <div className="searchBar">
+                <input type="text" onChange={(e)=>this.handleSearch(e)}/>
+                <button className="btn btn-primary" onClick={() => {
+                    // reset de la barre de recherche
+                    document.querySelector(".searchBar input").value = ""
+                    this.setState({searchResults: []})
+                }}><RxValueNone/></button>
+            </div>
             <div className="searchResults">
                 {this.state.searchResults.map((result) => (
                     <div className="card" key={result.id}>
