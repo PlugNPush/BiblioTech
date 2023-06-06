@@ -26,3 +26,17 @@ export function addBook(title, owner, author, year, type, publisher) {
             console.log(err)
         })
 }
+
+export function noteBook(title, email, note) {
+    axios.post("http://localhost:8100/api/notebook", {
+        title: title,
+        email: email,
+        note: note
+    })
+        .then((res) => {
+            console.log("note ajoute")
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}

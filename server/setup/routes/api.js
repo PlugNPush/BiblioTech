@@ -105,6 +105,16 @@ router.post("/addbook", async (req, res) => {
   }
 });
 
+router.post("/notebook", async (req, res) => {
+  const { title, email, note } = req.body;
+  try {
+    await sequelize.query(`update book set note='${note}' where email='${email}' and title='${title}'`);
+    res.status(200).json({ message: "Note added successfully" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 
 router.get("/getbooksfromowner/:owner", async (req, res) => {
   const { owner } = req.params;
