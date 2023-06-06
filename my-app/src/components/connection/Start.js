@@ -13,23 +13,22 @@ class Start extends Component {
      */
     constructor(props) {
         super(props)
-        this.state = {choice : undefined}
+        this.state = {choice : 'Login'}
     }
-    accueil() {
-        if(this.state.choice === undefined) {
-            return <div className="accueil">
-            <button className="buttonAccueil" onClick={() => this.setState({choice : 'Login'})}>Connexion</button>
-            <button className="buttonAccueil" onClick={() => this.setState({choice : 'SignIn'})}>Inscription</button>
+    connexion() {
+        return <div className="accueil">
+            <div className="buttonContainer">
+            <button className={`buttonAccueil ${this.state.choice === "Login" ? "selected" : ""}`} onClick={() => this.setState({choice : 'Login'})}>Connexion</button>
+            <button className={`buttonAccueil ${this.state.choice === "SignIn" ? "selected" : ""}`} onClick={() => this.setState({choice : 'SignIn'})}>Inscription</button>
             </div>
-        } else if(this.state.choice === "Login") {
-            return <Login goAppPage={this.props.goAppPage} setEmail={this.props.setEmail}/>
-        } else if(this.state.choice === "SignIn") {
-            return <SignIn goAppPage={this.props.goAppPage} setEmail={this.props.setEmail}/>
-        }
+            <div className="formContainer">
+                {this.state.choice === "Login" ? <Login goAppPage={this.props.goAppPage} setEmail={this.props.setEmail}/> : <SignIn goAppPage={this.props.goAppPage} setEmail={this.props.setEmail}/>}
+            </div>
+        </div>
     }
     render() {
         return <React.Fragment>
-            {this.accueil()}
+            {this.connexion()}
         </React.Fragment>
     }
 }

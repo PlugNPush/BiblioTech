@@ -1,9 +1,13 @@
 .accueil {
     display: flex;
+    flex-direction: column;
     text-align: center;
     align-items: center;
-    margin-top: 22%;
-    margin-left: 40%;
+    margin-top: 2%;
+}
+
+.buttonContainer {
+  border-bottom: 1px solid #0077cc;
 }
 
 .buttonAccueil {
@@ -28,3 +32,10 @@
 .buttonAccueil:focus {
   outline: none;
 }
+
+.buttonAccueil.selected {
+  text-decoration: underline;
+}
+
+// à améliorer :
+// - ajouter une transition sur le underline des boutons
