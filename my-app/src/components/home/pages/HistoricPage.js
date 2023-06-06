@@ -29,8 +29,9 @@ class HistoricPage extends Component {
             let bookList = []
             for (let i in res.data) {
                 bookList.push({author : res.data[i].author, title: res.data[i].title, nbBooks: res.data[i].nbBooks,
-                    publisher: res.data[i].publisher, type: res.data[i].type, year: res.data[i].year})
+                    publisher: res.data[i].publisher, type: res.data[i].type, year: res.data[i].year, note: res.data[i].note})
             }
+            console.log(bookList)
             this.setState({books: bookList})
         })
         .catch((err) => {
@@ -42,7 +43,7 @@ class HistoricPage extends Component {
     }
     render() {
         const filteredBooks = this.state.books.filter(book => {
-            return book.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.author.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.publisher.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.type.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.year.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+            return book.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.author.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.publisher.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.type.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.year.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.note.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
         })
 
         return <div className="historicPage">
@@ -61,14 +62,14 @@ class HistoricPage extends Component {
                         <th>Editeur</th>
                         <th>Type</th>
                         <th>Année</th>
+                        <th>Note</th>
                         <th>Supprimer</th>
                     </tr>
                 </thead>
                 <tbody>
                 {filteredBooks.map(book => (
                     <Book key={book.title+this.props.getEmail} title={book.title} author={book.author} 
-                    nbBooks={book.nbBooks} publisher={book.publisher} type={book.type} year={book.year}
-                    getEmail={this.props.getEmail} whenDelete={this.updateBooks}/>
+                    nbBooks={book.nbBooks} publisher={book.publisher} type={book.type} year={book.year} note={book.note} getEmail={this.props.getEmail} whenDelete={this.updateBooks}/>
                   ))}
                 </tbody>
             </table>

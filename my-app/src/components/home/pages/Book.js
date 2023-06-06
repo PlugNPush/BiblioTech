@@ -29,6 +29,7 @@ class Book extends Component {
             <td className="publisherBook">{this.props.publisher}</td>
             <td className="typeBook">{this.props.type}</td>
             <td className="yearBook">{this.props.year}</td>
+            <td className="noteBook">{this.props.note}</td>
             <td className="deleteBook">
                 <AiTwotoneDelete onClick={() => this.deleteBook()}/>
             </td>

@@ -27,10 +27,10 @@ export function addBook(title, owner, author, year, type, publisher) {
         })
 }
 
-export function noteBook(title, email, note) {
+export function noteBook(title, owner, note) {
     axios.post("http://localhost:8100/api/notebook", {
         title: title,
-        email: email,
+        owner: owner,
         note: note
     })
         .then((res) => {
