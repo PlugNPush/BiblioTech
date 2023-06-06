@@ -3,6 +3,7 @@ Master Project M1
 
 # Prérequis :
 VSCode : installer l'extension "Javascript and Typescript Nightly"
+Dans l'installer de VSCode, il faut activer si ce n'est déjà fait le "Development Desktop in C++"
 
 # Executer le front :
 - exécuter les lignes :
