@@ -2,6 +2,7 @@ import React from "react"
 import { Component } from "react"
 import {MdAddAPhoto} from "react-icons/md"
 import {RxValueNone} from "react-icons/rx"
+import {AiOutlineCheck} from "react-icons/ai"
 import {readFileContent, convertStringToListOfFile} from "utils/FileReaderUtil.js"
 import {getBookGoogle, addBook} from "utils/sendBook";
 
@@ -14,7 +15,7 @@ class Home extends Component {
      */
     constructor(props) {
         super(props)
-        this.state = {addPhoto : false, book: "", timer: null, searchResults: []}
+        this.state = {addPhoto : false, book: "", timer: null, searchResults: [], addBook:""}
         this.photoAdded = this.photoAdded.bind(this)
     }
     photoAdded() {
@@ -51,16 +52,17 @@ class Home extends Component {
                             <p className="card-text">{result.volumeInfo.publishedDate?result.volumeInfo.publishedDate:"unknown"}</p>
                             <p className="card-text">{result.volumeInfo.categories?result.volumeInfo.categories[0]:"unknown"}</p>
                             <p className="card-text">{result.volumeInfo.publisher?result.volumeInfo.publisher:"unknown"}</p>
-                            
                         </div>
                         <div className="card-footer">
                             <button className="btn btn-primary" onClick={() => {
+                                this.bookAddedWait(result.id)
                                 const bookInfo = result.volumeInfo
                                 addBook(bookInfo.title, this.props.getEmail, bookInfo["authors"]?bookInfo.authors[0]:"unknown",
                                     bookInfo["publishedDate"]?bookInfo.publishedDate:"unknown",
                                     bookInfo["categories"]?bookInfo.categories[0]:"unknown",
                                     bookInfo["publisher"]?bookInfo.publisher:"unknown")
                             }}>Ajouter</button>
+                            {this.bookAdded(result.id)}
                         </div>
                     </div>
                 ))}
@@ -78,7 +80,6 @@ class Home extends Component {
                 this.setState({searchResults: []})
             } else {
                 getBookGoogle(filtered, this.props.getEmail).then((res) => {
-                    //console.log("res", res)
                     this.setState({searchResults: res})
                 })               
             }
@@ -90,6 +91,17 @@ class Home extends Component {
         setTimeout(() => {
             this.setState({addPhoto : false})
         }, 3000)
+    }
+    bookAddedWait(titre) {
+        this.setState({addBook : titre})
+        setTimeout(() => {
+            this.setState({addBook : ""})
+        }, 3000)
+    }
+    bookAdded(titre) {
+        if(this.state.addBook === titre) {
+            return <AiOutlineCheck color="red"/>
+        }
     }
     render() {
         return <React.Fragment>

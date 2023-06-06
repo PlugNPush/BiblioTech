@@ -4,7 +4,6 @@
     align-items: center;
     font-weight: bold;
     text-align: center;
-    display: flex;
     font-size: 200%;
     white-space: nowrap;
     margin-top: 5%;
@@ -86,6 +85,9 @@
             flex-direction: row;
             align-items: center;
             text-align: center;
+        }
+        .card-footer:hover { // contient les boutons de la carte
+            transform: scale(1.2);
         }
     }
 }
