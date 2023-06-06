@@ -29,7 +29,7 @@ class HistoricPage extends Component {
             let bookList = []
             for (let i in res.data) {
                 bookList.push({author : res.data[i].author, title: res.data[i].title, nbBooks: res.data[i].nbBooks,
-                    publisher: res.data[i].publisher, type: res.data[i].type, year: res.data[i].year, note: res.data[i].note})
+                    publisher: res.data[i].publisher, type: res.data[i].type, year: res.data[i].year, note: res.data[i].rating})
             }
             console.log(bookList)
             this.setState({books: bookList})
