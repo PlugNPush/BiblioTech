@@ -16,7 +16,7 @@ class MainPage extends Component {
         this.setEmail = this.setEmail.bind(this)
     }
     setEmail(userEmail) {
-        this.setState({email: userEmail})
+        this.setState({email: userEmail});
     }
     selectPage(page) {
         if(this.state.page === 'Login')

@@ -31,3 +31,15 @@
 .non-selectable { // à repler dans main.scss
     user-select: none;
 }
+
+.exitPopUp {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    color: blueviolet;
+    border: 4px solid blueviolet;
+    border-radius: 0px 5px 5px 0px;
+    padding: 10px;
+    background-color: rgb(87, 217, 239);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
