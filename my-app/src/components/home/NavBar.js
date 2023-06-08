@@ -1,5 +1,4 @@
-import React from "react"
-import { Component } from "react"
+import React, { Component } from "react"
 import {BiHistory} from "react-icons/bi"
 import {ImExit} from "react-icons/im"
 

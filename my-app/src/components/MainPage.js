@@ -1,5 +1,4 @@
-import React from "react"
-import { Component } from "react"
+import React, { Component } from "react"
 
 import Start from "./connection/Start"
 import AppPage from "./home/AppPage"

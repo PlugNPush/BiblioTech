@@ -1,5 +1,4 @@
-import React from "react"
-import { Component } from "react"
+import React, { Component } from "react"
 
 import NavBar from "./NavBar"
 import Home from "./pages/Home"

@@ -1,5 +1,4 @@
-import React from "react"
-import { Component } from "react"
+import React, { Component } from "react"
 import {MdAddAPhoto} from "react-icons/md"
 import {RxValueNone} from "react-icons/rx"
 import {AiOutlineCheck} from "react-icons/ai"
