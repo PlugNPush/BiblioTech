@@ -32,6 +32,19 @@
     user-select: none;
 }
 
+.greyScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .exitPopUp {
     position: fixed;
     top: 50%;
@@ -42,4 +55,9 @@
     padding: 10px;
     background-color: rgb(87, 217, 239);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.centered {
+    display: flex;
+    justify-content: space-around;
 }

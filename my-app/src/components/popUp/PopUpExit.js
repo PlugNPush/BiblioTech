@@ -27,10 +27,14 @@ class PopUpExit extends Component {
 
     render() {
         return <React.Fragment>{this.state.showConfirmationBox && (
-            <div className="confirmation-box exitPopUp">
-                <p>Do you really want to exit?</p>
-                <button onClick={() => { this.handleConfirmExit(); }}>Yes</button>
-                <button onClick={() => { this.handleCancelExit(); }}>No</button>
+            <div className="greyScreen" onClick={() => {this.handleCancelExit();}}>
+                <div className="confirmation-box exitPopUp" onClick={(e) => {e.stopPropagation();}}>
+                    <p>Voulez vous quitter ?</p>
+                    <div className="centered">
+                        <button onClick={() => { this.handleConfirmExit(); }}>Yes</button>
+                        <button onClick={() => { this.handleCancelExit(); }}>No</button>
+                    </div>
+                </div>
             </div>
         )}</React.Fragment>
     }
