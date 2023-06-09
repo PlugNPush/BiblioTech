@@ -99,10 +99,14 @@
     white-space: nowrap;
     align-items: center;
 
+    #questionMark {
+      margin-right: 2%;
+    }
     #questionMark:hover {
       transform: scale(1.2);
     }
 }
+
 .popup {
   align-items: center;
   text-align: center;
@@ -121,8 +125,6 @@
   transition: opacity 0.3s ease-in-out; /* Effet de transition */
 }
 
-
-
 .popup-content {
   background-color: white; /* Fond de la popup */
   padding: 20px;
@@ -130,7 +132,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre */
   margin-top: 20px; /* Espacement par rapport au haut */
 }
-
 #closePopup:hover {
-  transform: scale(1.2);
-}
+      transform: scale(1.2);
+    }

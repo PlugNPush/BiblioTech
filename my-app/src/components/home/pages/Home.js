@@ -27,8 +27,6 @@ class Home extends Component {
     }
     addFile() {
         return <div className="loadFile">
-            <input type="file" onChange={(e)=>readFileContent(e, this.props.getEmail)}/>
-            <div>
               <Popup trigger={<button id="questionMark"><AiFillQuestionCircle/></button>} modal>
                 {(close) => (
                   <div className="popup">
@@ -38,7 +36,7 @@ class Home extends Component {
                   </div>
                 )}
               </Popup>
-            </div>
+            <input type="file" onChange={(e)=>readFileContent(e, this.props.getEmail)}/>
         </div>
     }
     addBook() { // affiche une barre de recherche ainsi que le résultat en temps réel
