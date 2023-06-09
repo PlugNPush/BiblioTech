@@ -6,3 +6,23 @@
     transform: scale(1.5);
     color: red;
 }
+
+// lorsque la note est de -1, on affiche 5 étoiles vides avec par dessus un texte "non noté" sur un fond gris transparent et qui s'en va au hover
+
+.noteBookText {
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    width: 100%;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0);
+        display: none;
+    }
+}
+
+.noteBookStars > * {
+    color: black;
+}
+
