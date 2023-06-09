@@ -108,6 +108,11 @@ router.post("/addbook", async (req, res) => {
 router.post("/notebook", async (req, res) => {
   const { title, owner, note } = req.body;
   try {
+    const checkBook = await sequelize.query(`Select * From Book where owner='${owner}' and title='${title}'`);
+    if(checkBook[0].length === 0) {
+      res.status(404).json({message: "No book found"})
+      return
+    }
     await sequelize.query(`update book set rating='${note}' where owner='${owner}' and title='${title}'`);
     res.status(200).json({ message: "Note added successfully" });
   } catch (error) {
