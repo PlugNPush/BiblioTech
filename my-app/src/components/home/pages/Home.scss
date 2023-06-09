@@ -89,5 +89,8 @@
         .card-footer:hover { // contient les boutons de la carte
             transform: scale(1.2);
         }
+        button:hover {
+            background-color: #57d9ef;
+        }
     }
 }

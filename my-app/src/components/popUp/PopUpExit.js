@@ -31,8 +31,8 @@ class PopUpExit extends Component {
                 <div className="confirmation-box exitPopUp" onClick={(e) => {e.stopPropagation();}}>
                     <p>Voulez vous quitter ?</p>
                     <div className="centered">
-                        <button onClick={() => { this.handleConfirmExit(); }}>Yes</button>
-                        <button onClick={() => { this.handleCancelExit(); }}>No</button>
+                        <button onClick={() => { this.handleConfirmExit(); }}>Oui</button>
+                        <button onClick={() => { this.handleCancelExit(); }}>Non</button>
                     </div>
                 </div>
             </div>
