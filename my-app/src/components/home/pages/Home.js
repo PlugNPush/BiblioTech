@@ -1,9 +1,10 @@
 import React, { Component } from "react"
 import {MdAddAPhoto} from "react-icons/md"
 import {RxValueNone} from "react-icons/rx"
-import {AiOutlineCheck} from "react-icons/ai"
+import {AiOutlineCheck, AiFillQuestionCircle} from "react-icons/ai"
 import {readFileContent, convertStringToListOfFile} from "utils/FileReaderUtil.js"
 import {getBookGoogle, addBook} from "utils/sendBook";
+import Popup from 'reactjs-popup';
 
 import "./Home.scss"
 
@@ -27,6 +28,17 @@ class Home extends Component {
     addFile() {
         return <div className="loadFile">
             <input type="file" onChange={(e)=>readFileContent(e, this.props.getEmail)}/>
+            <div>
+              <Popup trigger={<button id="questionMark"><AiFillQuestionCircle/></button>} modal>
+                {(close) => (
+                  <div className="popup">
+                    <h2>Format du Fichier</h2>
+                    <p>Chaque titre doit être sur une ligne différente</p>
+                    <button id="closePopup" onClick={close}>Fermer</button>
+                  </div>
+                )}
+              </Popup>
+            </div>
         </div>
     }
     addBook() { // affiche une barre de recherche ainsi que le résultat en temps réel

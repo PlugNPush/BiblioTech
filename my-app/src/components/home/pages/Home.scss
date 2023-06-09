@@ -94,3 +94,43 @@
         }
     }
 }
+
+.loadFile {
+    white-space: nowrap;
+    align-items: center;
+
+    #questionMark:hover {
+      transform: scale(1.2);
+    }
+}
+.popup {
+  align-items: center;
+  text-align: center;
+}
+.popup-overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 9999; /* Assurez-vous que la popup est au-dessus du contenu de l'application */
+  transition: opacity 0.3s ease-in-out; /* Effet de transition */
+}
+
+
+
+.popup-content {
+  background-color: white; /* Fond de la popup */
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre */
+  margin-top: 20px; /* Espacement par rapport au haut */
+}
+
+#closePopup:hover {
+  transform: scale(1.2);
+}
