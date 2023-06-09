@@ -27,11 +27,6 @@ class Book extends Component {
         })
     }
 
-    // quand on hover sur les étoiles, ça change l'affichage des étoiles en fonction de la position de la souris (affiche les étoiles en doré par dessus les étoiles noires)
-    // on peut les cliquer et ça envoie la note au serveur
-    // quand la souris sort des étoiles, ça remet l'affichage de la note
-    // les étoiles précédentes sont toujours affichées en doré, donc si la position de la souris est sur la première motié de l'étoile 3, les étoiles 1, 2 sont dorées et l'étoile 3 est à moitié dorée
-    // on affiche des étoiles pleines, des étoiles à moitié pleines et des étoiles vides
     changeRating(e) {
         const divElement = this.stars.current // Accéder à la référence de la div
         const container = divElement.getBoundingClientRect() // Obtenir les coordonnées de la div
@@ -39,28 +34,10 @@ class Book extends Component {
         const positionX = mouseX / container.width // Normaliser la position X entre 0 et 1
         const note = Math.round(positionX * 10) / 2 // Transformer en plage de 0 à 5 par incréments de 0.5
         // changer l'affichage des étoiles
-        const children = divElement.children
-        console.log(children)
-        let stars = []
-        for (let i = 0; i < 5; i++) { // remplacer les étoiles
-            if (note >= i + 1) {
-                //stars.push(2)
-                stars.push(<TiStarFullOutline/>)
-            } else if (note >= i + 0.5) {
-                //stars.push(1)
-                stars.push(<TiStarHalfOutline/>)
-            } else {
-                //stars.push(0)
-                stars.push(<TiStarOutline/>)
-            }
-        }
         this.setState({ note: note })
-        //console.log(stars)
     }
 
     calculateRating(note) {
-        //this.setState({ note: note })
-        //let note = this.state.note
         let stars = []
         for (let i = 0; i < 5; i++) {
             if (note >= i + 1) {
@@ -73,6 +50,15 @@ class Book extends Component {
         }
         return stars
     }
+
+    validateRating() {
+        this.setState({ initNote: this.state.note })
+        noteBook(this.props.title, this.props.getEmail, this.state.note)
+    }
+
+    resetRating() {
+        this.setState({ note: this.state.initNote })
+    }
     
     render() {
         return <tr className="book">
@@ -83,11 +69,11 @@ class Book extends Component {
             <td className="typeBook">{this.props.type}</td>
             <td className="yearBook">{this.props.year}</td>
             <td className="noteBook">
-                { this.props.note === -1 ?
+                { this.state.initNote < 0 ?
                     <div className="noteBookText">Non noté</div>
                     : null
                 }
-                <div className="noteBookStars" ref={this.stars} onMouseMove={(e) => this.changeRating(e)} onMouseLeave={() => this.calculateRating(this.state.initNote)} onClick={() => noteBook(this.props.title, this.props.getEmail, this.state.note)}>
+                <div className="noteBookStars" ref={this.stars} onMouseMove={(e) => this.changeRating(e)} onMouseLeave={() => this.resetRating()} onClick={() => this.validateRating()}>
                     { this.calculateRating(this.state.note) }
                 </div>
             </td>
