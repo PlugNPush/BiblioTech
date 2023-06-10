@@ -34,6 +34,7 @@
     flex-direction: column;
     align-items: center;
     margin-top: 2%;
+    margin-bottom: 2%;
     white-space: nowrap;
     text-decoration: underline;
     color: red;
@@ -104,6 +105,9 @@
     }
     #questionMark:hover {
       transform: scale(1.2);
+    }
+    .fileRead {
+      border-radius: 3px;
     }
 }
 

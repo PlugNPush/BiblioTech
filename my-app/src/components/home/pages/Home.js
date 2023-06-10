@@ -36,7 +36,7 @@ class Home extends Component {
                   </div>
                 )}
               </Popup>
-            <input type="file" onChange={(e)=>readFileContent(e, this.props.getEmail)}/>
+            <input className="fileRead" type="file" onChange={(e)=>readFileContent(e, this.props.getEmail)}/>
         </div>
     }
     addBook() { // affiche une barre de recherche ainsi que le résultat en temps réel
