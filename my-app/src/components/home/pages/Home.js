@@ -7,6 +7,7 @@ import {getBookGoogle, addBook} from "utils/sendBook";
 import Popup from 'reactjs-popup';
 
 import "./Home.scss"
+import NavBar from "../NavBar";
 
 class Home extends Component {
     /**
@@ -113,17 +114,21 @@ class Home extends Component {
         }
     }
     render() {
-        return <React.Fragment>
-            <div className="photo">
-                Photographiez!
+        return <div className="appPage">
+            <NavBar/>
+            <div className="choosePageSite">
+                <div className="photo">
+                    Photographiez!
+                </div>
+                <div className="camera">
+                    <MdAddAPhoto onClick={() => {this.addPhoto()}}/>
+                </div>
+                {this.photoAdded()}
+                {this.addFile()}
+                {this.addBook()}
             </div>
-            <div className="camera">
-                <MdAddAPhoto onClick={() => {this.addPhoto()}}/>
-            </div>
-            {this.photoAdded()}
-            {this.addFile()}
-            {this.addBook()}
-        </React.Fragment>
+
+        </div>
     }
 }
 

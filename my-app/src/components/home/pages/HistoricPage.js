@@ -4,6 +4,8 @@ import Book from "./Book"
 import axios from "axios"
 
 import "./HistoricPage.scss"
+import NavBar from "../NavBar";
+import "../NavBar.scss"
 
 class HistoricPage extends Component {
     /**
@@ -12,7 +14,7 @@ class HistoricPage extends Component {
      */
     constructor(props) {
         super(props)
-        this.state = {books : [], search : ""}
+        this.state = {books : [], search : "", getEmail: window.email}
         this.updateBooks = this.updateBooks.bind(this)
         this.getBooksOwner = this.getBooksOwner.bind(this)
     }
@@ -23,7 +25,7 @@ class HistoricPage extends Component {
         this.getBooksOwner()
     }
     getBooksOwner() {
-        axios.get("http://localhost:8100/api/getbooksfromowner/" + this.props.getEmail)
+        axios.get("http://localhost:8100/api/getbooksfromowner/" + this.state.getEmail)
         .then((res) => {
             let bookList = []
             for (let i in res.data) {
@@ -45,14 +47,17 @@ class HistoricPage extends Component {
             return book.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.author.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.publisher.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.type.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.year.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.note.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
         })
 
-        return <div className="historicPage">
+        return <div className="appPage">
+            <NavBar/>
+            <div className="choosePageSite">
+                <div className="historicPage">
             <div className="titreHistoricPage">
                 Liste des Livres scannés :
             </div>
             <div className="searchBar">
                 <input type="text" placeholder="Rechercher un livre" value={this.state.search} onChange={this.handleSearch}/>
             </div>
-            <table className="listeLivres"> 
+            <table className="listeLivres">
                 <thead>
                     <tr>
                         <th>Titre</th>
@@ -67,12 +72,17 @@ class HistoricPage extends Component {
                 </thead>
                 <tbody>
                 {filteredBooks.map(book => (
-                    <Book key={book.title+this.props.getEmail} title={book.title} author={book.author} 
+                    <Book key={book.title+this.props.getEmail} title={book.title} author={book.author}
                     nbBooks={book.nbBooks} publisher={book.publisher} type={book.type} year={book.year} note={book.note} getEmail={this.props.getEmail} whenDelete={this.updateBooks}/>
                   ))}
                 </tbody>
             </table>
         </div>
+            </div>
+
+        </div>
+
+
     }
 }
 

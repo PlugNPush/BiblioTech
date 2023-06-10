@@ -1,63 +1,61 @@
-import React, { Component } from "react"
+import React, {useState} from "react"
 import axios from "axios"
 
 import "./Form.scss"
+import {useNavigate} from "react-router-dom";
 
-class Login extends Component {
+function Login(props) {
     /**
      * @description login page, the user can connect to the application
      * @call in Start.js
      */
-    constructor(props) {
-        super(props)
-        this.state = {email : '', password : '', wrongPassword: false}
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
-    wrongPassword() {
-        if(this.state.wrongPassword) {
+    const [wrongPassword, setWrongPassword] = useState(false)
+    const navigate = useNavigate();
+    function showWrongPassword() {
+        if({wrongPassword} === true) {
             return <div className="wrongPassword">
                 Mauvais email/mot de passe
             </div>
         }
     }
-    handleSubmit(event) {
+    function handleSubmit(event) {
         event.preventDefault()
+        console.log("event", event.target.elements.email.value, event.target.elements.password.value)
         axios.post("http://localhost:8100/api/login", 
-            {email: this.state.email, password: this.state.password})
+            {email: event.target.elements.email.value, password: event.target.elements.password.value})
         .then((res) => {
             if(res.status === 200) {
-                this.props.setEmail(this.state.email)
-                this.props.goAppPage()
+                window.email = event.target.elements.email.value;
+                navigate("/home")
             } else {
-                this.setState({wrongPassword : true})
+                setWrongPassword(true)
                 setTimeout(() => {
-                    this.setState({wrongPassword : false})
+                    setWrongPassword(false)
                 }, 3000)
             }
         })
         .catch((res) => {
-            this.setState({wrongPassword : true})
+            setWrongPassword(true)
             setTimeout(() => {
-                this.setState({wrongPassword : false})
+                setWrongPassword(false)
             }, 3000)
         })
     }
-    render() {
         return <React.Fragment>
-        <form className="formCss" onSubmit={this.handleSubmit}>
+        <form className="formCss" onSubmit={handleSubmit}>
             <label>
             Email:
-            <input className="inputForm" type="email" name="email" onChange={e => this.setState({email : e.target.value})} />
+            <input className="inputForm" type="email" name="email"/>
             </label>
             <label>
             Password:
-            <input className="inputForm" type="password" name="password" onChange={e => this.setState({password : e.target.value})} />
+            <input className="inputForm" type="password" name="password"/>
             </label>
             <button className="submit" type="submit">Sign Up</button>
         </form>
-        {this.wrongPassword()}
+        {showWrongPassword()}
       </React.Fragment>
-    }
+
 }
 
 export default Login

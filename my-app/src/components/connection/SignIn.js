@@ -1,71 +1,70 @@
-import React, { Component } from "react"
+import React, {useState} from "react"
 import axios from 'axios'
 
 import "./Form.scss"
+import {useNavigate} from "react-router-dom";
 
-class SignIn extends Component {
+function SignIn(props) {
     /**
      * @description form to sign in
      * @call in Start.js
      */
-    constructor(props) {
-        super(props)
-        this.state = {firstName : '', lastName : '', email : '', password : '', badEmail : false}
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
-    badEmail() {
-        if(this.state.badEmail) {
+    const [wrongEmail, setWrongEmail] = useState(false)
+    const navigate = useNavigate();
+    function badEmail() {
+        if({wrongEmail}) {
             return <div className="wrongPassword">
                 Email déjà pris
             </div>
         }
     }
-    handleSubmit(event) {
+    function handleSubmit(event) {
         event.preventDefault()
         axios.post("http://localhost:8100/api/signin", 
-            {firstname: this.state.firstName, lastname: this.state.lastName, email: this.state.email, password: this.state.password})
+            {firstname: event.target.elements.firstName.value,
+                lastname: event.target.elements.lastName.value,
+                email: event.target.elements.email.value,
+                password: event.target.elements.password.value})
         .then((res) => {
             if(res.status === 200) {
-                this.props.setEmail(this.state.email)
-                this.props.goAppPage()
+                window.email = event.target.elements.email.value
+                navigate("/home")
             } else {
-                this.setState({badEmail : true})
+                setWrongEmail(true)
                 setTimeout(() => {
-                    this.setState({badEmail : false})
+                    setWrongEmail(false)
                 }, 3000)
             }
         })
         .catch((res) => {
-            this.setState({badEmail : true})
+            setWrongEmail(true)
             setTimeout(() => {
-                this.setState({badEmail : false})
+                setWrongEmail(false)
             }, 3000)
         })
     }
-    render() {
-        return <React.Fragment>
-        <form className="formCss" onSubmit={this.handleSubmit}>
+    return <React.Fragment>
+        <form className="formCss" onSubmit={handleSubmit}>
             <label>
             First Name:
-            <input className="inputForm" type="text" name="firstName" onChange={e => this.setState({firstName : e.target.value})} />
+            <input className="inputForm" type="text" name="firstName" />
             </label>
             <label>
             Last Name:
-            <input className="inputForm" type="text" name="lastName" onChange={e => this.setState({lastName : e.target.value})} />
+            <input className="inputForm" type="text" name="lastName"/>
             </label>
             <label>
             Email:
-            <input className="inputForm" type="email" name="email" onChange={e => this.setState({email : e.target.value})} />
+            <input className="inputForm" type="email" name="email"/>
             </label>
             <label>
             Password:
-            <input className="inputForm" type="password" name="password" onChange={e => this.setState({password : e.target.value})} />
+            <input className="inputForm" type="password" name="password"/>
             </label>
             <button className="submit" type="submit">Sign Up</button>
         </form>
-        {this.badEmail()}
-      </React.Fragment>
-    }
+        {badEmail()}
+    </React.Fragment>
 }
 
 export default SignIn

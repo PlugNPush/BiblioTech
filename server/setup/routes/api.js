@@ -70,7 +70,7 @@ router.post("/signin", async(req, res) => {
     const query = await sequelize.query(
         `Select * from user where email = '${email}';`
     )
-    if(query[0].length != 0) {
+    if(query[0].length !== 0) {
       res.status(400).json({message: "email deja present"})
       return
     }

@@ -21,7 +21,7 @@ class Start extends Component {
             <button className={`buttonAccueil ${this.state.choice === "SignIn" ? "selected" : ""}`} onClick={() => this.setState({choice : 'SignIn'})}>Inscription</button>
             </div>
             <div className="formContainer">
-                {this.state.choice === "Login" ? <Login goAppPage={this.props.goAppPage} setEmail={this.props.setEmail}/> : <SignIn goAppPage={this.props.goAppPage} setEmail={this.props.setEmail}/>}
+                {this.state.choice === "Login" ? <Login/> : <SignIn/>}
             </div>
         </div>
     }

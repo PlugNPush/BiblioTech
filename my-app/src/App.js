@@ -1,11 +1,25 @@
-import MainPage from "./components/MainPage"
+import {
+  BrowserRouter,
+  Routes, // instead of "Switch"
+  Route,
+} from "react-router-dom";
+import React from "react";
+import HistoricPage from "./components/home/pages/HistoricPage";
+import Home from "./components/home/pages/Home";
+import Start from "./components/connection/Start";
+
+window.email = ""
 
 function App() {
-  /**
-   * @call in index.js
-   */
   return (
-    <MainPage/>
+      <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<Start/>} />
+        <Route exact path="/home" element={<Home/>} />
+        <Route exact path="/historic" element={<HistoricPage/>} />
+      </Routes>
+    </BrowserRouter>
+
   )
 }
 
