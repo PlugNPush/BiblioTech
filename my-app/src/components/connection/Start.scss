@@ -1,0 +1,41 @@
+.accueil {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin-top: 2%;
+}
+
+.buttonContainer {
+  border-bottom: 1px solid #0077cc;
+}
+
+.buttonAccueil {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 2px solid #0077cc;
+  color: #0077cc;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  margin: 10px;
+  cursor: pointer;
+}
+  
+.buttonAccueil:hover {
+  background-color: #0077cc;
+  color: #fff;
+}
+
+.buttonAccueil:focus {
+  outline: none;
+}
+
+.buttonAccueil.selected {
+  text-decoration: underline;
+}
+
+// à améliorer :
+// - ajouter une transition sur le underline des boutons

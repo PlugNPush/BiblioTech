@@ -8,8 +8,9 @@ In order to initialize the database, type command line : /usr/local/mysql/bin/my
 
 ## Windows 
 
-Installer mysql workbench
-Installer un mysql database server : https://dev.mysql.com/downloads/mysql/
+Install MySQL Workbench
+Install a mysql database server : https://dev.mysql.com/downloads/mysql/
+Create a connection in MySQL Workbench and then execute the file initialisation.sql
 
 # Set up environment 
 
@@ -25,3 +26,4 @@ const data_db = {
 
 module.exports = data_db;
 ```
+Add your MySQL username and password

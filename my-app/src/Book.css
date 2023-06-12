@@ -1,8 +1,0 @@
-.book {
-    display: flex;
-}
-
-.deleteBook:hover {
-    transform: scale(1.5);
-    color: red;
-}

@@ -1,0 +1,153 @@
+.photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+    text-align: center;
+    font-size: 200%;
+    white-space: nowrap;
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+
+.camera {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 600%;
+    color: blueviolet;
+}
+
+.camera > * {
+    height: 100%;
+    width: 100%;
+    transition: transform 0.2s;
+}
+.camera > *:hover {
+    transform: scale(1.2);
+}
+
+#photoAdded {
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    white-space: nowrap;
+    text-decoration: underline;
+    color: red;
+}
+
+.searchFile { // contient le bouton pour rechercher un fichier et la recherche dans searchResults
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.searchFile > * {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.searchResults { // contient les résultats de la recherche (un ensemble de cartes)
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .card { // la carte / l'oeuvre
+        margin: 1%;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .card-header { // contient l'image et le titre de la carte
+            
+        }
+
+        .card-body { // contient les infos de la carte
+            // les infos sont affichées en grille de 3 par 3
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-template-areas: 
+                "title title title"
+                "author author author";
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        .card-footer { // contient les boutons de la carte
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            text-align: center;
+        }
+        .card-footer:hover { // contient les boutons de la carte
+            transform: scale(1.2);
+        }
+        button:hover {
+            background-color: #57d9ef;
+        }
+    }
+}
+
+.loadFile {
+    white-space: nowrap;
+    align-items: center;
+
+    #questionMark {
+      margin-right: 2%;
+    }
+    #questionMark:hover {
+      transform: scale(1.2);
+    }
+    .fileRead {
+      border-radius: 3px;
+    }
+}
+
+.popup {
+  align-items: center;
+  text-align: center;
+}
+.popup-overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 9999; /* Assurez-vous que la popup est au-dessus du contenu de l'application */
+  transition: opacity 0.3s ease-in-out; /* Effet de transition */
+}
+
+.popup-content {
+  background-color: white; /* Fond de la popup */
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre */
+  margin-top: 20px; /* Espacement par rapport au haut */
+}
+#closePopup:hover {
+      transform: scale(1.2);
+    }
+
+.appPage {
+    display: flex;
+}
+
+.choosePageSite {
+    display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+}

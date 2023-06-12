@@ -36,7 +36,6 @@ const Book = sequelize.define('Book', {
   author: DataTypes.STRING,
   year: DataTypes.STRING,
   type: DataTypes.STRING,
-  iban: DataTypes.STRING,
   nbBooks: DataTypes.INTEGER,
   publisher: DataTypes.STRING,
   price_old: DataTypes.STRING,
@@ -71,7 +70,7 @@ router.post("/signin", async(req, res) => {
     const query = await sequelize.query(
         `Select * from user where email = '${email}';`
     )
-    if(query[0].length != 0) {
+    if(query[0].length !== 0) {
       res.status(400).json({message: "email deja present"})
       return
     }
@@ -86,21 +85,36 @@ router.post("/signin", async(req, res) => {
 });
 
 router.post("/addbook", async (req, res) => {
-  const { title, owner, author, year, type, iban, publisher} = req.body;
+  const { title, owner, author, year, type, publisher} = req.body;
   try {
     const checkBook = await sequelize.query(`Select * From Book where owner='${owner}' and title='${title}'`);
     if(checkBook[0].length !== 0) {
       await sequelize.query(`update book set nbBooks='${checkBook[0][0].nbBooks + 1}' where owner='${owner}' and title='${title}'`);
     } else {
       const result = await sequelize.query(
-        `INSERT INTO book (title, owner, author, year, type, iban, publisher) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO book (title, owner, author, year, type, publisher) VALUES (?, ?, ?, ?, ?, ?)`,
         {
-          replacements: [title, owner, author, year, type, iban, publisher],
+          replacements: [title, owner, author, year, type, publisher],
           type: Sequelize.QueryTypes.INSERT
         }
       );
     }
     res.status(200).json({ message: "Book added successfully" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+router.post("/notebook", async (req, res) => {
+  const { title, owner, note } = req.body;
+  try {
+    const checkBook = await sequelize.query(`Select * From Book where owner='${owner}' and title='${title}'`);
+    if(checkBook[0].length === 0) {
+      res.status(404).json({message: "No book found"})
+      return
+    }
+    await sequelize.query(`update book set rating='${note}' where owner='${owner}' and title='${title}'`);
+    res.status(200).json({ message: "Note added successfully" });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
