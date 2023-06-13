@@ -1,3 +1,12 @@
+# Important
+
+Nécessaire d'ajouter un fichier *data_db.py* dans ce répertoire qui contient le texte suivant :
+```py
+user = "userBDD"
+mdp = "mdpBDD"
+```
+Ce sont les mêmes informations que pour le server
+
 Faut installer :
 ```zsh
 pip install pandas
