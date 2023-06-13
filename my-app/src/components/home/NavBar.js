@@ -32,6 +32,11 @@ class NavBar extends Component {
                     <img src={logo} alt="Logo" className="non-selectable"/>
                 </Link>
             </div>
+            <div className="searchIcon">
+                <Link to="/search">
+                    <img src="https://img.icons8.com/ios/50/000000/search--v1.png" alt="search" className="non-selectable"/>
+                </Link>
+            </div>
             <div className="pastIcon">
                 <Link to="/historic">
                     <BiHistory size={90}/>
