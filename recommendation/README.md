@@ -1,16 +1,21 @@
-Faut pip install :
-    pip install pandas
-    pip install sqlalchemy
-    pip install scikit-learn
-    pip install fuzzywuzzy
+Faut installer :
+```zsh
+pip install pandas
+pip install sqlalchemy
+pip install scikit-learn
+pip install fuzzywuzzy
+```
+    
 
 Ligne 10 il faut changer le mot de passe et le username : mysql://username:mdp@localhost:3306/db_master_project
 
 Insert que j'ai utiliser pour l'exemple
 
+```sql
+INSERT into user (firstname, lastname, email, password) values ('john', 'doe', 'john.doe@example.com', 'test');
 
-INSERT INTO book (title, owner, author, year, type, nbBooks, publisher, price_old, price_new, rating) 
-VALUES 
+INSERT INTO book (title, owner, author, year, type, nbBooks, publisher, price_old, price_new, rating)
+VALUES
 ('1984', 'john.doe@example.com', 'George Orwell', '1949', 'Dystopian', 1, 'Secker & Warburg', '10.00', '8.00', 5),
 ('To Kill a Mockingbird', 'john.doe@example.com', 'Harper Lee', '1960', 'Southern Gothic, Bildungsroman', 1, 'J. B. Lippincott & Co.', '12.00', '10.00', 5),
 ('The Great Gatsby', 'john.doe@example.com', 'F. Scott Fitzgerald', '1925', 'Tragedy', 1, 'Charles Scribner\'s Sons', '15.00', '12.00', 4),
@@ -39,3 +44,6 @@ INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('
 INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('A Wrinkle in Time: With Related Readings (A Wrinkle in Time Quintet #1)', 'john.doe@example.com', 'Madeleine LEngle', '2023', 'Fiction', 'Unknown Publisher', -1);
 INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Literature Circle Guide: A Wrinkle in Time', 'john.doe@example.com', 'Madeleine LEngle', '2023', 'Fiction', 'Unknown Publisher', -1);
 INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Una arruga en el tiempo – A Wrinkle in Time', 'john.doe@example.com', 'Madeleine LEngle', '2023', 'Fiction', 'Unknown Publisher', -1);
+
+commit;
+```
