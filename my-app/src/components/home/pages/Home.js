@@ -39,7 +39,7 @@ class Home extends Component {
                   </div>
                 )}
               </Popup>
-            <input className="fileRead" type="file" onChange={(e)=>readFileContent(e, this.props.getEmail)}/>
+            <input className="fileRead" type="file" onChange={(e)=>readFileContent(e, window.email)}/>
         </div>
     }
     addBook() { // affiche une barre de recherche ainsi que le résultat en temps réel
@@ -69,7 +69,7 @@ class Home extends Component {
                             <button className="btn btn-primary" onClick={() => {
                                 this.bookAddedWait(result.id)
                                 const bookInfo = result.volumeInfo
-                                addBook(bookInfo.title, this.props.getEmail, bookInfo["authors"]?bookInfo.authors[0]:"unknown",
+                                addBook(bookInfo.title, window.email, bookInfo["authors"]?bookInfo.authors[0]:"unknown",
                                     bookInfo["publishedDate"]?bookInfo.publishedDate:"unknown",
                                     bookInfo["categories"]?bookInfo.categories[0]:"unknown",
                                     bookInfo["publisher"]?bookInfo.publisher:"unknown")
@@ -91,7 +91,7 @@ class Home extends Component {
             if (filtered[0].length === 0) {
                 this.setState({searchResults: []})
             } else {
-                getBookGoogle(filtered, this.props.getEmail).then((res) => {
+                getBookGoogle(filtered, window.email).then((res) => {
                     this.setState({searchResults: res})
                 })               
             }
