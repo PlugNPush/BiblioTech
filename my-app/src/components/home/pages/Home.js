@@ -1,18 +1,20 @@
 import React, { Component } from "react"
+
 import {MdAddAPhoto} from "react-icons/md"
 import {RxValueNone} from "react-icons/rx"
 import {AiOutlineCheck, AiFillQuestionCircle} from "react-icons/ai"
+
 import {readFileContent, convertStringToListOfFile} from "utils/FileReaderUtil.js"
-import {getBookGoogle, addBook} from "utils/sendBook";
-import Popup from 'reactjs-popup';
+import {getBookGoogle, addBook} from "utils/sendBook"
+import Popup from 'reactjs-popup'
+import NavBar from "../NavBar"
 
 import "./Home.scss"
-import NavBar from "../NavBar";
 
 class Home extends Component {
     /**
      * @description home page, the user can take a photo
-     * @call in AppPage.js
+     * @call in App.js
      */
     constructor(props) {
         super(props)
@@ -114,9 +116,9 @@ class Home extends Component {
         }
     }
     render() {
-        return <div className="appPage">
+        return <React.Fragment>
             <NavBar/>
-            <div className="choosePageSite">
+            <div className="homePage">
                 <div className="photo">
                     Photographiez!
                 </div>
@@ -127,8 +129,7 @@ class Home extends Component {
                 {this.addFile()}
                 {this.addBook()}
             </div>
-
-        </div>
+        </React.Fragment>
     }
 }
 

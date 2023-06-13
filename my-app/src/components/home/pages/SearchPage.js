@@ -7,7 +7,6 @@ import {readFileContent, convertStringToListOfFile} from "utils/FileReaderUtil.j
 import {RxValueNone} from "react-icons/rx"
 import {AiOutlineCheck, AiFillQuestionCircle} from "react-icons/ai"
 import './SearchPage.scss'
-import '../NavBar.scss'
 
 class SearchPage extends Component {
     /**
@@ -86,13 +85,13 @@ class SearchPage extends Component {
         }
     }
     render() {
-        return <div className="AppPage">
+        return <React.Fragment>
             <NavBar/>
-            <div className="choosePageSite">
+            <div className="searchPage">
                 <h1>Search Page</h1>
                 {this.addBook()}
             </div>
-        </div>
+        </React.Fragment>
     }
 }
 

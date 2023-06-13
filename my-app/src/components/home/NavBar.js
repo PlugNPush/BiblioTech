@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import {BiHistory} from "react-icons/bi"
 import {ImExit} from "react-icons/im"
+import {FaSearch} from "react-icons/fa"
 
 import PopUpExit from "components/popUp/PopUpExit"
 import "./NavBar.scss"
@@ -10,7 +11,7 @@ import {Link} from "react-router-dom";
 class NavBar extends Component {
     /**
      * @description the navigation bar
-     * @call in AppPage.js
+     * @call in every page
      */
     constructor(props) {
         super(props);
@@ -34,7 +35,7 @@ class NavBar extends Component {
             </div>
             <div className="searchIcon">
                 <Link to="/search">
-                    <img src="https://img.icons8.com/ios/50/000000/search--v1.png" alt="search" className="non-selectable"/>
+                    <FaSearch size={85}/>
                 </Link>
             </div>
             <div className="pastIcon">

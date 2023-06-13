@@ -2,13 +2,13 @@ import {
   BrowserRouter,
   Routes, // instead of "Switch"
   Route,
-} from "react-router-dom";
-import React from "react";
+} from "react-router-dom"
+import React from "react"
 
-import SearchPage from "./components/home/pages/SearchPage";
-import HistoricPage from "./components/home/pages/HistoricPage";
-import Home from "./components/home/pages/Home";
-import Start from "./components/connection/Start";
+import SearchPage from "./components/home/pages/SearchPage"
+import HistoricPage from "./components/home/pages/HistoricPage"
+import Home from "./components/home/pages/Home"
+import Start from "./components/connection/Start"
 
 window.email = ""
 
