@@ -9,6 +9,7 @@ Ce sont les mêmes informations que pour le server
 
 Faut installer :
 ```zsh
+pip install pymysql
 pip install pandas
 pip install sqlalchemy
 pip install scikit-learn
