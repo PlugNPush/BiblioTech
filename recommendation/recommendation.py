@@ -11,9 +11,7 @@ def recommend_books(user_email):
 
     # Load user's read and liked books from the database
     query = f"SELECT DISTINCT title, author FROM book WHERE owner = '{user_email}' AND rating >= 4;"
-    print("query", query)
     user_books = pd.read_sql_query(query, engine)
-    print("user book", user_books)
 
     # Load all books from the CSV file
     books = pd.read_csv('books.csv', delimiter=',', on_bad_lines='warn')
@@ -63,4 +61,5 @@ def recommend_books(user_email):
     return list_book
             
 # Example usage
-list_book = recommend_books('john.doe@example.com')
+#list_book = recommend_books('john.doe@example.com')
+#print(list_book)

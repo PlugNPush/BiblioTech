@@ -22,11 +22,8 @@ class RequestHandler(BaseHTTPRequestHandler):
         content_length = int(self.headers['Content-Length'])
         data = self.rfile.read(content_length).decode('utf-8')
         t = data.split(":")[1].replace('"', '').replace('}', '').replace('\n', '')
-        print("test", t, t == "c@c")
         recco = recommendation.recommend_books(t)
-        print("recco", recco)
-        response_data = json.dumps(recco).encode('utf-8')
-        # Process the POST data as needed
+        response_data = '-'.join(recco).encode('utf-8')
         self.wfile.write(response_data)
 
 
