@@ -2,6 +2,7 @@ import React, {Component} from "react"
 import {BiHistory} from "react-icons/bi"
 import {ImExit} from "react-icons/im"
 import {FaSearch} from "react-icons/fa"
+import {BsPerson} from "react-icons/bs"
 
 import PopUpExit from "components/popUp/PopUpExit"
 import "./NavBar.scss"
@@ -41,6 +42,11 @@ class NavBar extends Component {
             <div className="pastIcon">
                 <Link to="/historic">
                     <BiHistory size={90}/>
+                </Link>
+            </div>
+            <div className="userIcon">
+                <Link to="/user">
+                    <BsPerson size={90}/>
                 </Link>
             </div>
             <div className="exitIcon">
