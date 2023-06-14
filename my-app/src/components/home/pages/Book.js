@@ -19,7 +19,7 @@ class Book extends Component {
         this.stars = React.createRef()
     }
     deleteBook() {
-        axios.post("http://localhost:8100/api/deletebook", {owner: this.props.getEmail, title: this.props.title})
+        axios.post("http://localhost:8100/api/deletebook", {owner: window.email, title: this.props.title})
         .then((res) => {
             this.props.whenDelete()
         }).catch((err) => {
@@ -53,7 +53,7 @@ class Book extends Component {
 
     validateRating() {
         this.setState({ initNote: this.state.note })
-        noteBook(this.props.title, this.props.getEmail, this.state.note)
+        noteBook(this.props.title, window.email, this.state.note)
     }
 
     resetRating() {

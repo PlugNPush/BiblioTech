@@ -7,11 +7,13 @@ from IPython.display import clear_output
 
 def recommend_books(user_email):
     # Connect to the database
-    engine = create_engine('mysql://username:mdp@localhost:3306/db_master_project') # Change the password accordingly !!!!
+    engine = create_engine('mysql+pymysql://user:mdp@localhost:3306/db_master_project') # Change the password accordingly !!!!
 
     # Load user's read and liked books from the database
-    query = f"SELECT DISTINCT title, author FROM book WHERE owner = '{user_email}' AND rating >= 4"
+    query = f"SELECT DISTINCT title, author FROM book WHERE owner = '{user_email}' AND rating >= 4;"
+    print("query", query)
     user_books = pd.read_sql_query(query, engine)
+    print("user book", user_books)
 
     # Load all books from the CSV file
     books = pd.read_csv('books.csv', delimiter=',', on_bad_lines='warn')
@@ -36,6 +38,7 @@ def recommend_books(user_email):
     # Recommend books for the user based on the books they have read and liked
     all_recommendations = []  # List to store all recommendations
     recommended_books = set()  # Set to keep track of books already recommended
+    list_book = []
     for user_book in user_books.itertuples():
         recommendations = get_similar_books(user_book.title, user_book.author)
         unique_recommendations = []
@@ -51,13 +54,13 @@ def recommend_books(user_email):
         if unique_recommendations:
             all_recommendations.append((user_book.title, unique_recommendations))
 
-    # Print all recommendations together
-    clear_output()
+
     for user_book, recommendations in all_recommendations:
         #print(f"Because you read {user_book}:")
         for score, book in recommendations:
-            print(book['title'], "by", book['authors'])
-        print("\n")
-
+            print(book['title'])
+            list_book.append(book['title'])
+    return list_book
+            
 # Example usage
-recommend_books('john.doe@example.com')
+list_book = recommend_books('john.doe@example.com')
