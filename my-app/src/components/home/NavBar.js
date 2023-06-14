@@ -28,6 +28,9 @@ class NavBar extends Component {
         }
     }
     render() {
+        if (window.email === "") {
+            window.location.href = "/"
+        }
         return <div className="navbar">
             <div className="logoApp">
                 <Link to="/home">

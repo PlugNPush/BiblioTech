@@ -159,5 +159,51 @@ router.post("/deletebook", async (req, res) => {
   }
 });
 
+/// - user
+router.get("/getuser/:email", async (req, res) => {
+  const { email } = req.params
+  try {
+    const user = await sequelize.query(`Select * from user where email='${email}'`);    
+    user[0][0].password = undefined
+    if(user[0].length === 0) {
+      res.status(400).json({message: "utilisateur inexistant"})
+      return
+    }
+    res.status(200).json(user[0][0])
+  }
+  catch(err) {
+    res.status(501).json({message: err})
+  }
+});
+
+router.put("/updateuser/:email", async (req, res) => {
+  const { email } = req.params
+  const {firstname, lastname, password} = req.body
+  try {
+    console.log(firstname, lastname, password, email)
+    if (password !== "") {
+      const newPassword = await bcrypt.hash(password, 10)
+      await sequelize.query(`update user set firstname='${firstname}', lastname='${lastname}', password='${newPassword}' where email='${email}'`)
+      res.status(200).json({message: "utilisateur modifie"})
+    } else {
+      await sequelize.query(`update user set firstname='${firstname}', lastname='${lastname}' where email='${email}'`)
+      res.status(200).json({message: "utilisateur modifie"})
+    }
+  }
+  catch(err) {
+    res.status(501).json({message: err})
+  }
+});
+
+router.post("/deleteuser", async (req, res) => {
+  try {
+    await sequelize.query(`delete from user where email='${req.user.email}'`)
+    res.status(200).json({message: "utilisateur supprime"})
+  }
+  catch(err) {
+    res.status(501).json({message: err})
+  }
+});
+
 
 module.exports = router;
