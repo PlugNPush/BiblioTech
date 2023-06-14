@@ -9,6 +9,9 @@
 # database
 /server/setup/routes/.data_db.js
 
+# recommandation
+/recommendation/data_db.py
+
 # testing
 /coverage
 

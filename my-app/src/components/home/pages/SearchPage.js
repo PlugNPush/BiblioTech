@@ -1,46 +1,21 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 
-import {MdAddAPhoto} from "react-icons/md"
+import NavBar from '../NavBar'
+import {getBookGoogle, addBook} from "utils/sendBook"
+import {readFileContent, convertStringToListOfFile} from "utils/FileReaderUtil.js"
+
 import {RxValueNone} from "react-icons/rx"
 import {AiOutlineCheck, AiFillQuestionCircle} from "react-icons/ai"
+import './SearchPage.scss'
 
-import {readFileContent, convertStringToListOfFile} from "utils/FileReaderUtil.js"
-import {getBookGoogle, addBook} from "utils/sendBook"
-import Popup from 'reactjs-popup'
-import NavBar from "../NavBar"
-
-import "./Home.scss"
-
-class Home extends Component {
+class SearchPage extends Component {
     /**
-     * @description home page, the user can take a photo
-     * @call in App.js
+     * @description the search page
+     * @call in NavBar.js
      */
     constructor(props) {
-        super(props)
-        this.state = {addPhoto : false, book: "", timer: null, searchResults: [], addBook:""}
-        this.photoAdded = this.photoAdded.bind(this)
-    }
-    photoAdded() {
-        if(this.state.addPhoto) {
-            return <div id="photoAdded">
-                Photo Ajoutée
-            </div>
-        }
-    }
-    addFile() {
-        return <div className="loadFile">
-              <Popup trigger={<button id="questionMark"><AiFillQuestionCircle/></button>} modal>
-                {(close) => (
-                  <div className="popup">
-                    <h2>Format du Fichier</h2>
-                    <p>Chaque titre doit être sur une ligne différente</p>
-                    <button id="closePopup" onClick={close}>Fermer</button>
-                  </div>
-                )}
-              </Popup>
-            <input className="fileRead" type="file" onChange={(e)=>readFileContent(e, window.email)}/>
-        </div>
+        super(props);
+        this.state = {timer: null, searchResults: [], addBook:""}
     }
     addBook() { // affiche une barre de recherche ainsi que le résultat en temps réel
         return <div className="searchFile">
@@ -91,18 +66,12 @@ class Home extends Component {
             if (filtered[0].length === 0) {
                 this.setState({searchResults: []})
             } else {
-                getBookGoogle(filtered, window.email).then((res) => {
+                getBookGoogle(filtered, this.props.getEmail).then((res) => {
                     this.setState({searchResults: res})
                 })               
             }
         }, 1000)})
         //console.log("searchResults", this.state.searchResults)
-    }
-    addPhoto() {
-        this.setState({addPhoto : true})
-        setTimeout(() => {
-            this.setState({addPhoto : false})
-        }, 3000)
     }
     bookAddedWait(titre) {
         this.setState({addBook : titre})
@@ -118,19 +87,12 @@ class Home extends Component {
     render() {
         return <React.Fragment>
             <NavBar/>
-            <div className="homePage">
-                <div className="photo">
-                    Photographiez!
-                </div>
-                <div className="camera">
-                    <MdAddAPhoto onClick={() => {this.addPhoto()}}/>
-                </div>
-                {this.photoAdded()}
-                {this.addFile()}
+            <div className="searchPage">
+                <h1>Search Page</h1>
                 {this.addBook()}
             </div>
         </React.Fragment>
     }
 }
 
-export default Home
+export default SearchPage

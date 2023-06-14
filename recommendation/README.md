@@ -1,8 +1,21 @@
-Faut pip install :
-    pip install pandas
-    pip install sqlalchemy
-    pip install scikit-learn
-    pip install fuzzywuzzy
+# Important
+
+Nécessaire d'ajouter un fichier *data_db.py* dans ce répertoire qui contient le texte suivant :
+```py
+user = "userBDD"
+mdp = "mdpBDD"
+```
+Ce sont les mêmes informations que pour le server
+
+Faut installer :
+```zsh
+pip install pymysql
+pip install pandas
+pip install sqlalchemy
+pip install scikit-learn
+pip install fuzzywuzzy
+```
+    
 
 Ligne 10 il faut changer le mot de passe et le username : mysql://username:mdp@localhost:3306/db_master_project
 

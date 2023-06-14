@@ -137,15 +137,11 @@
   margin-top: 20px; /* Espacement par rapport au haut */
 }
 #closePopup:hover {
-      transform: scale(1.2);
-    }
-
-.appPage {
-    display: flex;
+    transform: scale(1.2);
 }
 
-.choosePageSite {
-    display: flex;
+.homePage {
+  display: flex;
   flex-direction: column;
   height: 100vh;
   width: 100%;

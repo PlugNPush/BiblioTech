@@ -1,11 +1,10 @@
 import React, { Component } from "react"
-
-import Book from "./Book"
 import axios from "axios"
 
+import Book from "./Book"
+import NavBar from "../NavBar"
+
 import "./HistoricPage.scss"
-import NavBar from "../NavBar";
-import "../NavBar.scss"
 
 class HistoricPage extends Component {
     /**
@@ -47,42 +46,36 @@ class HistoricPage extends Component {
             return book.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.author.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.publisher.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.type.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.year.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || book.note.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
         })
 
-        return <div className="appPage">
+        return <React.Fragment>
             <NavBar/>
-            <div className="choosePageSite">
-                <div className="historicPage">
-            <div className="titreHistoricPage">
-                Liste des Livres scannés :
+            <div className="historicPage">
+                <div className="titreHistoricPage">
+                    Liste des Livres scannés :
+                </div>
+                <div className="searchBar">
+                    <input type="text" placeholder="Rechercher un livre" value={this.state.search} onChange={this.handleSearch}/>
+                </div>
+                <table className="listeLivres">
+                    <thead>
+                        <tr>
+                            <th>Titre</th>
+                            <th>Auteur</th>
+                            <th>Nombre de livres</th>
+                            <th>Editeur</th>
+                            <th>Type</th>
+                            <th>Année</th>
+                            <th>Note</th>
+                            <th>Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {filteredBooks.map(book => (
+                        <Book key={book.title+this.props.getEmail} title={book.title} author={book.author} nbBooks={book.nbBooks} publisher={book.publisher} type={book.type} year={book.year} note={book.note} getEmail={this.props.getEmail} whenDelete={this.updateBooks}/>
+                    ))}
+                    </tbody>
+                </table>
             </div>
-            <div className="searchBar">
-                <input type="text" placeholder="Rechercher un livre" value={this.state.search} onChange={this.handleSearch}/>
-            </div>
-            <table className="listeLivres">
-                <thead>
-                    <tr>
-                        <th>Titre</th>
-                        <th>Auteur</th>
-                        <th>Nombre de livres</th>
-                        <th>Editeur</th>
-                        <th>Type</th>
-                        <th>Année</th>
-                        <th>Note</th>
-                        <th>Supprimer</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {filteredBooks.map(book => (
-                    <Book key={book.title+this.props.getEmail} title={book.title} author={book.author}
-                    nbBooks={book.nbBooks} publisher={book.publisher} type={book.type} year={book.year} note={book.note} getEmail={this.props.getEmail} whenDelete={this.updateBooks}/>
-                  ))}
-                </tbody>
-            </table>
-        </div>
-            </div>
-
-        </div>
-
-
+        </React.Fragment>
     }
 }
 

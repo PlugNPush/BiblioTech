@@ -108,6 +108,7 @@ router.post("/addbook", async (req, res) => {
 router.post("/notebook", async (req, res) => {
   const { title, owner, note } = req.body;
   try {
+    console.log(title, owner, note)
     const checkBook = await sequelize.query(`Select * From Book where owner='${owner}' and title='${title}'`);
     if(checkBook[0].length === 0) {
       res.status(404).json({message: "No book found"})
@@ -158,5 +159,66 @@ router.post("/deletebook", async (req, res) => {
   }
 });
 
+/// - user
+router.get("/getuser/:email", async (req, res) => {
+  const { email } = req.params
+  try {
+    const user = await sequelize.query(`Select * from user where email='${email}'`);    
+    user[0][0].password = undefined
+    if(user[0].length === 0) {
+      res.status(400).json({message: "utilisateur inexistant"})
+      return
+    }
+    console.log("user", user[0], user[0][0])
+    res.status(200).json(user[0][0])
+  }
+  catch(err) {
+    res.status(501).json({message: err})
+  }
+});
+
+router.put("/updateuser/:email", async (req, res) => {
+  const { email } = req.params
+  const {firstname, lastname, password} = req.body
+  try {
+    console.log(firstname, lastname, password, email)
+    if (password !== "") {
+      const newPassword = await bcrypt.hash(password, 10)
+      await sequelize.query(`update user set password='${newPassword}' where email='${email}'`)
+    } if(firstname !== "") {
+      await updateFirstname(sequelize, email, firstname)
+    } if(lastname !== "") {
+      await updateLastname(sequelize, email, lastname)
+    }
+    res.status(200).json({message: "utilisateur modifie"})
+  }
+  catch(err) {
+    res.status(501).json({message: err})
+  }
+});
+
+router.post("/deleteuser", async (req, res) => {
+  try {
+    await sequelize.query(`delete from user where email='${req.user.email}'`)
+    res.status(200).json({message: "utilisateur supprime"})
+  }
+  catch(err) {
+    res.status(501).json({message: err})
+  }
+});
+
+
+
+async function updateFirstname(email, firstname) {
+    await sequelize.query(`update user
+                           set firstname='${firstname}'
+                           where email = '${email}'`)
+}
+
+async function updateLastname(email, lastname) {
+    await sequelize.query(`update user
+                           set lastname='${lastname}'
+                           where email = '${email}'`)
+}
 
 module.exports = router;

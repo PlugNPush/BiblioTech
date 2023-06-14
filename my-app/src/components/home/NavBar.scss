@@ -7,49 +7,53 @@
     background-color: rgb(87, 217, 239);
 }
 
-.navbar > * {
+.navbar > *:not(.greyScreen) {
     //border: 1px solid red;
     transform: scale(1);
     margin-bottom: 20%;
     display: flex;
     transition: transform 0.2s;
-}
-.navbar > *:hover {
-    transform: scale(1.2);
-}
 
-// les icones contenus dans pastIcon et exitIcon doivent prendre la largeur maximale de leur parent
-.pastIcon > *, .exitIcon > * {
-    width: 100%;
-    height: 100%;
-}
-pastIcon {
-    transform: scale(1.3);
+    > * {
+        //border: 1px solid green;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.2);
+    }
 }
 
 .exitIcon {
-    padding-left: 12px;
+    position: relative;
+    left: 5px;
 }
 
-.non-selectable { // à repler dans main.scss
+.non-selectable { // à move dans main.scss
     user-select: none;
 }
 
 .greyScreen {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 35%;
+    left: -25%;
     width: 100vw;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    //background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    // placer la div à droite de la div exitIcon (div cousine n-1)
 }
 
 .exitPopUp {
-    position: fixed;
+    position: fixed; // fixe, relative, absolute : https://www.w3schools.com/css/css_positioning.asp
     top: 50%;
     left: 50%;
     color: blueviolet;
@@ -63,4 +67,8 @@ pastIcon {
 .centered {
     display: flex;
     justify-content: space-around;
+}
+
+.AppPage {
+    display: flex;
 }

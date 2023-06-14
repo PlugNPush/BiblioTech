@@ -3,11 +3,11 @@ from sqlalchemy import create_engine
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 from fuzzywuzzy import process, fuzz
-from IPython.display import clear_output
+from data_db import user, mdp
 
 def recommend_books(user_email):
     # Connect to the database
-    engine = create_engine('mysql+pymysql://user:mdp@localhost:3306/db_master_project') # Change the password accordingly !!!!
+    engine = create_engine('mysql+pymysql://'+user+':'+mdp+'@localhost:3306/db_master_project') # Change the password accordingly !!!!
 
     # Load user's read and liked books from the database
     query = f"SELECT DISTINCT title, author FROM book WHERE owner = '{user_email}' AND rating >= 4;"
@@ -45,7 +45,7 @@ def recommend_books(user_email):
         for rec in recommendations:
             if any(fuzz.ratio(rec[1]['title'], rec_title) > 80 for rec_title in recommended_books):
                 continue  # Skip if similar title already recommended
-            if rec[1]['title'] == user_book.title:  
+            if rec[1]['title'] == user_book.title:
                 continue  # Skip the book itself
             if fuzz.ratio(rec[1]['title'], user_book.title) > 80:
                 continue  # Skip books with similarity > 80%
