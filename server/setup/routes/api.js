@@ -169,6 +169,7 @@ router.get("/getuser/:email", async (req, res) => {
       res.status(400).json({message: "utilisateur inexistant"})
       return
     }
+    console.log("user", user[0], user[0][0])
     res.status(200).json(user[0][0])
   }
   catch(err) {
@@ -183,12 +184,13 @@ router.put("/updateuser/:email", async (req, res) => {
     console.log(firstname, lastname, password, email)
     if (password !== "") {
       const newPassword = await bcrypt.hash(password, 10)
-      await sequelize.query(`update user set firstname='${firstname}', lastname='${lastname}', password='${newPassword}' where email='${email}'`)
-      res.status(200).json({message: "utilisateur modifie"})
-    } else {
-      await sequelize.query(`update user set firstname='${firstname}', lastname='${lastname}' where email='${email}'`)
-      res.status(200).json({message: "utilisateur modifie"})
+      await sequelize.query(`update user set password='${newPassword}' where email='${email}'`)
+    } if(firstname !== "") {
+      await updateFirstname(sequelize, email, firstname)
+    } if(lastname !== "") {
+      await updateLastname(sequelize, email, lastname)
     }
+    res.status(200).json({message: "utilisateur modifie"})
   }
   catch(err) {
     res.status(501).json({message: err})
@@ -205,5 +207,18 @@ router.post("/deleteuser", async (req, res) => {
   }
 });
 
+
+
+async function updateFirstname(email, firstname) {
+    await sequelize.query(`update user
+                           set firstname='${firstname}'
+                           where email = '${email}'`)
+}
+
+async function updateLastname(email, lastname) {
+    await sequelize.query(`update user
+                           set lastname='${lastname}'
+                           where email = '${email}'`)
+}
 
 module.exports = router;

@@ -37,7 +37,7 @@ class UserPage extends Component {
         .then((res) => {
             this.setState({message: res.data.message})
             this.setState({user: this.state.newuser})
-            this.resetUser()
+            this.getUserInfos()
         })
         .catch((err) => {
             console.log(err)
