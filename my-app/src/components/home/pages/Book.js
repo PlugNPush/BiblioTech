@@ -64,19 +64,23 @@ class Book extends Component {
         return <tr className="book">
             <td className="titleBook">{this.props.title}</td>
             <td className="authorBook">{this.props.author}</td>
-            <td className="nbBooksBook">{this.props.nbBooks}</td>
+            { this.props.nbBooks &&
+                <td className="nbBooksBook">{this.props.nbBooks}</td>
+            }
             <td className="publisherBook">{this.props.publisher}</td>
             <td className="typeBook">{this.props.type}</td>
             <td className="yearBook">{this.props.year}</td>
-            <td className="noteBook">
-                { this.state.initNote < 0 ?
-                    <div className="noteBookText">Non noté</div>
-                    : null
-                }
-                <div className="noteBookStars" ref={this.stars} onMouseMove={(e) => this.changeRating(e)} onMouseLeave={() => this.resetRating()} onClick={() => this.validateRating()}>
-                    { this.calculateRating(this.state.note) }
-                </div>
-            </td>
+            { this.props.note &&
+                <td className="noteBook">
+                    { this.state.initNote < 0 ?
+                        <div className="noteBookText">Non noté</div>
+                        : null
+                    }
+                    <div className="noteBookStars" ref={this.stars} onMouseMove={(e) => this.changeRating(e)} onMouseLeave={() => this.resetRating()} onClick={() => this.validateRating()}>
+                        { this.calculateRating(this.state.note) }
+                    </div>
+                </td>
+            }
             <td className="deleteBook">
                 <AiTwotoneDelete onClick={() => this.deleteBook()}/>
             </td>

@@ -36,4 +36,4 @@ create table if not exists recco_book (
     publisher varchar(255) not null,
     primary key (title, owner),
     constraint fk_recco_book foreign key (owner) references user(email)
-)
+);
