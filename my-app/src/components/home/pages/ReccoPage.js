@@ -10,8 +10,13 @@ class ReccoPage extends Component {
     constructor(props) {
         super(props);
         this.state = {books : []}
+        this.getBooksReccomended = this.getBooksReccomended.bind(this)
     }
     componentDidMount() {
+        this.getBooksReccomended()
+    }
+
+    getBooksReccomended() {
         axios.get("http://localhost:8100/api/getreccobooksfromowner/" + window.email)
         .then((res) => {
             let bookList = []
@@ -44,7 +49,7 @@ class ReccoPage extends Component {
                     </thead>
                     <tbody>
                     {this.state.books.map(book => (
-                        <Book key={book.title+window.email} title={book.title} author={book.author} publisher={book.publisher} type={book.type} year={book.year} whenAdd={true}/>
+                        <Book key={book.title+window.email} title={book.title} author={book.author} publisher={book.publisher} type={book.type} year={book.year} whenAdded={this.getBooksReccomended}/>
                     ))}
                     </tbody>
                 </table>

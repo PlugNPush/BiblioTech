@@ -247,8 +247,10 @@ router.delete("/deleteuser/:email", async (req, res) => {
 });
 
 router.post("/deleterecco", async (req, res) => {
+  const { email, title } = req.body
+  console.log("req", req.params, email, title)
   try {
-    await sequelize.query(`delete from recco_book where email='${req.user.email}' and title='${req.user.title}')
+    await sequelize.query(`delete from recco_book where owner='${email}' and title='${title}'`)
     res.status(200).json({message: "recco supprime"})
   } catch (err){
     console.log(err)

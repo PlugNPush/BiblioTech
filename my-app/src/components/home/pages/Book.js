@@ -1,9 +1,9 @@
 import axios from "axios"
 import React, { Component } from "react"
 
-import { noteBook } from "utils/sendBook" // noteBook(title, owner, note)
+import {addBook, noteBook} from "utils/sendBook" // noteBook(title, owner, note)
 
-import {AiTwotoneDelete} from "react-icons/ai"
+import {AiTwotoneDelete, AiFillCheckCircle} from "react-icons/ai"
 import {TiStarFullOutline, TiStarHalfOutline, TiStarOutline} from "react-icons/ti"
 
 import "./Book.scss"
@@ -26,7 +26,17 @@ class Book extends Component {
             console.log(err)
         })
     }
-
+    addBookFromRecco() {
+        addBook(this.props.title, window.email, this.props.author, this.props.year, this.props.type, this.props.publisher)
+        axios.post("http://localhost:8100/api/deleterecco", {
+            email: window.email,
+            title: this.props.title
+        }).then((res) => {
+            this.props.whenAdded()
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
     changeRating(e) {
         const divElement = this.stars.current // Accéder à la référence de la div
         const container = divElement.getBoundingClientRect() // Obtenir les coordonnées de la div
@@ -61,6 +71,7 @@ class Book extends Component {
     }
     
     render() {
+
         return <tr className="book">
             <td className="titleBook">{this.props.title}</td>
             <td className="authorBook">{this.props.author}</td>
@@ -81,9 +92,9 @@ class Book extends Component {
                     </div>
                 </td>
             }
-            { this.props.whenAdd &&
+            { this.props.whenAdded &&
                 <td className="addBook">
-                    <button onClick={() => console.log("add book")}>Ajouter</button>
+                    <AiFillCheckCircle onClick={() => this.addBookFromRecco()}/>
                 </td>
             }
             { this.props.whenDelete &&
