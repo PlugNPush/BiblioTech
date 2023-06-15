@@ -105,6 +105,25 @@ router.post("/addbook", async (req, res) => {
   }
 });
 
+router.post("/addreccobook", async (req, res) => {
+  const { title, owner, author, year, type, publisher} = req.body;
+  try {
+    const checkBook = await sequelize.query(`Select * From recco_book where owner='${owner}' and title='${title}'`);
+    if(checkBook[0].length === 0) {
+      const result = await sequelize.query(
+        `INSERT INTO recco_book (title, owner, author, year, type, publisher) VALUES (?, ?, ?, ?, ?, ?)`,
+        {
+          replacements: [title, owner, author, year, type, publisher],
+          type: Sequelize.QueryTypes.INSERT
+        }
+      );
+    }
+    res.status(200).json({ message: "Book added successfully" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 router.post("/notebook", async (req, res) => {
   const { title, owner, note } = req.body;
   try {
@@ -127,6 +146,22 @@ router.get("/getbooksfromowner/:owner", async (req, res) => {
   try {
     const books = await sequelize.query(
       `SELECT * FROM book WHERE owner = ?`,
+      {
+        replacements: [owner],
+        type: Sequelize.QueryTypes.SELECT
+      }
+    );
+    res.status(200).json(books);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+router.get("/getreccobooksfromowner/:owner", async (req, res) => {
+  const { owner } = req.params;
+  try {
+    const books = await sequelize.query(
+      `SELECT * FROM recco_book WHERE owner = ?`,
       {
         replacements: [owner],
         type: Sequelize.QueryTypes.SELECT

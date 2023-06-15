@@ -10,6 +10,7 @@ import HistoricPage from "./components/home/pages/HistoricPage"
 import UserPage from "./components/home/pages/UserPage"
 import Home from "./components/home/pages/Home"
 import Start from "./components/connection/Start"
+import ReccoPage from "./components/home/pages/ReccoPage";
 
 window.email = ""
 
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/" element={<Start/>} />
         <Route exact path="/home" element={<Home/>} />
         <Route exact path="/search" element={<SearchPage/>} />
+        <Route exact path="/reccomandation" element={<ReccoPage/>} />
         <Route exact path="/historic" element={<HistoricPage/>} />
         <Route exact path="/user" element={<UserPage/>} />
       </Routes>

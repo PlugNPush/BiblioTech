@@ -5,7 +5,7 @@ import {RxValueNone} from "react-icons/rx"
 import {AiOutlineCheck, AiFillQuestionCircle} from "react-icons/ai"
 
 import {readFileContent, convertStringToListOfFile} from "utils/FileReaderUtil.js"
-import {getBookGoogle, addBook} from "utils/sendBook"
+import {getBookGoogle, addBook, getReccomandationBook} from "utils/sendBook"
 import Popup from 'reactjs-popup'
 import NavBar from "../NavBar"
 
@@ -20,6 +20,12 @@ class Home extends Component {
         super(props)
         this.state = {addPhoto : false, book: "", timer: null, searchResults: [], addBook:""}
         this.photoAdded = this.photoAdded.bind(this)
+    }
+    componentDidMount() {
+        this.addReccomandationsBook()
+    }
+    addReccomandationsBook() {
+        getReccomandationBook(window.email)
     }
     photoAdded() {
         if(this.state.addPhoto) {
@@ -96,7 +102,6 @@ class Home extends Component {
                 })               
             }
         }, 1000)})
-        //console.log("searchResults", this.state.searchResults)
     }
     addPhoto() {
         this.setState({addPhoto : true})

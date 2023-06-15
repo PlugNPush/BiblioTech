@@ -1,11 +1,11 @@
 import json
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import SimpleHTTPRequestHandler, HTTPServer
 import urllib.parse
 import recommendation
 
 
 # Define the request handler class
-class RequestHandler(BaseHTTPRequestHandler):
+class RequestHandler(SimpleHTTPRequestHandler):
     def _set_response(self, status_code=200):
         self.send_response(status_code)
         self.send_header('Content-type', 'text/html')
@@ -25,6 +25,13 @@ class RequestHandler(BaseHTTPRequestHandler):
         recco = recommendation.recommend_books(t)
         response_data = '-'.join(recco).encode('utf-8')
         self.wfile.write(response_data)
+
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', 'http://localhost:3000')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.end_headers()
 
 
 # Set up the server

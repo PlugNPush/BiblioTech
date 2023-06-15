@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {BiHistory} from "react-icons/bi"
 import {ImExit} from "react-icons/im"
-import {FaSearch} from "react-icons/fa"
+import {FaSearch, FaLightbulb} from "react-icons/fa"
 import {BsPerson} from "react-icons/bs"
 
 import PopUpExit from "components/popUp/PopUpExit"
@@ -40,6 +40,11 @@ class NavBar extends Component {
             <div className="searchIcon">
                 <Link to="/search">
                     <FaSearch size={85}/>
+                </Link>
+            </div>
+            <div className="reccoIcon">
+                <Link to="/reccomandation">
+                    <FaLightbulb size={85}/>
                 </Link>
             </div>
             <div className="pastIcon">

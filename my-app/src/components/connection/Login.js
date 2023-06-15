@@ -20,7 +20,6 @@ function Login(props) {
     }
     function handleSubmit(event) {
         event.preventDefault()
-        console.log("event", event.target.elements.email.value, event.target.elements.password.value)
         axios.post("http://localhost:8100/api/login", 
             {email: event.target.elements.email.value, password: event.target.elements.password.value})
         .then((res) => {
