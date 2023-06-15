@@ -11,7 +11,7 @@
 
 # recommandation
 /recommendation/data_db.py
-/recommendation/$.pyc
+/recommendation/*.pyc
 /recommendation/*.csv
 
 # testing
