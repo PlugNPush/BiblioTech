@@ -63,9 +63,9 @@ export function getReccomandationBook(owner) {
         .then((value) => {
             const listOfBooks = value.data.split("-")
             for(let i in listOfBooks) {
-                getBookGoogle(i).then((value) => {
+                getBookGoogle(listOfBooks[i]).then((value) => {
                     const res = value[0].volumeInfo
-                    addBookReccomandation(i, owner,res["authors"]?res.authors[0]:"unknown",
+                    addBookReccomandation(listOfBooks[i], owner,res["authors"]?res.authors[0]:"unknown",
                                     res["publishedDate"]?res.publishedDate:"unknown",
                                     res["categories"]?res.categories[0]:"unknown",
                                     res["publisher"]?res.publisher:"unknown")
