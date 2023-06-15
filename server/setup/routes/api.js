@@ -44,7 +44,7 @@ const Book = sequelize.define('Book', {
   // Other model options go here
 });
 
-
+/// - CONNECTION - ///
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -84,6 +84,7 @@ router.post("/signin", async(req, res) => {
     }
 });
 
+/// - BOOKS - ///
 router.post("/addbook", async (req, res) => {
   const { title, owner, author, year, type, publisher} = req.body;
   try {
@@ -194,7 +195,7 @@ router.post("/deletebook", async (req, res) => {
   }
 });
 
-/// - user
+/// - USER - ///
 router.get("/getuser/:email", async (req, res) => {
   const { email } = req.params
   try {
@@ -204,7 +205,7 @@ router.get("/getuser/:email", async (req, res) => {
       res.status(400).json({message: "utilisateur inexistant"})
       return
     }
-    console.log("user", user[0], user[0][0])
+    console.log("user", user[0][0])
     res.status(200).json(user[0][0])
   }
   catch(err) {
@@ -216,14 +217,15 @@ router.put("/updateuser/:email", async (req, res) => {
   const { email } = req.params
   const {firstname, lastname, password} = req.body
   try {
-    console.log(firstname, lastname, password, email)
     if (password !== "") {
       const newPassword = await bcrypt.hash(password, 10)
       await sequelize.query(`update user set password='${newPassword}' where email='${email}'`)
-    } if(firstname !== "") {
-      await updateFirstname(sequelize, email, firstname)
-    } if(lastname !== "") {
-      await updateLastname(sequelize, email, lastname)
+    }
+    if(firstname !== "") {
+      await sequelize.query(`update user set firstname='${firstname}' where email='${email}'`)
+    }
+    if(lastname !== "") {
+      await sequelize.query(`update user set lastname='${lastname}' where email='${email}'`)
     }
     res.status(200).json({message: "utilisateur modifie"})
   }
@@ -232,9 +234,11 @@ router.put("/updateuser/:email", async (req, res) => {
   }
 });
 
-router.post("/deleteuser", async (req, res) => {
+router.delete("/deleteuser/:email", async (req, res) => {
+  const { email } = req.params
   try {
-    await sequelize.query(`delete from user where email='${req.user.email}'`)
+    await sequelize.query(`delete from user where email='${email}'`)
+    console.log("user supprime", email)
     res.status(200).json({message: "utilisateur supprime"})
   }
   catch(err) {
@@ -242,18 +246,5 @@ router.post("/deleteuser", async (req, res) => {
   }
 });
 
-
-
-async function updateFirstname(email, firstname) {
-    await sequelize.query(`update user
-                           set firstname='${firstname}'
-                           where email = '${email}'`)
-}
-
-async function updateLastname(email, lastname) {
-    await sequelize.query(`update user
-                           set lastname='${lastname}'
-                           where email = '${email}'`)
-}
 
 module.exports = router;

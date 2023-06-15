@@ -32,12 +32,26 @@ class UserPage extends Component {
         this.setState({newuser: {password: "", firstname: "", lastname: ""}})
     }
     updateUser() { // update les infos de l'utilisateur
-        axios.put("http://localhost:8100/api/updateuser/" + window.email,
-        {password: this.state.newuser.password??"", firstname: this.state.newuser.firstname??this.state.user.firstname, lastname: this.state.newuser.lastname??this.state.user.lastname})
+        if (this.state.newuser.password === "" && this.state.newuser.firstname === "" && this.state.newuser.lastname === "") {
+            this.setState({message: "Aucun changement n'a été effectué"})
+            return
+        }
+        axios.put("http://localhost:8100/api/updateuser/" + window.email, this.state.newuser)
         .then((res) => {
             this.setState({message: res.data.message})
-            this.setState({user: this.state.newuser})
-            this.getUserInfos()
+            // give this.state.newuser.firstname if it's not null, else give this.state.user.firstname, same for lastname
+            this.setState({user: {firstname: this.state.newuser.firstname || this.state.user.firstname, lastname: this.state.newuser.lastname || this.state.user.lastname, email: window.email}})
+            this.resetUser()
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+    deleteUser() { // supprimer l'utilisateur
+        axios.delete("http://localhost:8100/api/deleteuser/" + window.email)
+        .then((res) => {
+            window.email = ""
+            window.location.href = "/"
         })
         .catch((err) => {
             console.log(err)
