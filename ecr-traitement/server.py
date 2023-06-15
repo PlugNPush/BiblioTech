@@ -18,11 +18,7 @@ class RequestHandler(SimpleHTTPRequestHandler):
     def do_POST(self):
         self._set_response()
         content_length = int(self.headers['Content-Length'])
-        data = self.rfile.read(content_length).decode('utf-8')
-        t = data.split(":")[1].replace('"', '').replace('}', '').replace('\n', '')
-        recco = recommendation.recommend_books(t)
-        response_data = '-'.join(recco).encode('utf-8')
-        self.wfile.write(response_data)
+        self.wfile.write(bytes("Message recu"))
 
     def do_OPTIONS(self):
         self.send_response(200)
@@ -35,7 +31,7 @@ class RequestHandler(SimpleHTTPRequestHandler):
 # Set up the server
 def run_server():
     host = 'localhost'
-    port = 8000
+    port = 8080
     server_address = (host, port)
     httpd = HTTPServer(server_address, RequestHandler)
     print(f'Starting server on {host}:{port}...')
