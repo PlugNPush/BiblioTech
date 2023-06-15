@@ -70,7 +70,7 @@ class HistoricPage extends Component {
                     </thead>
                     <tbody>
                     {filteredBooks.map(book => (
-                        <Book key={book.title+this.props.getEmail} title={book.title} author={book.author} nbBooks={book.nbBooks} publisher={book.publisher} type={book.type} year={book.year} note={book.note} getEmail={this.props.getEmail} whenDelete={this.updateBooks}/>
+                        <Book key={book.title+window.email} title={book.title} author={book.author} nbBooks={book.nbBooks} publisher={book.publisher} type={book.type} year={book.year} note={book.note} getEmail={window.email} whenDelete={this.updateBooks}/>
                     ))}
                     </tbody>
                 </table>

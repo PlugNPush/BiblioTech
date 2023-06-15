@@ -42,7 +42,7 @@ class ReccoPage extends Component {
                     </thead>
                     <tbody>
                     {book.map(book => (
-                        <Book key={book.title+this.props.getEmail} title={book.title} author={book.author} publisher={book.publisher} type={book.type} year={book.year} getEmail={this.props.getEmail} whenDelete={this.updateBooks}/>
+                        <Book key={book.title+window.email} title={book.title} author={book.author} publisher={book.publisher} type={book.type} year={book.year} getEmail={this.props.getEmail} whenDelete={this.updateBooks}/>
                     ))}
                     </tbody>
                 </table>

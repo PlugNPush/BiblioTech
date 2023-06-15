@@ -66,7 +66,7 @@ class SearchPage extends Component {
             if (filtered[0].length === 0) {
                 this.setState({searchResults: []})
             } else {
-                getBookGoogle(filtered, this.props.getEmail).then((res) => {
+                getBookGoogle(filtered).then((res) => {
                     this.setState({searchResults: res})
                 })               
             }
