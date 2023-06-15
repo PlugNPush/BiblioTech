@@ -81,9 +81,16 @@ class Book extends Component {
                     </div>
                 </td>
             }
-            <td className="deleteBook">
-                <AiTwotoneDelete onClick={() => this.deleteBook()}/>
-            </td>
+            { this.props.whenAdd &&
+                <td className="addBook">
+                    <button onClick={() => console.log("add book")}>Ajouter</button>
+                </td>
+            }
+            { this.props.whenDelete &&
+                <td className="deleteBook">
+                    <AiTwotoneDelete onClick={() => this.deleteBook()}/>
+                </td>
+            }
         </tr>
     }
 }

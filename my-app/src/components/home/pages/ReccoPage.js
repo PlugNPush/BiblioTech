@@ -39,12 +39,12 @@ class ReccoPage extends Component {
                             <th>Editeur</th>
                             <th>Type</th>
                             <th>Année</th>
-                            <th>Supprimer</th>
+                            <th>Ajouter</th>
                         </tr>
                     </thead>
                     <tbody>
                     {this.state.books.map(book => (
-                        <Book key={book.title+window.email} title={book.title} author={book.author} publisher={book.publisher} type={book.type} year={book.year} whenDelete={this.updateBooks}/>
+                        <Book key={book.title+window.email} title={book.title} author={book.author} publisher={book.publisher} type={book.type} year={book.year} whenAdd={true}/>
                     ))}
                     </tbody>
                 </table>
