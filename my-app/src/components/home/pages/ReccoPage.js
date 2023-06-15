@@ -1,16 +1,18 @@
-import React, {Component} from "react";
-import NavBar from "../NavBar";
-import "./ReccoPage.css"
-import axios from "axios";
-import Book from "./Book";
-import book from "./Book";
+import React, {Component} from "react"
+import axios from "axios"
+
+import NavBar from "../NavBar"
+import Book from "./Book"
+
+import "./ReccoPage.scss"
+
 class ReccoPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {books : undefined}
+        this.state = {books : []}
     }
     componentDidMount() {
-        axios.get("http://localhost:8100/api/getreccobooksfromowner/" + this.state.getEmail)
+        axios.get("http://localhost:8100/api/getreccobooksfromowner/" + window.email)
         .then((res) => {
             let bookList = []
             for (let i in res.data) {
@@ -41,8 +43,8 @@ class ReccoPage extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                    {book.map(book => (
-                        <Book key={book.title+window.email} title={book.title} author={book.author} publisher={book.publisher} type={book.type} year={book.year} getEmail={this.props.getEmail} whenDelete={this.updateBooks}/>
+                    {this.state.books.map(book => (
+                        <Book key={book.title+window.email} title={book.title} author={book.author} publisher={book.publisher} type={book.type} year={book.year} whenDelete={this.updateBooks}/>
                     ))}
                     </tbody>
                 </table>

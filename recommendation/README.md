@@ -15,9 +15,11 @@ pip install sqlalchemy
 pip install scikit-learn
 pip install fuzzywuzzy
 ```
-    
 
-Ligne 10 il faut changer le mot de passe et le username : mysql://username:mdp@localhost:3306/db_master_project
+Pour le lancer :
+```zsh
+python server.py
+```
 
 
 ```sql
