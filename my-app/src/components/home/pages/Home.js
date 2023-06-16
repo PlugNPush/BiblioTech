@@ -25,7 +25,7 @@ class Home extends Component {
         this.addReccomandationsBook()
     }
     addReccomandationsBook() {
-        getReccomandationBook(window.email)
+        getReccomandationBook(localStorage.getItem("email"))
     }
     photoAdded() {
         if(this.state.addPhoto) {
@@ -45,7 +45,7 @@ class Home extends Component {
                   </div>
                 )}
               </Popup>
-            <input className="fileRead" type="file" onChange={(e)=>readFileContent(e, window.email)}/>
+            <input className="fileRead" type="file" onChange={(e)=>readFileContent(e, localStorage.getItem("email"))}/>
         </div>
     }
     addBook() { // affiche une barre de recherche ainsi que le résultat en temps réel
@@ -75,7 +75,7 @@ class Home extends Component {
                             <button className="btn btn-primary" onClick={() => {
                                 this.bookAddedWait(result.id)
                                 const bookInfo = result.volumeInfo
-                                addBook(bookInfo.title, window.email, bookInfo["authors"]?bookInfo.authors[0]:"unknown",
+                                addBook(bookInfo.title, localStorage.getItem("email"), bookInfo["authors"]?bookInfo.authors[0]:"unknown",
                                     bookInfo["publishedDate"]?bookInfo.publishedDate:"unknown",
                                     bookInfo["categories"]?bookInfo.categories[0]:"unknown",
                                     bookInfo["publisher"]?bookInfo.publisher:"unknown")
@@ -97,7 +97,7 @@ class Home extends Component {
             if (filtered[0].length === 0) {
                 this.setState({searchResults: []})
             } else {
-                getBookGoogle(filtered, window.email).then((res) => {
+                getBookGoogle(filtered, localStorage.getItem("email")).then((res) => {
                     this.setState({searchResults: res})
                 })               
             }

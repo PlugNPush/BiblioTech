@@ -28,7 +28,7 @@ class NavBar extends Component {
         }
     }
     render() {
-        if (window.email === "") {
+        if (localStorage.getItem("email") === "") {
             window.location.href = "/"
         }
         return <div className="navbar">

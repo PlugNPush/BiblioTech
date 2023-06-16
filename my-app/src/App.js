@@ -12,8 +12,6 @@ import Home from "./components/home/pages/Home"
 import Start from "./components/connection/Start"
 import ReccoPage from "./components/home/pages/ReccoPage";
 
-window.email = ""
-
 function App() {
   return (
       <BrowserRouter>

@@ -15,7 +15,7 @@ class UserPage extends Component {
         this.state = {user: {}, newuser: {password:"",firstname:"",lastname:""}, message: ""}
     }
     getUserInfos() { // récupérer les infos de l'utilisateur
-        axios.get("http://localhost:8100/api/getuser/" + window.email)
+        axios.get("http://localhost:8100/api/getuser/" + localStorage.getItem("email"))
         .then((res) => {
             this.setState({user: res.data})
         })
@@ -36,11 +36,11 @@ class UserPage extends Component {
             this.setState({message: "Aucun changement n'a été effectué"})
             return
         }
-        axios.put("http://localhost:8100/api/updateuser/" + window.email, this.state.newuser)
+        axios.put("http://localhost:8100/api/updateuser/" + localStorage.getItem("email"), this.state.newuser)
         .then((res) => {
             this.setState({message: res.data.message})
             // give this.state.newuser.firstname if it's not null, else give this.state.user.firstname, same for lastname
-            this.setState({user: {firstname: this.state.newuser.firstname || this.state.user.firstname, lastname: this.state.newuser.lastname || this.state.user.lastname, email: window.email}})
+            this.setState({user: {firstname: this.state.newuser.firstname || this.state.user.firstname, lastname: this.state.newuser.lastname || this.state.user.lastname, email: localStorage.getItem("email")}})
             this.resetUser()
         })
         .catch((err) => {
@@ -48,9 +48,9 @@ class UserPage extends Component {
         })
     }
     deleteUser() { // supprimer l'utilisateur
-        axios.delete("http://localhost:8100/api/deleteuser/" + window.email)
+        axios.delete("http://localhost:8100/api/deleteuser/" + localStorage.getItem("email"))
         .then((res) => {
-            window.email = ""
+            localStorage.setItem("email", "")
             window.location.href = "/"
         })
         .catch((err) => {

@@ -11,7 +11,7 @@ function PopUpExit(props) {
     const navigate = useNavigate();
 
     function handleConfirmExit() {
-        window.email = ""
+        localStorage.setItem("email", "")
         navigate("/")
     }
     function handleCancelExit() {

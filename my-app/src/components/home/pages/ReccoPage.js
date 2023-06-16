@@ -17,7 +17,7 @@ class ReccoPage extends Component {
     }
 
     getBooksReccomended() {
-        axios.get("http://localhost:8100/api/getreccobooksfromowner/" + window.email)
+        axios.get("http://localhost:8100/api/getreccobooksfromowner/" + localStorage.getItem("email"))
         .then((res) => {
             let bookList = []
             for (let i in res.data) {
@@ -49,7 +49,7 @@ class ReccoPage extends Component {
                     </thead>
                     <tbody>
                     {this.state.books.map(book => (
-                        <Book key={book.title+window.email} title={book.title} author={book.author} publisher={book.publisher} type={book.type} year={book.year} whenAdded={this.getBooksReccomended}/>
+                        <Book key={book.title+localStorage.getItem("email")} title={book.title} author={book.author} publisher={book.publisher} type={book.type} year={book.year} whenAdded={this.getBooksReccomended}/>
                     ))}
                     </tbody>
                 </table>

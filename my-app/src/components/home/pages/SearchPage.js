@@ -44,7 +44,7 @@ class SearchPage extends Component {
                             <button className="btn btn-primary" onClick={() => {
                                 this.bookAddedWait(result.id)
                                 const bookInfo = result.volumeInfo
-                                addBook(bookInfo.title, window.email, bookInfo["authors"]?bookInfo.authors[0]:"unknown",
+                                addBook(bookInfo.title, localStorage.getItem("email"), bookInfo["authors"]?bookInfo.authors[0]:"unknown",
                                     bookInfo["publishedDate"]?bookInfo.publishedDate:"unknown",
                                     bookInfo["categories"]?bookInfo.categories[0]:"unknown",
                                     bookInfo["publisher"]?bookInfo.publisher:"unknown")
