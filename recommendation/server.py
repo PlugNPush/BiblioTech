@@ -22,9 +22,11 @@ class RequestHandler(SimpleHTTPRequestHandler):
         content_length = int(self.headers['Content-Length'])
         data = self.rfile.read(content_length).decode('utf-8')
         mail = data.split(":")[1].replace('"', '').replace('}', '').replace('\n', '')
+        print(mail)
         user_books = reccomendation_ml.get_user_books(mail)
         recommended_books = reccomendation_ml.recommend_books_for_new_user(user_books, 10)
         response_data = '-'.join(recommended_books).encode('utf-8')
+        print("reco", mail, recommended_books)
         self.wfile.write(response_data)
 
     def do_OPTIONS(self):

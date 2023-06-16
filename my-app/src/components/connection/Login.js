@@ -12,7 +12,7 @@ function Login(props) {
     const [wrongPassword, setWrongPassword] = useState(false)
     const navigate = useNavigate();
     function showWrongPassword() {
-        if({wrongPassword} === true) {
+        if({wrongPassword}.wrongPassword) {
             return <div className="wrongPassword">
                 Mauvais email/mot de passe
             </div>

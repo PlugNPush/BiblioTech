@@ -12,7 +12,7 @@ function SignIn(props) {
     const [wrongEmail, setWrongEmail] = useState(false)
     const navigate = useNavigate();
     function badEmail() {
-        if({wrongEmail} === true) {
+        if({wrongEmail}.wrongEmail === true) {
             return <div className="wrongPassword">
                 Email déjà pris
             </div>
