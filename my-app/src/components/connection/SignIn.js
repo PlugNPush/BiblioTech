@@ -12,7 +12,7 @@ function SignIn(props) {
     const [wrongEmail, setWrongEmail] = useState(false)
     const navigate = useNavigate();
     function badEmail() {
-        if({wrongEmail} === true) {
+        if({wrongEmail}.wrongEmail === true) {
             return <div className="wrongPassword">
                 Email déjà pris
             </div>
@@ -27,7 +27,7 @@ function SignIn(props) {
                 password: event.target.elements.password.value})
         .then((res) => {
             if(res.status === 200) {
-                window.email = event.target.elements.email.value
+                localStorage.setItem("email", event.target.elements.email.value)
                 navigate("/home")
             } else {
                 setWrongEmail(true)

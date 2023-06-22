@@ -9,6 +9,12 @@
       name="description"
       content="Web site created for users to scan their library"
     />
+    <!-- Access to XMLHttpRequest at 'http://localhost:8000/' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. 
+    to correct this error, i need to add this line
+    @CrossOrigin(origins = "http://localhost:3000/", methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowedHeaders = "*", allowCredentials = "true")
+    in the controller ()
+    -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a

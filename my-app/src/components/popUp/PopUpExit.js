@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React from "react"
 
 import "components/home/NavBar.scss"
 import {useNavigate} from "react-router-dom";
@@ -11,7 +11,7 @@ function PopUpExit(props) {
     const navigate = useNavigate();
 
     function handleConfirmExit() {
-        window.email = ""
+        localStorage.setItem("email", "")
         navigate("/")
     }
     function handleCancelExit() {

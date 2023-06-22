@@ -1,0 +1,63 @@
+.searchPage {
+    display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+}
+
+.searchFile { // contient le bouton pour rechercher un fichier et la recherche dans searchResults
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.searchFile > * {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.searchResults { // contient les résultats de la recherche (un ensemble de cartes)
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .card { // la carte / l'oeuvre
+        margin: 1%;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .card-header { // contient l'image et le titre de la carte
+            
+        }
+
+        .card-body { // contient les infos de la carte
+            // les infos sont affichées en grille de 3 par 3
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-template-areas: 
+                "title title title"
+                "author author author";
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        .card-footer { // contient les boutons de la carte
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            text-align: center;
+        }
+        .card-footer:hover { // contient les boutons de la carte
+            transform: scale(1.2);
+        }
+        button:hover {
+            background-color: #57d9ef;
+        }
+    }
+}

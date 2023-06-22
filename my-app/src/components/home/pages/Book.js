@@ -1,9 +1,9 @@
 import axios from "axios"
 import React, { Component } from "react"
 
-import { noteBook } from "utils/sendBook" // noteBook(title, owner, note)
+import {addBook, noteBook} from "utils/sendBook" // noteBook(title, owner, note)
 
-import {AiTwotoneDelete} from "react-icons/ai"
+import {AiTwotoneDelete, AiFillCheckCircle} from "react-icons/ai"
 import {TiStarFullOutline, TiStarHalfOutline, TiStarOutline} from "react-icons/ti"
 
 import "./Book.scss"
@@ -19,14 +19,24 @@ class Book extends Component {
         this.stars = React.createRef()
     }
     deleteBook() {
-        axios.post("http://localhost:8100/api/deletebook", {owner: this.props.getEmail, title: this.props.title})
+        axios.post("http://localhost:8100/api/deletebook", {owner: localStorage.getItem("email"), title: this.props.title})
         .then((res) => {
             this.props.whenDelete()
         }).catch((err) => {
             console.log(err)
         })
     }
-
+    addBookFromRecco() {
+        addBook(this.props.title, localStorage.getItem("email"), this.props.author, this.props.year, this.props.type, this.props.publisher)
+        axios.post("http://localhost:8100/api/deleterecco", {
+            email: localStorage.getItem("email"),
+            title: this.props.title
+        }).then((res) => {
+            this.props.whenAdded()
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
     changeRating(e) {
         const divElement = this.stars.current // Accéder à la référence de la div
         const container = divElement.getBoundingClientRect() // Obtenir les coordonnées de la div
@@ -53,7 +63,7 @@ class Book extends Component {
 
     validateRating() {
         this.setState({ initNote: this.state.note })
-        noteBook(this.props.title, this.props.getEmail, this.state.note)
+        noteBook(this.props.title, localStorage.getItem("email"), this.state.note)
     }
 
     resetRating() {
@@ -61,25 +71,37 @@ class Book extends Component {
     }
     
     render() {
+
         return <tr className="book">
             <td className="titleBook">{this.props.title}</td>
             <td className="authorBook">{this.props.author}</td>
-            <td className="nbBooksBook">{this.props.nbBooks}</td>
+            { this.props.nbBooks &&
+                <td className="nbBooksBook">{this.props.nbBooks}</td>
+            }
             <td className="publisherBook">{this.props.publisher}</td>
             <td className="typeBook">{this.props.type}</td>
             <td className="yearBook">{this.props.year}</td>
-            <td className="noteBook">
-                { this.state.initNote < 0 ?
-                    <div className="noteBookText">Non noté</div>
-                    : null
-                }
-                <div className="noteBookStars" ref={this.stars} onMouseMove={(e) => this.changeRating(e)} onMouseLeave={() => this.resetRating()} onClick={() => this.validateRating()}>
-                    { this.calculateRating(this.state.note) }
-                </div>
-            </td>
-            <td className="deleteBook">
-                <AiTwotoneDelete onClick={() => this.deleteBook()}/>
-            </td>
+            { this.props.note &&
+                <td className="noteBook">
+                    { this.state.initNote < 0 ?
+                        <div className="noteBookText">Non noté</div>
+                        : null
+                    }
+                    <div className="noteBookStars" ref={this.stars} onMouseMove={(e) => this.changeRating(e)} onMouseLeave={() => this.resetRating()} onClick={() => this.validateRating()}>
+                        { this.calculateRating(this.state.note) }
+                    </div>
+                </td>
+            }
+            { this.props.whenAdded &&
+                <td className="addBook">
+                    <AiFillCheckCircle onClick={() => this.addBookFromRecco()}/>
+                </td>
+            }
+            { this.props.whenDelete &&
+                <td className="deleteBook">
+                    <AiTwotoneDelete onClick={() => this.deleteBook()}/>
+                </td>
+            }
         </tr>
     }
 }
