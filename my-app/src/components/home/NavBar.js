@@ -8,6 +8,7 @@ import PopUpExit from "components/popUp/PopUpExit"
 import "./NavBar.scss"
 import logo from "assets/logo.png"
 import {Link} from "react-router-dom";
+import {GiPositionMarker} from "react-icons/gi";
 
 class NavBar extends Component {
     /**
@@ -45,6 +46,11 @@ class NavBar extends Component {
             <div className="reccoIcon">
                 <Link to="/reccomandation">
                     <FaLightbulb size={85}/>
+                </Link>
+            </div>
+            <div className="position">
+                <Link to={"/position"}>
+                    <GiPositionMarker size={90}/>
                 </Link>
             </div>
             <div className="pastIcon">

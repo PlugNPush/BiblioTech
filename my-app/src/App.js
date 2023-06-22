@@ -11,6 +11,7 @@ import UserPage from "./components/home/pages/UserPage"
 import Home from "./components/home/pages/Home"
 import Start from "./components/connection/Start"
 import ReccoPage from "./components/home/pages/ReccoPage";
+import Position from "./components/home/pages/Position";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/reccomandation" element={<ReccoPage/>} />
         <Route exact path="/historic" element={<HistoricPage/>} />
         <Route exact path="/user" element={<UserPage/>} />
+        <Route exact path="/position" element={<Position/>} />
       </Routes>
     </BrowserRouter>
 

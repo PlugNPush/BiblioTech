@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 
 import NavBar from '../NavBar'
 import {getBookGoogle, addBook} from "utils/sendBook"
-import {readFileContent, convertStringToListOfFile} from "utils/FileReaderUtil.js"
+import {convertStringToListOfFile} from "utils/FileReaderUtil.js"
 
 import {RxValueNone} from "react-icons/rx"
-import {AiOutlineCheck, AiFillQuestionCircle} from "react-icons/ai"
+import {AiOutlineCheck} from "react-icons/ai"
 import './SearchPage.scss'
 
 class SearchPage extends Component {
