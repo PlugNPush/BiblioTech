@@ -35,7 +35,7 @@ class ReccoPage extends Component {
         return <React.Fragment>
             <NavBar/>
             <div className="reccoPage">
-                <h1>Reccomandations de livres :</h1>
+                <h1>Recommandation de livres :</h1>
                 <table className="listeLivres">
                     <thead>
                         <tr>
