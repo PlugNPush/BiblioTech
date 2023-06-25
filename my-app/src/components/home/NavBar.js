@@ -8,7 +8,7 @@ import PopUpExit from "components/popUp/PopUpExit"
 import "./NavBar.scss"
 import logo from "assets/logo.png"
 import {Link} from "react-router-dom";
-import {GiPositionMarker} from "react-icons/gi";
+import {BsFillBoxFill} from "react-icons/bs";
 
 class NavBar extends Component {
     /**
@@ -50,7 +50,7 @@ class NavBar extends Component {
             </div>
             <div className="position">
                 <Link to={"/position"}>
-                    <GiPositionMarker size={90}/>
+                    <BsFillBoxFill size={80}/>
                 </Link>
             </div>
             <div className="pastIcon">

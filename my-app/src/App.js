@@ -12,6 +12,7 @@ import Home from "./components/home/pages/Home"
 import Start from "./components/connection/Start"
 import ReccoPage from "./components/home/pages/ReccoPage";
 import Position from "./components/home/pages/Position";
+import BoiteLivres from "./components/home/pages/BoiteLivres";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/historic" element={<HistoricPage/>} />
         <Route exact path="/user" element={<UserPage/>} />
         <Route exact path="/position" element={<Position/>} />
+        <Route exact path="/infos/:name" element={<BoiteLivres/>} />
       </Routes>
     </BrowserRouter>
 

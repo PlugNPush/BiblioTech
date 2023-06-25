@@ -71,7 +71,6 @@ class SearchPage extends Component {
                 })               
             }
         }, 1000)})
-        //console.log("searchResults", this.state.searchResults)
     }
     bookAddedWait(titre) {
         this.setState({addBook : titre})
