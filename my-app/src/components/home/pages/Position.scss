@@ -31,3 +31,28 @@
     width: 100%;
     height: 100%;
 }
+
+.titreGares {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+.listeGares { // table
+    // mettre des bordures à l'intérieur de la table
+    border-collapse: collapse;
+    thead {
+        border-bottom: 1px solid lightblue;
+
+        tr {
+            border-collapse: collapse;
+            th:not(:last-child) {
+                border-right: 1px solid lightblue;
+            }
+        }
+    }
+}

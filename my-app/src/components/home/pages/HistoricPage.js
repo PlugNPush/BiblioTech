@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import axios from "axios"
 
-import Book from "./Book"
+import Book from "../entities/Book"
 import NavBar from "../NavBar"
 
 import "./HistoricPage.scss"

@@ -5,6 +5,10 @@
     border-radius: 0px 5px 5px 0px;
     padding: 10px;
     background-color: rgb(87, 217, 239);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
 }
 
 .navbar > *:not(.greyScreen) {
