@@ -1,14 +1,6 @@
 import React, {Component} from "react"
-import {BiHistory} from "react-icons/bi"
-import {ImExit} from "react-icons/im"
-import {FaSearch, FaLightbulb} from "react-icons/fa"
-import {BsPerson} from "react-icons/bs"
-
-import PopUpExit from "components/popUp/PopUpExit"
 import "./NavBar.scss"
-import logo from "assets/logo.png"
 import {Link} from "react-router-dom";
-import {BsFillBoxFill} from "react-icons/bs";
 
 class NavBar extends Component {
     /**
@@ -23,11 +15,6 @@ class NavBar extends Component {
     setPopup() {
         this.setState({popup: !this.state.popup})
     }
-    showPopup() {
-        if(this.state.popup) {
-            return <PopUpExit setPopup={this.setPopup}/>
-        }
-    }
     render() {
         if (localStorage.getItem("email") === "") {
             window.location.href = "/"
@@ -35,38 +22,40 @@ class NavBar extends Component {
         return <div className="navbar">
             <div className="logoApp">
                 <Link to="/home">
-                    <img src={logo} alt="Logo" className="non-selectable"/>
+                    Accueil
                 </Link>
             </div>
             <div className="searchIcon">
                 <Link to="/search">
-                    <FaSearch size={85}/>
+                    Rechercher
                 </Link>
             </div>
             <div className="reccoIcon">
                 <Link to="/reccomandation">
-                    <FaLightbulb size={85}/>
+                    Recommandation
                 </Link>
             </div>
             <div className="position">
                 <Link to={"/position"}>
-                    <BsFillBoxFill size={80}/>
+                    Boîtes à livres
                 </Link>
             </div>
             <div className="pastIcon">
                 <Link to="/historic">
-                    <BiHistory size={90}/>
+                    Historique
                 </Link>
             </div>
             <div className="userIcon">
                 <Link to="/user">
-                    <BsPerson size={90}/>
+                    Mon compte
                 </Link>
             </div>
-            <div className="exitIcon">
-                <ImExit onClick={() => this.setState({popup: true})} />
+            <div className="exitIcon" onClick={() => {
+                localStorage.setItem("email", "");
+                window.location.href = "/"}
+            }>
+                Se déconnecter
             </div>
-            {this.showPopup()}
         </div>
     }
 }

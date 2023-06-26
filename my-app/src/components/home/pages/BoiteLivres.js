@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios";
-import Gare from "../entities/Gare";
 import Book from "../entities/Book";
+import "./BoiteLivres.scss";
 
 class BoiteLivres extends Component {
     constructor(props) {
