@@ -12,7 +12,7 @@ function Login(props) {
     const [wrongPassword, setWrongPassword] = useState(false)
     const navigate = useNavigate();
     function showWrongPassword() {
-        if({wrongPassword} === true) {
+        if({wrongPassword}.wrongPassword) {
             return <div className="wrongPassword">
                 Mauvais email/mot de passe
             </div>
@@ -20,12 +20,11 @@ function Login(props) {
     }
     function handleSubmit(event) {
         event.preventDefault()
-        console.log("event", event.target.elements.email.value, event.target.elements.password.value)
         axios.post("http://localhost:8100/api/login", 
             {email: event.target.elements.email.value, password: event.target.elements.password.value})
         .then((res) => {
             if(res.status === 200) {
-                window.email = event.target.elements.email.value;
+                localStorage.setItem("email", event.target.elements.email.value)
                 navigate("/home")
             } else {
                 setWrongPassword(true)

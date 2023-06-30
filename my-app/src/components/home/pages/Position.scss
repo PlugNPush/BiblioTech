@@ -1,0 +1,59 @@
+.positionPage {
+    display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.buttonPos {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #000000; /* Border color */
+  border-radius: 50%; /* Creates a circular border */
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.buttonPos:hover {
+  background-color: #f0f0f0; /* Change the background color on hover */
+}
+.codePAdded {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.titreGares {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+.listeGares { // table
+    // mettre des bordures à l'intérieur de la table
+    border-collapse: collapse;
+    thead {
+        border-bottom: 1px solid lightblue;
+
+        tr {
+            border-collapse: collapse;
+            th:not(:last-child) {
+                border-right: 1px solid lightblue;
+            }
+        }
+    }
+}

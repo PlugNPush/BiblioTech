@@ -9,6 +9,11 @@
 # database
 /server/setup/routes/.data_db.js
 
+# recommandation
+/recommendation/data_db.py
+/recommendation/TEST.ipynb
+/recommendation/*.csv
+
 # testing
 /coverage
 
@@ -25,3 +30,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+__pycache__

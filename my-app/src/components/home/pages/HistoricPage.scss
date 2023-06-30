@@ -1,3 +1,11 @@
+.historicPage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+    margin-top: 6%;
+}
+
 .titreHistoricPage {
     display: flex;
     flex-direction: column;
@@ -7,8 +15,6 @@
     display: flex;
     font-size: 200%;
     white-space: nowrap;
-    margin-top: 5%;
-    margin-bottom: 5%;
 }
 
 .searchBar {
