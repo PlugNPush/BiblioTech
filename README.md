@@ -24,6 +24,18 @@ npm i
 npm start
 ```
 
+# Executer le service de traitement d'images :
+- Installer les dépendances pour la première fois :
+```zsh
+pip install -r ./ImageProcessingService/requirements.txt
+```
+- Exécuter dans un terminal :
+```zsh
+cd ./ImageProcessingService
+python server.py
+```
+- Note: le premier lancement nécessitera entre 5 et 10 minutes d'attente avant de démarrer le service afin de télécharger les modèles requis (environ 3Gb).
+
 # Executer l'algorithme de reccomandation :
 - exécuter dans un terminal les lignes :
 ```zsh
