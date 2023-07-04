@@ -1,0 +1,6 @@
+model_checkpoint_path: "/tmp/east_icdar2015_resnet_v1_50_rbox/model.ckpt-49491"
+all_model_checkpoint_paths: "/tmp/east_icdar2015_resnet_v1_50_rbox/model.ckpt-45451"
+all_model_checkpoint_paths: "/tmp/east_icdar2015_resnet_v1_50_rbox/model.ckpt-46461"
+all_model_checkpoint_paths: "/tmp/east_icdar2015_resnet_v1_50_rbox/model.ckpt-47471"
+all_model_checkpoint_paths: "/tmp/east_icdar2015_resnet_v1_50_rbox/model.ckpt-48481"
+all_model_checkpoint_paths: "/tmp/east_icdar2015_resnet_v1_50_rbox/model.ckpt-49491"
