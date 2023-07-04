@@ -30,3 +30,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 __pycache__
+
+# ImageProcessingService
+ImageProcessingService/processing_requests/*
+.history/*
+ImageProcessingService/sam_vit_h_4b8939.pth
+.DS_Store
