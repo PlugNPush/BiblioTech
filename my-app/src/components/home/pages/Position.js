@@ -4,7 +4,6 @@ import "./Position.scss";
 import "../NavBar.scss";
 import {RiSendPlaneFill} from "react-icons/ri";
 import {getAllGares, searchCodePostaleSncf, searchLigneSncf} from "../../../utils/FileReaderUtil";
-import Book from "../entities/Book";
 import Gare from "../entities/Gare";
 class Position extends Component {
     constructor(props) {
