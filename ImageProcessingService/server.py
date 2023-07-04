@@ -416,32 +416,24 @@ def extract_books(books):
         publisher = "Unknown"
         
         # Check if 'items' key exists in the JSON
-        if 'items' in book:
-            items = book['items']
-            
-            # Check if there are any items in the list
-            if items:
-                # Get the first item in the list
-                first_item = items[0]
-                
-                # Extract the title from 'volumeInfo' if available
-                if 'volumeInfo' in first_item:
-                    volume_info = first_item['volumeInfo']
-                    title = volume_info.get('title', title)
-                    
-                    # Extract the author from 'volumeInfo' if available
-                    authors = volume_info.get('authors')
-                    author = authors[0] if authors else author
-                    
-                    # Extract the year from 'volumeInfo' if available
-                    published_date = volume_info.get('publishedDate')
-                    year = published_date.split('-')[0] if published_date else year
-                    
-                    # Extract the book type from 'volumeInfo' if available
-                    categories = volume_info.get('categories')
-                    book_type = categories[0] if categories else book_type
+        if 'volumeInfo' in book:
 
-                    publisher = volume_info.get('publisher', publisher)
+            volume_info = book['volumeInfo']
+            title = volume_info.get('title', title)
+
+            # Extract the author from 'volumeInfo' if available
+            authors = volume_info.get('authors')
+            author = authors[0] if authors else author
+
+            # Extract the year from 'volumeInfo' if available
+            published_date = volume_info.get('publishedDate')
+            year = published_date.split('-')[0] if published_date else year
+
+            # Extract the book type from 'volumeInfo' if available
+            categories = volume_info.get('categories')
+            book_type = categories[0] if categories else book_type
+
+            publisher = volume_info.get('publisher', publisher)
         
         # Return the extracted information
         result_books.append((title, author, year, book_type, publisher))
@@ -471,30 +463,30 @@ def process_image(image_path, owner):
     # Perform image processing here using the loaded script
     print("Processing image:", image_path)
     # Step 1: Use Segment Anything to generate all the masks
-    masks = generate_masks(image_path)
+    #masks = generate_masks(image_path)
 
     # Step 2: Filter out masks that are not rectangular enough
-    indexes = filter_masks(image_path, masks)
+    #indexes = filter_masks(image_path, masks)
 
     # Step 3: Overlay each mask on the image
-    overlay_masks(image_path, indexes)
+    #overlay_masks(image_path, indexes)
 
     # Step 4: Crop each overlayed mask
-    crop_masks(image_path, indexes)
+    #crop_masks(image_path, indexes)
 
     # Step 5: Read the OCR text for each overlayed mask
-    read_ocr_text(image_path, indexes)
+    #read_ocr_text(image_path, indexes)
 
     # Step 6: Merge the OCR text for each overlayed mask
-    merge_ocr_text(image_path, indexes)
+    #merge_ocr_text(image_path, indexes)
 
-    # Step 6: For each OCR text, call the Google Books API to get the book metadata
+    # Step 7: For each OCR text, call the Google Books API to get the book metadata
     books = get_books(image_path)
 
-    # Step 7: For each book metadata, call the database API to save the book metadata
+    # Step 8: For each book metadata, call the database API to save the book metadata
     add_books(books, owner)
     
-    # Step 8: Cleanup
+    # Step 9: Cleanup
     cleanup(image_path)
 
 
