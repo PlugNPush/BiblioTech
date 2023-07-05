@@ -4,6 +4,7 @@ import queue
 import multiprocessing
 import threading
 from flask import Flask, request
+from flask_cors import CORS
 import hashlib
 from segment_anything import SamAutomaticMaskGenerator, sam_model_registry, SamPredictor
 from typing import Any, Dict, List
@@ -19,10 +20,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 print("Libraries imported!")
 
-
 debug = True
 
 app = Flask(__name__)
+CORS(app, resources={r"/process_image": {"origins": "*"}})  # Allow all origins for the /process_image route
 task_queue = queue.Queue()
 
 sam_file_name = "sam_vit_h_4b8939.pth"
