@@ -466,15 +466,26 @@ def get_books(image_path):
 
 def add_book_db(title, author, year, book_type, publisher, owner):
     try:
-        url = "http://localhost:8100/api/addbook"
-        data = {
-            "title": title,
-            "owner": owner,
-            "author": author,
-            "year": year,
-            "type": book_type,
-            "publisher": publisher
-        }
+        if "@" in owner :
+            url = "http://localhost:8100/api/addbook"
+            data = {
+                "title": title,
+                "owner": owner,
+                "author": author,
+                "year": year,
+                "type": book_type,
+                "publisher": publisher
+            }
+        else :
+            url = "http://localhost:8100/api/addbookboite"
+            data = {
+                "title": title,
+                "nom_gare": owner,
+                "author": author,
+                "year": year,
+                "type": book_type,
+                "publisher": publisher
+            }
         response = requests.post(url, json=data)
         
         if response.status_code == 200:

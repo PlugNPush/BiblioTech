@@ -20,7 +20,7 @@ class BoiteLivres extends Component {
     handleDropBoite(acceptedFiles, gare) {
         const formData = new FormData();
         console.log(gare)
-          formData.append('owner', this.state.gare)
+          formData.append('owner', gare)
           formData.append('image', acceptedFiles[0]);
 
           axios.post('http://localhost:911/process_image', formData, {
