@@ -464,6 +464,19 @@ def get_books(image_path):
     print("Books gotten.")
     return books
 
+def deleteOldBooks(owner):
+    if not "@" in owner :
+        url = "http://localhost:8100/api/deletebookboite"
+        data = {
+            "nom_gare": owner
+        }
+        response = requests.post(url, json=data)
+        if response.status_code == 200:
+            print("anciens livres supprimes")
+        else:
+            print("Une erreur s'est produite lors de l'ajout du livre.")
+            print(f"Code de statut: {response.status_code}")
+
 def add_book_db(title, author, year, book_type, publisher, owner):
     try:
         if "@" in owner :
@@ -521,6 +534,7 @@ def add_books(books, owner):
     if owner != "":
         print("Adding books...")
         result_books = extract_books(books)
+        deleteOldBooks(owner)
         for book in result_books:
             title, author, year, book_type, publisher = book
             add_book_db(title, author, year, book_type, publisher, owner)

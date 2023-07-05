@@ -125,6 +125,7 @@ class Home extends Component {
         }
     }
     handleDrop(acceptedFiles) {
+        this.addPhoto()
         const formData = new FormData();
           formData.append('owner', localStorage.getItem("email"))
           formData.append('image', acceptedFiles[0]);
