@@ -42,7 +42,7 @@ class NavBar extends Component {
             </div>
             <div className="pastIcon">
                 <Link to="/historic">
-                    Historique
+                    Bibliothèque
                 </Link>
             </div>
             <div className="userIcon">
