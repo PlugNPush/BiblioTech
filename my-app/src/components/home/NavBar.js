@@ -32,7 +32,7 @@ class NavBar extends Component {
             </div>
             <div className="reccoIcon">
                 <Link to="/reccomandation">
-                    Recommandation
+                    Recommandations
                 </Link>
             </div>
             <div className="position">
