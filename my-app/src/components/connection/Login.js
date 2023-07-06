@@ -47,10 +47,10 @@ function Login(props) {
             <input className="inputForm" type="email" name="email"/>
             </label>
             <label>
-            Password:
+            Mot de passe:
             <input className="inputForm" type="password" name="password"/>
             </label>
-            <button className="submit" type="submit">Sign Up</button>
+            <button className="submit" type="submit">Se connecter</button>
         </form>
         {showWrongPassword()}
       </React.Fragment>

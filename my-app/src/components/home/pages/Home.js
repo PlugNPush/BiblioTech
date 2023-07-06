@@ -145,7 +145,7 @@ class Home extends Component {
             <NavBar/>
             <div className="homePage">
                 <div className="photo">
-                    Photographiez!
+                    Photographiez !
                 </div>
                 <div className="camera">
                     <Dropzone onDrop={this.handleDrop}>

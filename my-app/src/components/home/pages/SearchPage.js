@@ -87,7 +87,7 @@ class SearchPage extends Component {
         return <React.Fragment>
             <NavBar/>
             <div className="searchPage">
-                <h1>Search Page</h1>
+                <h1>Rechercher</h1>
                 {this.addBook()}
             </div>
         </React.Fragment>
