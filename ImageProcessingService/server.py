@@ -553,22 +553,22 @@ def process_image(image_path, owner):
     # Perform image processing here using the loaded script
     print("Processing image:", image_path)
     # Step 1: Use Segment Anything to generate all the masks
-    #masks = generate_masks(image_path)
+    masks = generate_masks(image_path)
 
     # Step 2: Filter out masks that are not rectangular enough
-    #indexes = filter_masks(image_path, masks)
+    indexes = filter_masks(image_path, masks)
 
     # Step 3: Overlay each mask on the image
-    #overlay_masks(image_path, indexes)
+    overlay_masks(image_path, indexes)
 
     # Step 4: Crop each overlayed mask
-    #crop_masks(image_path, indexes)
+    crop_masks(image_path, indexes)
 
     # Step 5: Read the OCR text for each overlayed mask
-    #read_ocr_text(image_path, indexes)
+    read_ocr_text(image_path, indexes)
 
     # Step 6: Merge the OCR text for each overlayed mask
-    #merge_ocr_text(image_path, indexes)
+    merge_ocr_text(image_path, indexes)
 
     # Step 7: For each OCR text, call the Google Books API to get the book metadata
     books = get_books(image_path)
