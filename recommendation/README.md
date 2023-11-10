@@ -7,25 +7,19 @@ mdp = "mdpBDD"
 ```
 Ce sont les mêmes informations que pour le server
 
-Faut installer :
+Il faut installer les bibliothèques depuis le fichier *requirements.txt* :
 ```zsh
-pip install pymysql
-pip install pandas
-pip install sqlalchemy
-pip install scikit-learn
-pip install fuzzywuzzy
-pip install import-ipynb
-pip install python-Levenshtein
+pip install -r requirements.txt
 ```
 
-Télécharger les fichiers *books_metadata_Amazon.csv* et *Books_Amazon.csv* depuis [https://mega.nz/file/ZIJ0kCDY#XiTAW0sKbWcCuDTGI0JEwFrd9qbo81LwZo9Dzm6pypo](https://mega.nz/file/ZIJ0kCDY#XiTAW0sKbWcCuDTGI0JEwFrd9qbo81LwZo9Dzm6pypo)
+Télécharger les fichiers *books_metadata_Amazon.csv* et *Books_Amazon.csv* depuis [https://mega.nz/file/ZIJ0kCDY#XiTAW0sKbWcCuDTGI0JEwFrd9qbo81LwZo9Dzm6pypo](https://mega.nz/file/ZIJ0kCDY#XiTAW0sKbWcCuDTGI0JEwFrd9qbo81LwZo9Dzm6pypo) puis placer les dans le répertoire *recommendation*.
 
 Pour le lancer :
 ```zsh
 python server.py
 ```
 
-
+Pour tester en rapide, vous pouvez utiliser ce code SQL pour remplir la base de données :
 ```sql
 INSERT into user (firstname, lastname, email, password) values ('john', 'doe', 'john.doe@example.com', 'test');
 

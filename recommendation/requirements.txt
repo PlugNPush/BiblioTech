@@ -1,0 +1,7 @@
+pymysql
+pandas
+sqlalchemy
+scikit-learn
+fuzzywuzzy
+import-ipynb
+python-Levenshtein
