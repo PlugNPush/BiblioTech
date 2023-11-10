@@ -1,6 +1,6 @@
 pymysql
 pandas
-sqlalchemy
+sqlalchemy<2.0.0
 scikit-learn
 fuzzywuzzy
 import-ipynb
