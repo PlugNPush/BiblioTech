@@ -295,4 +295,14 @@ router.post("/deleteboite", async (req, res) => {
   }
 })
 
+router.post("/deletebookboite", async (req, res) => {
+  const { nom_gare } = req.body
+  try {
+    await sequelize.query(`delete from boite_aux_livres where nom_gare='${nom_gare}'`)
+    res.status(200).json({message: "anciens livres supprimes"})
+  } catch (err){
+    console.log(err)
+  }
+})
+
 module.exports = router;

@@ -10,6 +10,8 @@ import Popup from 'reactjs-popup'
 import NavBar from "../NavBar"
 
 import "./Home.scss"
+import axios from "axios";
+import Dropzone from "react-dropzone";
 
 class Home extends Component {
     /**
@@ -18,8 +20,10 @@ class Home extends Component {
      */
     constructor(props) {
         super(props)
-        this.state = {addPhoto : false, book: "", timer: null, searchResults: [], addBook:""}
+        this.state = {addPhoto : false, book: "", timer: null, searchResults: [], addBook:"", selectedPhoto: null,
+            rawImageContent: null}
         this.photoAdded = this.photoAdded.bind(this)
+        this.handleDrop = this.handleDrop.bind(this)
     }
     componentDidMount() {
         this.addReccomandationsBook()
@@ -120,15 +124,38 @@ class Home extends Component {
             return <AiOutlineCheck color="red"/>
         }
     }
+    handleDrop(acceptedFiles) {
+        this.addPhoto()
+        const formData = new FormData();
+          formData.append('owner', localStorage.getItem("email"))
+          formData.append('image', acceptedFiles[0]);
+
+          axios.post('http://localhost:911/process_image', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }).then((res) => {
+          console.log(res)
+          }).catch((err) => {
+              console.log(err)
+          })
+    };
     render() {
         return <React.Fragment>
             <NavBar/>
             <div className="homePage">
                 <div className="photo">
-                    Photographiez!
+                    Photographiez !
                 </div>
                 <div className="camera">
-                    <MdAddAPhoto onClick={() => {this.addPhoto()}}/>
+                    <Dropzone onDrop={this.handleDrop}>
+                      {({ getRootProps, getInputProps }) => (
+                        <div className="dropzone" {...getRootProps()}>
+                          <input {...getInputProps()} />
+                          <MdAddAPhoto/>
+                        </div>
+                      )}
+                    </Dropzone>
                 </div>
                 {this.photoAdded()}
                 {this.addFile()}

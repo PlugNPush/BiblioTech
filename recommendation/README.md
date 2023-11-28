@@ -7,21 +7,19 @@ mdp = "mdpBDD"
 ```
 Ce sont les mêmes informations que pour le server
 
-Faut installer :
+Il faut installer les bibliothèques depuis le fichier *requirements.txt* :
 ```zsh
-pip install pymysql
-pip install pandas
-pip install sqlalchemy
-pip install scikit-learn
-pip install fuzzywuzzy
+pip install -r requirements.txt
 ```
+
+Télécharger les fichiers *books_metadata_Amazon.csv* et *Books_Amazon.csv* depuis [https://mega.nz/file/ZIJ0kCDY#XiTAW0sKbWcCuDTGI0JEwFrd9qbo81LwZo9Dzm6pypo](https://mega.nz/file/ZIJ0kCDY#XiTAW0sKbWcCuDTGI0JEwFrd9qbo81LwZo9Dzm6pypo) puis placer les dans le répertoire *recommendation*.
 
 Pour le lancer :
 ```zsh
 python server.py
 ```
 
-
+Pour tester en rapide, vous pouvez utiliser ce code SQL pour remplir la base de données :
 ```sql
 INSERT into user (firstname, lastname, email, password) values ('john', 'doe', 'john.doe@example.com', 'test');
 
@@ -38,7 +36,7 @@ VALUES
 ('The Hobbit', 'john.doe@example.com', 'J.R.R. Tolkien', '1937', 'Fantasy', 1, 'George Allen & Unwin', '20.00', '18.00', 5),
 ('Don Quixote', 'john.doe@example.com', 'Miguel de Cervantes', '1605', 'Adventure', 1, 'Francisco de Robles', '22.00', '20.00', 4);
 
-<<<<<<< HEAD
+
 INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Rails Cookbook: Recipes for Rapid Web Development with Ruby', 'john.doe@example.com', 'Unknown', '2023', 'Fiction', 'Unknown Publisher', 3);
 INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Anna Karenina', 'john.doe@example.com', 'Leo Tolstoy', '2023', 'Fiction', 'Unknown Publisher', 3);
 INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('CliffsNotes on Tolstoys Anna Karenina', 'john.doe@example.com', 'Leo Tolstoy', '2023', 'Fiction', 'Unknown Publisher', 3);
@@ -57,25 +55,3 @@ INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('
 INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Literature Circle Guide: A Wrinkle in Time', 'john.doe@example.com', 'Madeleine LEngle', '2023', 'Fiction', 'Unknown Publisher', 3);
 INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Una arruga en el tiempo – A Wrinkle in Time', 'john.doe@example.com', 'Madeleine LEngle', '2023', 'Fiction', 'Unknown Publisher', 3);
 
-
-
-
-
-=======
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Rails Cookbook: Recipes for Rapid Web Development with Ruby', 'john.doe@example.com', 'Unknown', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Anna Karenina', 'john.doe@example.com', 'Leo Tolstoy', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('CliffsNotes on Tolstoys Anna Karenina', 'john.doe@example.com', 'Leo Tolstoy', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Dinner with Anna Karenina', 'john.doe@example.com', 'Unknown', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Tolstoy: Anna Karenina', 'john.doe@example.com', 'Leo Tolstoy', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Untouchable', 'john.doe@example.com', 'Unknown', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('The Untouchable', 'john.doe@example.com', 'Unknown', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('The Untouchables', 'john.doe@example.com', 'Unknown', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Untouchables: My Familys Triumphant Journey Out of the Caste System in Modern India', 'john.doe@example.com', 'Unknown', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Dalit: The Black Untaouchables of India', 'john.doe@example.com', 'Unknown', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Growing Up Untouchable in India: A Dalit Autobiography', 'john.doe@example.com', 'Unknown', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('The Evidence-Based Social Work Skills Book', 'john.doe@example.com', 'Unknown', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('A Wrinkle in Time: A Guide for Using "A Wrinkle in Time" in the Classroom', 'john.doe@example.com', 'Madeleine LEngle', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Wrinkles in Time', 'john.doe@example.com', 'Unknown', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('A Wrinkle in Time: With Related Readings (A Wrinkle in Time Quintet #1)', 'john.doe@example.com', 'Madeleine LEngle', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Literature Circle Guide: A Wrinkle in Time', 'john.doe@example.com', 'Madeleine LEngle', '2023', 'Fiction', 'Unknown Publisher', -1);
-INSERT INTO book (title, owner, author, year, type, publisher, rating) VALUES ('Una arruga en el tiempo – A Wrinkle in Time', 'john.doe@example.com', 'Madeleine LEngle', '2023', 'Fiction', 'Unknown Publisher', -1);
