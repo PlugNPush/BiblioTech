@@ -3,9 +3,7 @@ Master Project M1
 
 # Prérequis :
 VSCode : installer l'extension "Javascript and Typescript Nightly"
-Sur Chrome : installer l'extension suivante :
-
-https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc/related
+Les versions les plus anciennes du projet nécéssitaient l'installation d'une exetension Chrome pour altérer le CORS origin, les versions actuelles ne sont plus concernées par ce prérequis.
 
 # Executer le front :
 - exécuter les lignes (npm i en mode admin) :
