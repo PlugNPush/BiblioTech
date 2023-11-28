@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import axios from "axios"
 
 import NavBar from "../NavBar"
-import Book from "./Book"
+import Book from "../entities/Book"
 
 import "./ReccoPage.scss"
 
@@ -10,9 +10,14 @@ class ReccoPage extends Component {
     constructor(props) {
         super(props);
         this.state = {books : []}
+        this.getBooksReccomended = this.getBooksReccomended.bind(this)
     }
     componentDidMount() {
-        axios.get("http://localhost:8100/api/getreccobooksfromowner/" + window.email)
+        this.getBooksReccomended()
+    }
+
+    getBooksReccomended() {
+        axios.get("http://localhost:8100/api/getreccobooksfromowner/" + localStorage.getItem("email"))
         .then((res) => {
             let bookList = []
             for (let i in res.data) {
@@ -30,7 +35,7 @@ class ReccoPage extends Component {
         return <React.Fragment>
             <NavBar/>
             <div className="reccoPage">
-                <h1>Reccomandations de livres :</h1>
+                <h1>Recommandations de livres :</h1>
                 <table className="listeLivres">
                     <thead>
                         <tr>
@@ -39,12 +44,12 @@ class ReccoPage extends Component {
                             <th>Editeur</th>
                             <th>Type</th>
                             <th>Année</th>
-                            <th>Supprimer</th>
+                            <th>Ajouter</th>
                         </tr>
                     </thead>
                     <tbody>
                     {this.state.books.map(book => (
-                        <Book key={book.title+window.email} title={book.title} author={book.author} publisher={book.publisher} type={book.type} year={book.year} whenDelete={this.updateBooks}/>
+                        <Book key={book.title+localStorage.getItem("email")} title={book.title} author={book.author} publisher={book.publisher} type={book.type} year={book.year} whenAdded={this.getBooksReccomended}/>
                     ))}
                     </tbody>
                 </table>

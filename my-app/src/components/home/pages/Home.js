@@ -10,6 +10,8 @@ import Popup from 'reactjs-popup'
 import NavBar from "../NavBar"
 
 import "./Home.scss"
+import axios from "axios";
+import Dropzone from "react-dropzone";
 
 class Home extends Component {
     /**
@@ -18,14 +20,16 @@ class Home extends Component {
      */
     constructor(props) {
         super(props)
-        this.state = {addPhoto : false, book: "", timer: null, searchResults: [], addBook:""}
+        this.state = {addPhoto : false, book: "", timer: null, searchResults: [], addBook:"", selectedPhoto: null,
+            rawImageContent: null}
         this.photoAdded = this.photoAdded.bind(this)
+        this.handleDrop = this.handleDrop.bind(this)
     }
     componentDidMount() {
         this.addReccomandationsBook()
     }
     addReccomandationsBook() {
-        getReccomandationBook(window.email)
+        getReccomandationBook(localStorage.getItem("email"))
     }
     photoAdded() {
         if(this.state.addPhoto) {
@@ -45,7 +49,7 @@ class Home extends Component {
                   </div>
                 )}
               </Popup>
-            <input className="fileRead" type="file" onChange={(e)=>readFileContent(e, window.email)}/>
+            <input className="fileRead" type="file" onChange={(e)=>readFileContent(e, localStorage.getItem("email"))}/>
         </div>
     }
     addBook() { // affiche une barre de recherche ainsi que le résultat en temps réel
@@ -75,7 +79,7 @@ class Home extends Component {
                             <button className="btn btn-primary" onClick={() => {
                                 this.bookAddedWait(result.id)
                                 const bookInfo = result.volumeInfo
-                                addBook(bookInfo.title, window.email, bookInfo["authors"]?bookInfo.authors[0]:"unknown",
+                                addBook(bookInfo.title, localStorage.getItem("email"), bookInfo["authors"]?bookInfo.authors[0]:"unknown",
                                     bookInfo["publishedDate"]?bookInfo.publishedDate:"unknown",
                                     bookInfo["categories"]?bookInfo.categories[0]:"unknown",
                                     bookInfo["publisher"]?bookInfo.publisher:"unknown")
@@ -97,7 +101,7 @@ class Home extends Component {
             if (filtered[0].length === 0) {
                 this.setState({searchResults: []})
             } else {
-                getBookGoogle(filtered, window.email).then((res) => {
+                getBookGoogle(filtered, localStorage.getItem("email")).then((res) => {
                     this.setState({searchResults: res})
                 })               
             }
@@ -120,15 +124,38 @@ class Home extends Component {
             return <AiOutlineCheck color="red"/>
         }
     }
+    handleDrop(acceptedFiles) {
+        this.addPhoto()
+        const formData = new FormData();
+          formData.append('owner', localStorage.getItem("email"))
+          formData.append('image', acceptedFiles[0]);
+
+          axios.post('http://localhost:911/process_image', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }).then((res) => {
+          console.log(res)
+          }).catch((err) => {
+              console.log(err)
+          })
+    };
     render() {
         return <React.Fragment>
             <NavBar/>
             <div className="homePage">
                 <div className="photo">
-                    Photographiez!
+                    Photographiez !
                 </div>
                 <div className="camera">
-                    <MdAddAPhoto onClick={() => {this.addPhoto()}}/>
+                    <Dropzone onDrop={this.handleDrop}>
+                      {({ getRootProps, getInputProps }) => (
+                        <div className="dropzone" {...getRootProps()}>
+                          <input {...getInputProps()} />
+                          <MdAddAPhoto/>
+                        </div>
+                      )}
+                    </Dropzone>
                 </div>
                 {this.photoAdded()}
                 {this.addFile()}

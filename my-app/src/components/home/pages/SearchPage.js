@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 
 import NavBar from '../NavBar'
 import {getBookGoogle, addBook} from "utils/sendBook"
-import {readFileContent, convertStringToListOfFile} from "utils/FileReaderUtil.js"
+import {convertStringToListOfFile} from "utils/FileReaderUtil.js"
 
 import {RxValueNone} from "react-icons/rx"
-import {AiOutlineCheck, AiFillQuestionCircle} from "react-icons/ai"
+import {AiOutlineCheck} from "react-icons/ai"
 import './SearchPage.scss'
 
 class SearchPage extends Component {
@@ -44,7 +44,7 @@ class SearchPage extends Component {
                             <button className="btn btn-primary" onClick={() => {
                                 this.bookAddedWait(result.id)
                                 const bookInfo = result.volumeInfo
-                                addBook(bookInfo.title, window.email, bookInfo["authors"]?bookInfo.authors[0]:"unknown",
+                                addBook(bookInfo.title, localStorage.getItem("email"), bookInfo["authors"]?bookInfo.authors[0]:"unknown",
                                     bookInfo["publishedDate"]?bookInfo.publishedDate:"unknown",
                                     bookInfo["categories"]?bookInfo.categories[0]:"unknown",
                                     bookInfo["publisher"]?bookInfo.publisher:"unknown")
@@ -71,7 +71,6 @@ class SearchPage extends Component {
                 })               
             }
         }, 1000)})
-        //console.log("searchResults", this.state.searchResults)
     }
     bookAddedWait(titre) {
         this.setState({addBook : titre})
@@ -88,7 +87,7 @@ class SearchPage extends Component {
         return <React.Fragment>
             <NavBar/>
             <div className="searchPage">
-                <h1>Search Page</h1>
+                <h1>Rechercher</h1>
                 {this.addBook()}
             </div>
         </React.Fragment>

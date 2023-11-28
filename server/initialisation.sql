@@ -37,3 +37,14 @@ create table if not exists recco_book (
     primary key (title, owner),
     constraint fk_recco_book foreign key (owner) references user(email)
 );
+
+create table if not exists boite_aux_livres (
+    nom_gare varchar(255) DEFAULT '' not null,
+    title varchar(255) DEFAULT '' not null,
+    author varchar(255) DEFAULT '' not null,
+    type varchar(255) DEFAULT '' not null,
+    year varchar(255) DEFAULT '' not null,
+    nbBooks int DEFAULT 1,
+    publisher varchar(255) not null,
+    primary key (nom_gare, title)
+);

@@ -24,3 +24,10 @@
 .noteBookStars > * {
     color: black;
 }
+.addBook {
+    transform: scale(1.2);
+    color: green;
+}
+.addBook:hover {
+    transform: scale(1.7);
+}

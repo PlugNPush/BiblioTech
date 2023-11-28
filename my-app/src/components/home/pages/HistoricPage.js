@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import axios from "axios"
 
-import Book from "./Book"
+import Book from "../entities/Book"
 import NavBar from "../NavBar"
 
 import "./HistoricPage.scss"
@@ -13,7 +13,7 @@ class HistoricPage extends Component {
      */
     constructor(props) {
         super(props)
-        this.state = {books : [], search : "", getEmail: window.email}
+        this.state = {books : [], search : "", getEmail: localStorage.getItem("email")}
         this.updateBooks = this.updateBooks.bind(this)
         this.getBooksOwner = this.getBooksOwner.bind(this)
     }
@@ -70,7 +70,7 @@ class HistoricPage extends Component {
                     </thead>
                     <tbody>
                     {filteredBooks.map(book => (
-                        <Book key={book.title+window.email} title={book.title} author={book.author} nbBooks={book.nbBooks} publisher={book.publisher} type={book.type} year={book.year} note={book.note} getEmail={window.email} whenDelete={this.updateBooks}/>
+                        <Book key={book.title+this.state.email} title={book.title} author={book.author} nbBooks={book.nbBooks} publisher={book.publisher} type={book.type} year={book.year} note={book.note} getEmail={localStorage.getItem("email")} whenDelete={this.updateBooks}/>
                     ))}
                     </tbody>
                 </table>

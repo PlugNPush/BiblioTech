@@ -12,7 +12,7 @@ function Login(props) {
     const [wrongPassword, setWrongPassword] = useState(false)
     const navigate = useNavigate();
     function showWrongPassword() {
-        if({wrongPassword} === true) {
+        if({wrongPassword}.wrongPassword) {
             return <div className="wrongPassword">
                 Mauvais email/mot de passe
             </div>
@@ -24,7 +24,7 @@ function Login(props) {
             {email: event.target.elements.email.value, password: event.target.elements.password.value})
         .then((res) => {
             if(res.status === 200) {
-                window.email = event.target.elements.email.value;
+                localStorage.setItem("email", event.target.elements.email.value)
                 navigate("/home")
             } else {
                 setWrongPassword(true)
@@ -47,10 +47,10 @@ function Login(props) {
             <input className="inputForm" type="email" name="email"/>
             </label>
             <label>
-            Password:
+            Mot de passe:
             <input className="inputForm" type="password" name="password"/>
             </label>
-            <button className="submit" type="submit">Sign Up</button>
+            <button className="submit" type="submit">Se connecter</button>
         </form>
         {showWrongPassword()}
       </React.Fragment>
