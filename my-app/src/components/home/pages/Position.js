@@ -3,100 +3,78 @@ import NavBar from "../NavBar";
 import "./Position.scss";
 import "../NavBar.scss";
 import {RiSendPlaneFill} from "react-icons/ri";
+import {getAllGares, searchCodePostaleSncf, searchLigneSncf} from "../../../utils/FileReaderUtil";
+import Gare from "../entities/Gare";
 class Position extends Component {
     constructor(props) {
         super(props);
-        this.state = {position: null, codeP: "", added: false, ligne: "", ligneAdded: false};
+        this.state = {codeP: "", ligne: "", gareChoisie: ""};
     }
-    componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({ position: position.coords });
-      },
-      (error) => {
-        console.error('Error getting geolocation:', error);
-      }
-    );
-  }
-  codePostaleAdded() {
-        if(this.state.added) {
-          return <div className="codePAdded">
-              <p>Code postale ajouté</p>
-          </div>
-      }
-  }
-  ligneAdded() {
-        if(this.state.ligneAdded) {
-          return <div className="codePAdded">
-              <p>Ligne de RER ajoutée</p>
-          </div>
-      }
-  }
-  sendCodePostale() {
-    this.setState({added: true})
-    setTimeout(() => {
-        this.setState({added: false})
-    }, 3000)
-    console.log(this.state.codeP)
-  }
-  sendLigne() {
-      this.setState({ligneAdded: true})
-    setTimeout(() => {
-        this.setState({ligneAdded: false})
-    }, 3000)
-    console.log(this.state.ligne)
-  }
-  printError() {
-        return <div>
-            <p>La position n'a pas été authorisée</p>
-        </div>
-  }
-  portal() {
-    if (this.state.position) {
-        return <div>
-            <p>Latitude: {this.state.position.latitude}</p>
-            <p>Longitude: {this.state.position.longitude}</p>
-        </div>
-    } else {
-        return this.printError();
+  printGareChoisie() {
+    if(this.state.gareChoisie !== "") {
+        if(this.state.gareChoisie === undefined) {
+            return <div className="gareChoisie">
+                <p>Aucune gare choisie</p>
+            </div>
+        }else {
+            const allGares = this.state.gareChoisie
+            return <div className="gareChoisie">
+                <h1 className="titreGares">Gare(s) trouvées</h1>
+                <table className="listeGares">
+                    <thead>
+                        <tr>
+                            <th>Gare</th>
+                            <th>Code Postal</th>
+                            <th>Ligne</th>
+                            <th>Ville</th>
+                            <th>Rue</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {allGares.map(gare => (
+                        <Gare key={gare.latitude + gare.longitude} gare={gare.gare} codeP={gare.code_postal}
+                              ligne={gare.ligne} ville={gare.ville} rue={gare.voie}/>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+        }
     }
   }
     render() {
         return <React.Fragment>
             <NavBar/>
             <div className="positionPage">
-                <h1>Search Page</h1>
+                <h1>Boîtes à livres près de chez vous</h1>
                 <div>
-                    <p>{this.portal()}</p>
                     Saisissez votre code postal:
                     <input onChange={(e) => this.setState({codeP: e.target.value})}
                     onKeyDown={(e) => {
                         if (e.key === "Enter") {
-                            this.sendCodePostale()
+                            this.setState({gareChoisie : searchCodePostaleSncf(this.state.codeP)})
                         }
                     }}/>
                     <div className="buttonPos">
-                        <RiSendPlaneFill onClick={() => this.sendCodePostale()}/>
+                        <RiSendPlaneFill onClick={() => this.setState({gareChoisie : searchCodePostaleSncf(this.state.codeP)})}/>
                     </div>
-                    <div>
-                        {this.codePostaleAdded()}
-                    </div>
-
                 </div>
                 <div>
                     Saisissez la ligne de rer que vous prenez (ex: A, B, C, D, E):
                     <input onChange={(e) => this.setState({ligne: e.target.value})}
                     onKeyDown={(e) => {
                         if (e.key === "Enter") {
-                            this.sendLigne()
+                            this.setState({gareChoisie : searchLigneSncf(this.state.ligne)})
                         }
                     }}/>
                     <div className="buttonPos">
-                        <RiSendPlaneFill onClick={() => this.sendLigne()}/>
+                        <RiSendPlaneFill onClick={() => this.setState({gareChoisie : searchLigneSncf(this.state.ligne)})}/>
                     </div>
-                    <div>
-                        {this.ligneAdded()}
-                    </div>
+                </div>
+                <div>
+                    <button onClick={() => {this.setState({gareChoisie : getAllGares()})}}>Afficher toutes les gares</button>
+                </div>
+                <div>
+                    {this.printGareChoisie()}
                 </div>
             </div>
         </React.Fragment>

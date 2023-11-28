@@ -1,4 +1,5 @@
 flask
+flask-cors
 opencv-python
 pycocotools
 matplotlib
@@ -13,7 +14,6 @@ torchvision
 torchaudio
 numpy
 scipy
-matplotlib
 git+https://github.com/facebookresearch/segment-anything.git
 typing
 Pillow

@@ -4,6 +4,7 @@ import queue
 import multiprocessing
 import threading
 from flask import Flask, request
+from flask_cors import CORS
 import hashlib
 from segment_anything import SamAutomaticMaskGenerator, sam_model_registry, SamPredictor
 from typing import Any, Dict, List
@@ -19,10 +20,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 print("Libraries imported!")
 
-
 debug = True
 
 app = Flask(__name__)
+CORS(app, resources={r"/process_image": {"origins": "*"}})  # Allow all origins for the /process_image route
 task_queue = queue.Queue()
 
 sam_file_name = "sam_vit_h_4b8939.pth"
@@ -119,7 +120,7 @@ def show_mask(mask, ax, random_color=False):
     mask_image = mask.reshape(h, w, 1) * color.reshape(1, 1, -1)
     ax.imshow(mask_image)
 
-def draw_masks(image, masks, image_folder, trained = False):
+def draw_masks(image, masks, image_folder, trained = False, filtered = False):
     print("Drawing masks...")
     plt.figure(figsize=(20,20))
     plt.imshow(image)
@@ -131,6 +132,8 @@ def draw_masks(image, masks, image_folder, trained = False):
     plt.axis('off')
     if trained:
         plt.savefig(os.path.join(f"{image_folder}", "masks_trained.png"), bbox_inches='tight', pad_inches=0)
+    elif filtered:
+        plt.savefig(os.path.join(f"{image_folder}", "masks_filtered.png"), bbox_inches='tight', pad_inches=0)
     else:
         plt.savefig(os.path.join(f"{image_folder}", "masks.png"), bbox_inches='tight', pad_inches=0) 
     plt.close()
@@ -254,6 +257,8 @@ def crop_masks(image_path, indexes):
 
     print("Masks cropped.")
 
+"""
+
 def filter_masks(image_path, masks):
     print("Filtering masks...")
     image_folder = os.path.dirname(image_path)
@@ -272,6 +277,83 @@ def filter_masks(image_path, masks):
             print("Mask " + str(i) + " is not rectangular enough. Removing...")
     print("Masks filtered.")
     return filtered_indexes
+
+"""
+
+
+def filter_masks(image_path, masks):
+    print("Filtering masks...")
+    image_folder = os.path.dirname(image_path)
+    image = cv2.imread(image_path)
+    os.makedirs(os.path.join(f"{image_folder}", "sam_filtered"), exist_ok=True)
+
+    for idk, _ in enumerate(masks):
+        print("Assigning ID to mask " + str(idk) + ".png")
+        masks[idk]['id'] = idk
+
+    # Sort masks in descending order based on area
+    masks = sorted(masks, key=lambda x: x['area'], reverse=True)
+
+    # Convert masks to binary masks
+    binary_masks = []
+    for mask in masks:
+        if isinstance(mask['segmentation'], dict):
+            mask['segmentation'] = rle_to_mask(mask['segmentation'])
+        binary_masks.append(mask)
+
+    # Filter out masks that are overlapping
+    filtered_masks = []
+    for i in range(len(binary_masks)):
+        mask_i = binary_masks[i]['segmentation']
+        is_overlapping = False
+
+        for j in range(i + 1, len(binary_masks)):
+            mask_j = binary_masks[j]['segmentation']
+            intersection = np.logical_and(mask_i, mask_j)
+            union = np.logical_or(mask_i, mask_j)
+            iou = np.sum(intersection) / np.sum(union)
+
+            if iou > 0.5:  # Adjust the threshold as needed
+                print("Mask " + str(binary_masks[i]['id']) + " is overlapping with mask " + str(binary_masks[j]['id']) + ". Removing...")
+                is_overlapping = True
+                break
+
+        if not is_overlapping:
+            print("Mask " + str(i) + " is not overlapping with any other mask. Keeping...")
+            filtered_masks.append(masks[i])
+            
+    filtered_indexes = []
+    dfiltered_masks = []  
+
+    for i, mask_data in enumerate(filtered_masks):
+        _, _, w, h = mask_data["bbox"]
+        # Check if the longest edge is at least 3 times longer than the shortest one
+        # and if the tallest side is at least 35% of the image height
+        if max(w, h) >= 2 * min(w, h) and max(w, h) >= 0.35 * image.shape[0]:
+            print("Mask " + str(filtered_masks[i]['id']) + " is rectangular enough.")
+            shutil.copy2(os.path.join(f"{image_folder}", "sam_masks", f"{filtered_masks[i]['id']}.png"), os.path.join(f"{image_folder}", "sam_filtered", f"{filtered_masks[i]['id']}.png"))
+            filtered_indexes.append(filtered_masks[i]['id'])
+            dfiltered_masks.append(filtered_masks[i])
+        else:
+            print("Mask " + str(filtered_masks[i]['id']) + " is not rectangular enough. Removing...")
+    print("Masks filtered.")
+    filtered_indexes.sort()
+
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    draw_masks(image, dfiltered_masks, image_folder, False, True)
+    return filtered_indexes
+
+
+def rle_to_mask(segmentation, image_shape):
+    mask = np.zeros((image_shape[0], image_shape[1]), dtype=np.uint8)
+    for segment in segmentation:
+        polygon = np.array(segment).reshape((-1, 2)).astype(np.int32)
+        cv2.fillPoly(mask, [polygon], 1)
+    return mask
+
+
+
+
     
 def read_ocr_text(image_path, indexes):
     print("Reading OCR text...")
@@ -364,7 +446,7 @@ def get_book_google(title):
         response = requests.get(f"https://www.googleapis.com/books/v1/volumes?q={title}")
         data = response.json()
         items = data.get("items", [])
-        return items
+        return items[0] if len(items) > 0 else {}
     except requests.exceptions.RequestException as err:
         print(err)
         return []
@@ -378,21 +460,45 @@ def get_books(image_path):
         books = []
         for title in titles:
             print("Getting books from the Google API for title:", title)
-            books += get_book_google(title)
+            books.append(get_book_google(title))
     print("Books gotten.")
     return books
 
+def deleteOldBooks(owner):
+    if not "@" in owner :
+        url = "http://localhost:8100/api/deletebookboite"
+        data = {
+            "nom_gare": owner
+        }
+        response = requests.post(url, json=data)
+        if response.status_code == 200:
+            print("anciens livres supprimes")
+        else:
+            print("Une erreur s'est produite lors de l'ajout du livre.")
+            print(f"Code de statut: {response.status_code}")
+
 def add_book_db(title, author, year, book_type, publisher, owner):
     try:
-        url = "http://localhost:8100/api/addbook"
-        data = {
-            "title": title,
-            "owner": owner,
-            "author": author,
-            "year": year,
-            "type": book_type,
-            "publisher": publisher
-        }
+        if "@" in owner :
+            url = "http://localhost:8100/api/addbook"
+            data = {
+                "title": title,
+                "owner": owner,
+                "author": author,
+                "year": year,
+                "type": book_type,
+                "publisher": publisher
+            }
+        else :
+            url = "http://localhost:8100/api/addbookboite"
+            data = {
+                "title": title,
+                "nom_gare": owner,
+                "author": author,
+                "year": year,
+                "type": book_type,
+                "publisher": publisher
+            }
         response = requests.post(url, json=data)
         
         if response.status_code == 200:
@@ -404,45 +510,20 @@ def add_book_db(title, author, year, book_type, publisher, owner):
         print(err)
 
 def extract_books(books):
+
     # Json parse books
     result_books = []
     print("Extracting books...")
     for book in books:
         # Initialize variables with default values
-        title = "Unknown"
-        author = "Unknown"
-        year = "Unknown"
-        book_type = "Unknown"
-        publisher = "Unknown"
-        
-        # Check if 'items' key exists in the JSON
-        if 'items' in book:
-            items = book['items']
+        if 'volumeInfo' not in book:
+            continue
+        title = book['volumeInfo'].get('title', 'Unknown')
+        author = book['volumeInfo'].get('authors', ['Unknown'])[0]
+        year = book['volumeInfo'].get('publishedDate', 'Unknown')[:4]
+        book_type = book['volumeInfo'].get('categories', ['Unknown'])[0]
+        publisher = book['volumeInfo'].get('publisher', 'Unknown')
             
-            # Check if there are any items in the list
-            if items:
-                # Get the first item in the list
-                first_item = items[0]
-                
-                # Extract the title from 'volumeInfo' if available
-                if 'volumeInfo' in first_item:
-                    volume_info = first_item['volumeInfo']
-                    title = volume_info.get('title', title)
-                    
-                    # Extract the author from 'volumeInfo' if available
-                    authors = volume_info.get('authors')
-                    author = authors[0] if authors else author
-                    
-                    # Extract the year from 'volumeInfo' if available
-                    published_date = volume_info.get('publishedDate')
-                    year = published_date.split('-')[0] if published_date else year
-                    
-                    # Extract the book type from 'volumeInfo' if available
-                    categories = volume_info.get('categories')
-                    book_type = categories[0] if categories else book_type
-
-                    publisher = volume_info.get('publisher', publisher)
-        
         # Return the extracted information
         result_books.append((title, author, year, book_type, publisher))
     print("Books extracted.")
@@ -453,6 +534,7 @@ def add_books(books, owner):
     if owner != "":
         print("Adding books...")
         result_books = extract_books(books)
+        deleteOldBooks(owner)
         for book in result_books:
             title, author, year, book_type, publisher = book
             add_book_db(title, author, year, book_type, publisher, owner)
@@ -488,13 +570,13 @@ def process_image(image_path, owner):
     # Step 6: Merge the OCR text for each overlayed mask
     merge_ocr_text(image_path, indexes)
 
-    # Step 6: For each OCR text, call the Google Books API to get the book metadata
+    # Step 7: For each OCR text, call the Google Books API to get the book metadata
     books = get_books(image_path)
 
-    # Step 7: For each book metadata, call the database API to save the book metadata
+    # Step 8: For each book metadata, call the database API to save the book metadata
     add_books(books, owner)
     
-    # Step 8: Cleanup
+    # Step 9: Cleanup
     cleanup(image_path)
 
 

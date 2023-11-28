@@ -11,6 +11,7 @@
 
 # recommandation
 /recommendation/data_db.py
+/recommendation/TEST.ipynb
 /recommendation/*.csv
 
 # testing

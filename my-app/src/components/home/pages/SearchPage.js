@@ -71,7 +71,6 @@ class SearchPage extends Component {
                 })               
             }
         }, 1000)})
-        //console.log("searchResults", this.state.searchResults)
     }
     bookAddedWait(titre) {
         this.setState({addBook : titre})
@@ -88,7 +87,7 @@ class SearchPage extends Component {
         return <React.Fragment>
             <NavBar/>
             <div className="searchPage">
-                <h1>Search Page</h1>
+                <h1>Rechercher</h1>
                 {this.addBook()}
             </div>
         </React.Fragment>

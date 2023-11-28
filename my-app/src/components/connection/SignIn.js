@@ -46,11 +46,11 @@ function SignIn(props) {
     return <React.Fragment>
         <form className="formCss" onSubmit={handleSubmit}>
             <label>
-            First Name:
+                Prénom:
             <input className="inputForm" type="text" name="firstName" />
             </label>
             <label>
-            Last Name:
+            Nom de Famille:
             <input className="inputForm" type="text" name="lastName"/>
             </label>
             <label>
@@ -58,10 +58,10 @@ function SignIn(props) {
             <input className="inputForm" type="email" name="email"/>
             </label>
             <label>
-            Password:
+            Mot de passe:
             <input className="inputForm" type="password" name="password"/>
             </label>
-            <button className="submit" type="submit">Sign Up</button>
+            <button className="submit" type="submit">S'inscrire</button>
         </form>
         {badEmail()}
     </React.Fragment>

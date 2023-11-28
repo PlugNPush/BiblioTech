@@ -79,9 +79,9 @@ class UserPage extends Component {
                     </p>
                 </div>
                 <div className="userActions">
-                    <button onClick={() => this.resetUser()}>Reset</button>
-                    <button onClick={() => this.updateUser()}>Update</button>
-                    <button onClick={() => this.deleteUser()}>Delete</button>
+                    <button onClick={() => this.resetUser()}>Réinitialiser</button>
+                    <button onClick={() => this.updateUser()}>Mettre à jour</button>
+                    <button onClick={() => this.deleteUser()}>Supprimer</button>
                 </div>
                 {this.message()}
             </div>
