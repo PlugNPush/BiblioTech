@@ -11,7 +11,7 @@ import "./Book.scss"
 class Book extends Component {
     /**
      * @description display a book
-     * @call in HistoricPage.js
+     * @call in HistoryPage.js
      */
     constructor(props) {
         super(props)

@@ -25,6 +25,7 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-icons": "^4.8.0",
+    "react-bootstrap": "^2.9.1",
     "react-router-dom": "^6.12.1",
     "react-scripts": "^5.0.1",
     "reactjs-popup": "^2.0.5",
