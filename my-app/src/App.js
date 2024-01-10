@@ -6,7 +6,7 @@ import {
 import React from "react"
 
 import SearchPage from "./components/home/pages/SearchPage"
-import HistoricPage from "./components/home/pages/HistoricPage"
+import HistoryPage from "./components/home/pages/HistoryPage"
 import UserPage from "./components/home/pages/UserPage"
 import Home from "./components/home/pages/Home"
 import Start from "./components/connection/Start"
@@ -23,7 +23,7 @@ function App() {
         <Route exact path="/home" element={<Home/>} />
         <Route exact path="/search" element={<SearchPage/>} />
         <Route exact path="/reccomandation" element={<ReccoPage/>} />
-        <Route exact path="/historic" element={<HistoricPage/>} />
+        <Route exact path="/history" element={<HistoryPage/>} />
         <Route exact path="/user" element={<UserPage/>} />
         <Route exact path="/position" element={<Position/>} />
         <Route exact path="/infos/:name" element={<BoiteLivres/>} />
