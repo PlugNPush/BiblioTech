@@ -25,8 +25,8 @@ class NavBarLinks extends Component {
                     Boîtes à livres
                 </Link>
             </div>
-            <div className="historic">
-                <Link to="/historic">
+            <div className="history">
+                <Link to="/history">
                     Historique
                 </Link>
             </div>

@@ -89,7 +89,7 @@
         }
 
         @media screen and (max-width: $breakpoint-tablet) {
-            .home, .search, .reccomandation, .position, .historic, .user, .exit {
+            .home, .search, .reccomandation, .position, .history, .user, .exit {
                 display: none;
             }
             .expandIcon {

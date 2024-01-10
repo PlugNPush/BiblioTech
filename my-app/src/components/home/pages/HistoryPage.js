@@ -4,9 +4,9 @@ import axios from "axios"
 import Book from "../entities/Book"
 import NavBar from "../NavBar"
 
-import "./HistoricPage.scss"
+import "./HistoryPage.scss"
 
-class HistoricPage extends Component {
+class HistoryPage extends Component {
     /**
      * @description page where the user can see the books he scanned and make a research in the list
      * @call in AppPage.js
@@ -48,13 +48,16 @@ class HistoricPage extends Component {
 
         return <React.Fragment>
             <NavBar/>
-            <div className="historicPage">
-                <div className="titreHistoricPage">
+            <div className="HistoryPage">
+                <div className="titreHistoryPage">
                     Liste des Livres scannés :
                 </div>
                 <div className="searchBar">
                     <input type="text" placeholder="Rechercher un livre" value={this.state.search} onChange={this.handleSearch}/>
                 </div>
+                <h4>
+                    {filteredBooks.length} résultats
+                </h4>
                 <table className="listeLivres">
                     <thead>
                         <tr>
@@ -79,4 +82,4 @@ class HistoricPage extends Component {
     }
 }
 
-export default HistoricPage
+export default HistoryPage
