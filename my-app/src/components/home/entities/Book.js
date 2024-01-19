@@ -26,6 +26,7 @@ class Book extends Component {
             console.log(err)
         })
     }
+    
     addBookFromRecco() {
         addBook(this.props.title, localStorage.getItem("email"), this.props.author, this.props.year, this.props.type, this.props.publisher)
         axios.post("http://localhost:8100/api/deleterecco", {
@@ -72,26 +73,22 @@ class Book extends Component {
     
     render() {
 
-        return <tr className="book">
-            <td className="titleBook">{this.props.title}</td>
-            <td className="authorBook">{this.props.author}</td>
-            { this.props.nbBooks &&
-                <td className="nbBooksBook">{this.props.nbBooks}</td>
-            }
-            <td className="publisherBook">{this.props.publisher}</td>
-            <td className="typeBook">{this.props.type}</td>
-            <td className="yearBook">{this.props.year}</td>
-            { this.props.note &&
-                <td className="noteBook">
-                    { this.state.initNote < 0 ?
-                        <div className="noteBookText">Non noté</div>
-                        : null
-                    }
-                    <div className="noteBookStars" ref={this.stars} onMouseMove={(e) => this.changeRating(e)} onMouseLeave={() => this.resetRating()} onClick={() => this.validateRating()}>
-                        { this.calculateRating(this.state.note) }
-                    </div>
-                </td>
-            }
+        return <div key={this.props.title + this.state.email} className="book-card">
+            <h3>{this.props.title}</h3>
+            <p>Auteur: {this.props.author}</p>
+            <p>Nombre de livres: {this.props.nbBooks}</p>
+            <p>Editeur: {this.props.publisher}</p>
+            <p>Type: {this.props.type}</p>
+            <p>Année: {this.props.year}</p>
+            <p className="noteBook">Note: 
+                { this.state.initNote < 0 ?
+                    <div className="noteBookText">Non noté</div>
+                    : null
+                }
+                <div className="noteBookStars" ref={this.stars} onMouseMove={(e) => this.changeRating(e)} onMouseLeave={() => this.resetRating()} onClick={() => this.validateRating()}>
+                    { this.calculateRating(this.state.note) }
+                </div>
+            </p>
             { this.props.whenAdded &&
                 <td className="addBook">
                     <AiFillCheckCircle onClick={() => this.addBookFromRecco()}/>
@@ -102,7 +99,7 @@ class Book extends Component {
                     <AiTwotoneDelete onClick={() => this.deleteBook()}/>
                 </td>
             }
-        </tr>
+        </div>            
     }
 }
 

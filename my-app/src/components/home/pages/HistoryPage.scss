@@ -1,86 +1,57 @@
-.HistoryPage {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
-    margin-top: 6%;
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.titreHistoryPage {
+.HistoryPage {
     display: flex;
     flex-direction: column;
+    width: 100%;
     align-items: center;
-    font-weight: bold;
-    text-align: center;
-    display: flex;
-    font-size: 200%;
-    white-space: nowrap;
-}
-
-.searchBar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 5%;
-    margin-top: 5%;
-    input {
-        width: 50%;
-        height: 50%;
-        border-radius: 5px;
-        border: 1px solid lightblue;
-        padding: 1%;
-        font-size: 100%;
-        &:focus {
-            outline: none;
-        }
-    }
-    button {
-        margin-left: 1%;
-        border-radius: 5px;
-        border: 1px solid lightblue;
-        padding: 1%;
-        font-size: 100%;
-        &:focus {
-            outline: none;
-        }
-        &:hover {
-            background-color: lightblue;
-        }
-    }
-}
-
-.listeLivres { // table
-    // mettre des bordures à l'intérieur de la table
-    border-collapse: collapse;
-    thead {
-        border-bottom: 1px solid lightblue;
-
-        tr {
-            border-collapse: collapse;
-
-            // tous les th sauf le dernier
-            th:not(:last-child) {
-                border-right: 1px solid lightblue;
-            }
-
-        }
-
-    }
-    tbody {
-        text-align: center;
-        background-color: rgb(255, 255, 255);
-
-        td {
-            // mettre une taille maximum aux td
-            max-width: 200px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            position: relative;
-        }
-        td:hover {
-            overflow: visible;
-            white-space: normal;
-        }
-    }
-}
+      margin-top: 6%;
+  }
+  
+  .titreHistoryPage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-weight: bold;
+      text-align: center;
+      display: flex;
+      font-size: 200%;
+      white-space: nowrap;
+  }
+  
+  .searchBar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 5%;
+      margin-top: 5%;
+      input {
+          width: 50%;
+          height: 50%;
+          border-radius: 5px;
+          border: 1px solid lightblue;
+          padding: 1%;
+          font-size: 100%;
+          &:focus {
+              outline: none;
+          }
+      }
+      button {
+          margin-left: 1%;
+          border-radius: 5px;
+          border: 1px solid lightblue;
+          padding: 1%;
+          font-size: 100%;
+          &:focus {
+              outline: none;
+          }
+          &:hover {
+              background-color: lightblue;
+          }
+      }
+  }
