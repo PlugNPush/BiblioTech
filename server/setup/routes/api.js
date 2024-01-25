@@ -90,7 +90,14 @@ router.post("/addbook", async (req, res) => {
   try {
     const checkBook = await sequelize.query(`Select * From Book where owner='${owner}' and title='${title}'`);
     if(checkBook[0].length !== 0) {
-      await sequelize.query(`update book set nbBooks='${checkBook[0][0].nbBooks + 1}' where owner='${owner}' and title='${title}'`);
+      //await sequelize.query(`update book set nbBooks='${checkBook[0][0].nbBooks + 1}' where owner='${owner}' and title='${title}'`);
+      await sequelize.query(
+        `update book set nbBooks='${checkBook[0][0].nbBooks + 1}' where owner=? and title=?`,
+        {
+          replacements: [owner, title],
+          type: Sequelize.QueryTypes.UPDATE
+        }
+      )
     } else {
       const result = await sequelize.query(
         `INSERT INTO book (title, owner, author, year, type, publisher) VALUES (?, ?, ?, ?, ?, ?)`,
@@ -109,7 +116,9 @@ router.post("/addbook", async (req, res) => {
 router.post("/addreccobook", async (req, res) => {
   const { title, owner, author, year, type, publisher} = req.body;
   try {
-    const checkBook = await sequelize.query(`Select * From recco_book where owner='${owner}' and title='${title}'`);
+    const checkBook = await sequelize.query(`Select * From recco_book where owner=? and title=?`,
+    {replacements:[owner,title], type: Sequelize.QueryTypes.SELECT});
+    
     if(checkBook[0].length === 0) {
       const result = await sequelize.query(
         `INSERT INTO recco_book (title, owner, author, year, type, publisher) VALUES (?, ?, ?, ?, ?, ?)`,
@@ -129,7 +138,9 @@ router.post("/notebook", async (req, res) => {
   const { title, owner, note } = req.body;
   try {
     console.log(title, owner, note)
-    const checkBook = await sequelize.query(`Select * From Book where owner='${owner}' and title='${title}'`);
+    const checkBook = await sequelize.query(`Select * From recco_book where owner=? and title=?`,
+    {replacements:[owner,title], type: Sequelize.QueryTypes.SELECT});
+    
     if(checkBook[0].length === 0) {
       res.status(404).json({message: "No book found"})
       return
@@ -177,13 +188,16 @@ router.get("/getreccobooksfromowner/:owner", async (req, res) => {
 router.post("/deletebook", async (req, res) => {
   const {title, owner} = req.body;
   try {
-    const books = await sequelize.query(`Select * from book where owner='${owner}' and title='${title}'`);
+    const books = await sequelize.query(`Select * From book where owner=? and title=?`,
+    {replacements:[owner,title], type: Sequelize.QueryTypes.SELECT});
+
     if(books[0].length === 0) {
       res.status(400).json({message: "livre inexistant"})
       return
     }
     const nbBooks = books[0][0].nbBooks
     if(nbBooks === 1) {
+      // 
       await sequelize.query(`delete from book where owner='${owner}' and title='${title}'`)
     } else {
       await sequelize.query(`update book set nbBooks='${nbBooks - 1}' where owner='${owner}' and title='${title}'`)
