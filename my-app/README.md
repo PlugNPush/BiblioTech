@@ -98,7 +98,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 │   │       ├── logo.png
 │   │       └── pages
 │   │           ├── Home.js
-│   │           ├── HistoricPage.js
+│   │           ├── HistoryPage.js
 │   │           └── Book.js
 │   ├── reportWebVitals.js
 │   └── setupTests.js

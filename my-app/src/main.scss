@@ -7,14 +7,16 @@ $color-primary-dark: #004ba0;
 
 $color-secondary: #7ff7f8;
 
-$color-background: #ebe6f2;
-
 $color-icon: blueviolet;
 $color-button: #57d9ef;
 
-$color-text: #212121;
-$color-text-light: #ffffff;
-$color-text-dark: #000000;
+$color-background: #1a1a1a;
+$color-text: #ebe6f2;
+
+@media (prefers-color-scheme: light) {
+  $color-background: #ebe6f2;
+  $color-text: #1a1a1a;
+}
 
 // - fonts
 $font-primary: 'Roboto', sans-serif;
