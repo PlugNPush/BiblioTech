@@ -12,6 +12,7 @@ package-lock.json
 /recommendation/data_db.py
 /recommendation/TEST.ipynb
 /recommendation/*.csv
+/recommendation/Model/*
 
 # testing
 /coverage
