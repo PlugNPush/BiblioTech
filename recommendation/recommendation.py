@@ -67,7 +67,7 @@ def book_recommendation_system():
     print("Size of 'UserId' column:", len(df['UserId']))
 
     # Define the threshold values
-    product_id_threshold = 20 
+    product_id_threshold = 200 
     user_id_threshold = 10
 
     # Count the occurrences of ProductId and UserId
