@@ -12,3 +12,4 @@ bottleneck
 numexpr
 pyarrow
 pymysql
+cryptography
