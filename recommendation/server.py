@@ -1,6 +1,5 @@
 from http.server import SimpleHTTPRequestHandler, HTTPServer
-# import recommendation
-import import_ipynb
+
 #import reccomendation_ml
 import recommendation
 
