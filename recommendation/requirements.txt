@@ -8,3 +8,6 @@ python-Levenshtein  # This is often used alongside fuzzywuzzy for performance im
 IPython
 pickle-mixin  # If you're using pickle as an external library. Otherwise, it's part of the standard library.
 cffi
+bottleneck
+numexpr
+pyarrow
