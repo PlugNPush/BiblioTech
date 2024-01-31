@@ -34,8 +34,8 @@ def book_recommendation_system():
             return []
 
     # Replace NaN with empty strings
-    book_data['authors'].fillna('[]', inplace=True)
-    book_data['categories'].fillna('[]', inplace=True)
+    book_data['authors'] = book_data['authors'].fillna('[]')
+    book_data['categories'] = book_data['categories'].fillna('[]')
 
     # Convert strings that look like lists into actual lists
     book_data['authors'] = book_data['authors'].apply(str_to_list)
