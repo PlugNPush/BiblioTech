@@ -18,6 +18,7 @@ import time
 
 
 def book_recommendation_system():
+    print("Training recommendation system start...")
     start_time = time.time()
     ## PREPROCESSING
     book_data = pd.read_csv("books_metadata_Amazon.csv", delimiter=',', on_bad_lines='skip')
@@ -33,8 +34,8 @@ def book_recommendation_system():
             return []
 
     # Replace NaN with empty strings
-    book_data['authors'].fillna('[]', inplace=True)
-    book_data['categories'].fillna('[]', inplace=True)
+    book_data['authors'] = book_data['authors'].fillna('[]')
+    book_data['categories'] = book_data['categories'].fillna('[]')
 
     # Convert strings that look like lists into actual lists
     book_data['authors'] = book_data['authors'].apply(str_to_list)
@@ -66,7 +67,7 @@ def book_recommendation_system():
     print("Size of 'UserId' column:", len(df['UserId']))
 
     # Define the threshold values
-    product_id_threshold = 20 
+    product_id_threshold = 200 
     user_id_threshold = 10
 
     # Count the occurrences of ProductId and UserId
@@ -284,10 +285,12 @@ def book_recommendation_system():
         pickle.dump(VT_train, f)
         
     filtered_df.to_pickle('Model/books_metadata.pkl')
+    
+    print("Recommendation system trained in %s seconds." % (time.time() - start_time))
 
 
 
-# book_recommendation_system()
+book_recommendation_system()
 
 
 

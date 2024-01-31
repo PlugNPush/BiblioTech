@@ -1,7 +1,13 @@
-pymysql
+sqlalchemy
 pandas
-sqlalchemy<2.0.0
+numpy
 scikit-learn
+scipy
 fuzzywuzzy
-import-ipynb
-python-Levenshtein
+python-Levenshtein  # This is often used alongside fuzzywuzzy for performance improvements
+IPython
+pickle-mixin  # If you're using pickle as an external library. Otherwise, it's part of the standard library.
+cffi
+bottleneck
+numexpr
+pyarrow

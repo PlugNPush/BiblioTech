@@ -11,6 +11,7 @@ Il faut installer les bibliothèques depuis le fichier *requirements.txt* :
 ```zsh
 pip install -r requirements.txt
 ```
+insatll pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121 to use your GPU
 
 Télécharger les fichiers *books_metadata_Amazon.csv* et *Books_Amazon.csv* depuis [https://mega.nz/file/ZIJ0kCDY#XiTAW0sKbWcCuDTGI0JEwFrd9qbo81LwZo9Dzm6pypo](https://mega.nz/file/ZIJ0kCDY#XiTAW0sKbWcCuDTGI0JEwFrd9qbo81LwZo9Dzm6pypo) puis placer les dans le répertoire *recommendation*.
 
