@@ -11,3 +11,4 @@ cffi
 bottleneck
 numexpr
 pyarrow
+pymysql
