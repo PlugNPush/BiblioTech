@@ -18,6 +18,7 @@ import time
 
 
 def book_recommendation_system():
+    print("Training recommendation system start...")
     start_time = time.time()
     ## PREPROCESSING
     book_data = pd.read_csv("books_metadata_Amazon.csv", delimiter=',', on_bad_lines='skip')
@@ -284,10 +285,12 @@ def book_recommendation_system():
         pickle.dump(VT_train, f)
         
     filtered_df.to_pickle('Model/books_metadata.pkl')
+    
+    print("Recommendation system trained in %s seconds." % (time.time() - start_time))
 
 
 
-# book_recommendation_system()
+book_recommendation_system()
 
 
 
