@@ -14,7 +14,7 @@ npm start
 ```
 
 # Executer le back :
-- set up la bdd (voir fichier README.md dans le dossier server)
+- setup la bdd (voir fichier README.md dans le dossier server)
 - exécuter dans un terminal la ligne :
 ```zsh
 cd ./server
@@ -34,7 +34,12 @@ python server.py
 ```
 Note: le premier lancement nécessitera entre 5 et 10 minutes d'attente avant de démarrer le service afin de télécharger les modèles requis (environ 3Gb).
 
-# Executer l'algorithme de reccomandation :
+# Executer l'algorithme de recommandation :
+- Télécharger les données additionnelles requises manuellement et setup la bdd (voir fichier README.md dans le dossier recommendation)
+- Installer les dépendances pour la première fois :
+```zsh
+pip install -r ./recommendation/requirements.txt
+```
 - exécuter dans un terminal les lignes :
 ```zsh
 cd ./recommendation
