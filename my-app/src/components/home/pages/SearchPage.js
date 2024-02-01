@@ -87,7 +87,8 @@ class SearchPage extends Component {
         return <React.Fragment>
             <NavBar/>
             <div className="searchPage">
-                <h1>Rechercher</h1>
+                <h1>Rechercher un livre</h1>
+                <h3>(Exemple: Harry Potter; Marc Levy; Hachette)</h3>
                 {this.addBook()}
             </div>
         </React.Fragment>

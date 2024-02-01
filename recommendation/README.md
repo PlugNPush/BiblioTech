@@ -11,8 +11,11 @@ Il faut installer les bibliothèques depuis le fichier *requirements.txt* :
 ```zsh
 pip install -r requirements.txt
 ```
+insatll pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121 to use your GPU
 
 Télécharger les fichiers *books_metadata_Amazon.csv* et *Books_Amazon.csv* depuis [https://mega.nz/file/ZIJ0kCDY#XiTAW0sKbWcCuDTGI0JEwFrd9qbo81LwZo9Dzm6pypo](https://mega.nz/file/ZIJ0kCDY#XiTAW0sKbWcCuDTGI0JEwFrd9qbo81LwZo9Dzm6pypo) puis placer les dans le répertoire *recommendation*.
+
+En complément, télécharger le dossier Model (attention, le dossier Model est à l'intérieur du dossier désarchivé qui s'appelle également Model) depuis [https://mega.nz/file/5FhmDCoL#tJS3yWSEkkbS3M6BgmUe7FDunaq_YanWjz7XtmEH8yE](https://mega.nz/file/5FhmDCoL#tJS3yWSEkkbS3M6BgmUe7FDunaq_YanWjz7XtmEH8yE) et le placer dans le répertoire *recommendation*. On doit donc avoir recommendation/Model/....pkl.
 
 Pour le lancer :
 ```zsh

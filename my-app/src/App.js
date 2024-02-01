@@ -4,7 +4,6 @@ import {
   Route,
 } from "react-router-dom"
 import React from "react"
-
 import SearchPage from "./components/home/pages/SearchPage"
 import HistoryPage from "./components/home/pages/HistoryPage"
 import UserPage from "./components/home/pages/UserPage"

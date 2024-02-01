@@ -1,8 +1,7 @@
 from http.server import SimpleHTTPRequestHandler, HTTPServer
-# import recommendation
-import import_ipynb
-import reccomendation_ml
 
+#import reccomendation_ml
+import recommendation
 
 # Define the request handler class
 class RequestHandler(SimpleHTTPRequestHandler):
@@ -26,8 +25,8 @@ class RequestHandler(SimpleHTTPRequestHandler):
         data = self.rfile.read(content_length).decode('utf-8')
         mail = data.split(":")[1].replace('"', '').replace('}', '').replace('\n', '')
         print(mail)
-        user_books = reccomendation_ml.get_user_books(mail)
-        recommended_books = reccomendation_ml.recommend_books_for_new_user(user_books, 10)
+        user_books = recommendation.get_user_books(mail)
+        recommended_books = recommendation.provide_recommendations_for_user(mail, 35)
         response_data = '-'.join(recommended_books).encode('utf-8')
         print("reco", mail, recommended_books)
         self.wfile.write(response_data)
