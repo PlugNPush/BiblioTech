@@ -11,7 +11,7 @@ Il faut installer les bibliothèques depuis le fichier *requirements.txt* :
 ```zsh
 pip install -r requirements.txt
 ```
-insatll pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121 to use your GPU
+Note: avec une carte graphique NVIDIA, vous pouvez profiter de performances accrues avec CUDA. Si cela s'applique à vous, installez Pytorch en suivant [ces instructions d'installation](https://pytorch.org/get-started/locally/).
 
 Télécharger les fichiers *books_metadata_Amazon.csv* et *Books_Amazon.csv* depuis [https://mega.nz/file/ZIJ0kCDY#XiTAW0sKbWcCuDTGI0JEwFrd9qbo81LwZo9Dzm6pypo](https://mega.nz/file/ZIJ0kCDY#XiTAW0sKbWcCuDTGI0JEwFrd9qbo81LwZo9Dzm6pypo) puis placer les dans le répertoire *recommendation*.
 
