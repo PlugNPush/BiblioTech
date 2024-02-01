@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-
 import NavBar from '../NavBar'
 
 import './UserPage.scss'
@@ -14,6 +13,8 @@ class UserPage extends Component {
         super(props);
         this.state = {user: {}, newuser: {password:"",firstname:"",lastname:""}, message: ""}
     }
+
+
     getUserInfos() { // récupérer les infos de l'utilisateur
         axios.get("http://localhost:8100/api/getuser/" + localStorage.getItem("email"))
         .then((res) => {
@@ -57,10 +58,12 @@ class UserPage extends Component {
             console.log(err)
         })
     }
+    
 
     componentDidMount() {
         this.getUserInfos()
     }
+    
     render() {
         return <React.Fragment>
             <NavBar/>

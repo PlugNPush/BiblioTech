@@ -1,3 +1,5 @@
+@import 'main.scss';
+
 .searchPage {
     display: flex;
   flex-direction: column;
@@ -25,14 +27,18 @@
     flex-wrap: wrap;
 
     .card { // la carte / l'oeuvre
-        margin: 1%;
-        border: 1px solid black;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: visible;
+        padding: 10px;
+        width: 300px;
+        transition: transform 0.3s;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative; /* Ajoutez cette ligne */
+        z-index: 1;
 
         .card-header { // contient l'image et le titre de la carte
-            
+            transform: scale(1.05);
         }
 
         .card-body { // contient les infos de la carte
@@ -48,17 +54,32 @@
             text-align: center;
         }
 
-        .card-footer { // contient les boutons de la carte
+        .card-footer:hover { // contient les boutons de la carte
             display: flex;
             flex-direction: row;
             align-items: center;
             text-align: center;
-        }
-        .card-footer:hover { // contient les boutons de la carte
             transform: scale(1.2);
         }
-        button:hover {
-            background-color: #57d9ef;
+
+        button {
+            margin-left: 1%;
+            border-radius: 5px;
+            border: 1px solid lightblue;
+            padding: 1%;
+            font-size: 100%;
+            &:focus {
+                outline: none;
+            }
+            &:hover {
+                background-color: lightblue;
+            }
+        }
+
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
         }
     }
 }
