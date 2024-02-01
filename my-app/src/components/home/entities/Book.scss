@@ -1,6 +1,19 @@
-.book {
-    //display: flex;
+@import 'main.scss';
+
+.book-card {
+    border: 1px solid lightgrey;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 10px;
+    width: 300px; /* Ajustez la largeur des cartes */
+    transition: transform 0.3s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.book-card:hover {
+    transform: scale(1.05);
+}
+
 
 .deleteBook:hover {
     transform: scale(1.5);
@@ -12,8 +25,7 @@
     position: absolute;
     z-index: 1;
     background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    width: 100%;
+    width: auto;
 }
 .noteBook:hover {
     .noteBookText {
@@ -21,9 +33,14 @@
     }
 }
 
-.noteBookStars > * {
-    color: black;
+.noteBookStars {
+    width: fit-content;
 }
+
+.noteBookStars > * {
+    color: gold;
+}
+
 .addBook {
     transform: scale(1.2);
     color: green;
