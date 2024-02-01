@@ -44,6 +44,11 @@ const Book = sequelize.define('Book', {
   // Other model options go here
 });
 
+router.get("/", (req, res) => {
+  console.log("Hello World from server API");
+  res.send("Hello World from server API");
+});
+
 /// - CONNECTION - ///
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
