@@ -61,6 +61,7 @@ router.post("/login", async (req, res) => {
     res.status(400).json({ message: "User not found" });
     return
   } else {
+    console.log(user[0])
     const validPassword = await bcrypt.compare(password, user[0][0].password);
     if (validPassword) {
       res.status(200).json({ message: "Login successful" });
@@ -94,7 +95,7 @@ router.post("/addbook", async (req, res) => {
   const { title, owner, author, year, type, publisher} = req.body;
   try {
     const checkBook = await sequelize.query(`Select * From Book where owner='${owner}' and title='${title}'`);
-    if(checkbook.length !== 0 && checkBook[0].length !== 0) {
+    if(checkBook.length !== 0 && checkBook[0].length !== 0) {
       //await sequelize.query(`update book set nbBooks='${checkBook[0][0].nbBooks + 1}' where owner='${owner}' and title='${title}'`);
       await sequelize.query(
         `update book set nbBooks='${checkBook[0][0].nbBooks + 1}' where owner=? and title=?`,
@@ -174,21 +175,29 @@ router.get("/getbooksfromowner/:owner", async (req, res) => {
   }
 });
 
+const axios = require('axios');
+
 router.get("/getreccobooksfromowner/:owner", async (req, res) => {
-  const { owner } = req.params;
-  try {
-    const books = await sequelize.query(
-      `SELECT * FROM recco_book WHERE owner = ?`,
-      {
-        replacements: [owner],
-        type: Sequelize.QueryTypes.SELECT
-      }
-    );
-    res.status(200).json(books);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
+    const { owner } = req.params;
+    
+    try {
+        // Envoyer une requête POST au serveur Python pour obtenir des recommandations supplémentaires
+        const pythonServerResponse = await axios.post('http://127.0.0.1:8000', { mail: owner });
+        // Récupérer les livres recommandés depuis la base de données
+        const books = await sequelize.query(
+            `SELECT * FROM recco_book WHERE owner = ?`,
+            {
+                replacements: [owner],
+                type: Sequelize.QueryTypes.SELECT
+            }
+        );
+
+        res.status(200).json(books);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 });
+
 
 router.post("/deletebook", async (req, res) => {
   const {title, owner} = req.body;
@@ -196,11 +205,11 @@ router.post("/deletebook", async (req, res) => {
     const books = await sequelize.query(`Select * From book where owner=? and title=?`,
     {replacements:[owner,title], type: Sequelize.QueryTypes.SELECT});
 
-    if(books[0].length === 0) {
+    if(books.length === 0) {
       res.status(400).json({message: "livre inexistant"})
       return
     }
-    const nbBooks = books[0][0].nbBooks
+    const nbBooks = books[0].nbBooks
     if(nbBooks === 1) {
       // 
       await sequelize.query(`delete from book where owner='${owner}' and title='${title}'`)
@@ -219,11 +228,11 @@ router.get("/getuser/:email", async (req, res) => {
   const { email } = req.params
   try {
     const user = await sequelize.query(`Select * from user where email='${email}'`);    
-    user[0][0].password = undefined
-    if(user[0].length === 0) {
+    if(user.length === 0) {
       res.status(400).json({message: "utilisateur inexistant"})
       return
     }
+    user[0][0].password = undefined
     res.status(200).json(user[0][0])
   }
   catch(err) {
@@ -287,7 +296,7 @@ router.post("/addbookboite", async (req, res) => {
   const { nom_gare, title, author, year, type, publisher} = req.body;
   try {
     const checkBook = await sequelize.query(`Select * From boite_aux_livres where nom_gare='${nom_gare}' and title='${title}'`);
-    if(checkBook[0].length !== 0) {
+    if(checkBook.length !== 0) {
       await sequelize.query(`update boite_aux_livres set nbBooks='${checkBook[0][0].nbBooks + 1}' where nom_gare='${nom_gare}' and title='${title}'`);
     } else {
       const result = await sequelize.query(

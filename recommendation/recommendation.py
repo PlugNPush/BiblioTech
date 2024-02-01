@@ -144,8 +144,7 @@ def book_recommendation_system():
             if closest_title:
                 filtered_df.at[index, 'ProductId'] = product_ids_by_title[closest_title]
 
-    # filtered_df[filtered_df['UserId'] == 'john.doe@example.com']
-    # filtered_df[filtered_df['ProductId'] == '1565119770']
+    filtered_df = filtered_df.sample(frac=1, random_state=42)
     # Get unique UserIds and ProductIds
     unique_user_ids = filtered_df['UserId'].unique()
     unique_product_ids = filtered_df['ProductId'].unique() #unique ids for books are less
@@ -360,9 +359,11 @@ def get_user_books(user_email):
     #user_books = user_books[user_books['rating'].between(0, 5)]
     # Prendre en compte la casse et les espaces supplémentaires
     user_books['title'] = user_books['title'].str.strip().str.lower()
+    print("User book :",user_books)
     return user_books
 
 def provide_recommendations_for_user(user_id, top_n=35):
+    U_matrix, S_matrix, VT_matrix, user_id_to_index, product_id_to_index, original_matrix, U_train, VT_train, filtered_df = load_model_and_mappings()
     print("Recommendation for user", user_id)
     # Fetch relevant items for the user
     relevant_items = fetch_relevant_items_for_user(user_id, top_n)
