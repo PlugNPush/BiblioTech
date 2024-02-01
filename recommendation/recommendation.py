@@ -88,9 +88,8 @@ def book_recommendation_system():
         # Load user's read and liked books from the database
         query = text(f"SELECT * FROM user WHERE email = '{user_email}';")
         user_data = pd.read_sql_query(query, engine)
-        
         return user_data
-    user_data = get_user_data('john.doe@example.com')
+    # user_data = get_user_data('john.doe@example.com')
     def get_user_books(user_email):
         """ Récupère les livres d'un utilisateur à partir de la base de données """
         engine = create_engine('mysql+pymysql://'+user+':'+mdp+'@localhost:3306/db_master_project')
@@ -101,7 +100,7 @@ def book_recommendation_system():
         user_books['title'] = user_books['title'].str.strip().str.lower()
         return user_books
 
-    user_books = get_user_books('john.doe@example.com')
+    # user_books = get_user_books('john.doe@example.com')
     def get_all_user_books():
         """ Récupère les livres d'un utilisateur à partir de la base de données """
         engine = create_engine('mysql+pymysql://'+user+':'+mdp+'@localhost:3306/db_master_project')
@@ -364,6 +363,7 @@ def get_user_books(user_email):
     return user_books
 
 def provide_recommendations_for_user(user_id, top_n=35):
+    print("Recommendation for user", user_id)
     # Fetch relevant items for the user
     relevant_items = fetch_relevant_items_for_user(user_id, top_n)
 
