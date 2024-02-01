@@ -12,12 +12,13 @@ package-lock.json
 /recommendation/data_db.py
 /recommendation/TEST.ipynb
 /recommendation/*.csv
+/recommendation/Model/*
 
 # testing
 /coverage
 
 # production
-/build
+*/build
 
 # misc
 .DS_Store
