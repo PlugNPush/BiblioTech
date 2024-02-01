@@ -1,4 +1,5 @@
 from http.server import SimpleHTTPRequestHandler, HTTPServer
+import json
 
 #import reccomendation_ml
 import recommendation
@@ -19,17 +20,24 @@ class RequestHandler(SimpleHTTPRequestHandler):
         self.wfile.write(b'Hello, World! This is the response.')
 
     # Handle POST requests
+    
+
     def do_POST(self):
         self._set_response()
         content_length = int(self.headers['Content-Length'])
         data = self.rfile.read(content_length).decode('utf-8')
-        mail = data.split(":")[1].replace('"', '').replace('}', '').replace('\n', '')
-        print(mail)
-        user_books = recommendation.get_user_books(mail)
-        recommended_books = recommendation.provide_recommendations_for_user(mail, 35)
-        response_data = '-'.join(recommended_books).encode('utf-8')
-        print("reco", mail, recommended_books)
-        self.wfile.write(response_data)
+
+        try:
+            json_data = json.loads(data)  # Convertir les données JSON en un objet Python
+            mail = json_data.get('mail', '')  # Récupérer l'adresse e-mail de l'objet JSON
+            print("mail:", mail)
+
+            recommendation.get_user_books(mail)
+            recommended_books = recommendation.provide_recommendations_for_user(mail, 35)
+            self.wfile.write(b'OK')
+        except json.JSONDecodeError as e:
+            print("Erreur lors de la conversion JSON:", str(e))
+
 
     def do_OPTIONS(self):
         self.send_response(200)

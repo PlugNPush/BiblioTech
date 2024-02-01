@@ -175,21 +175,29 @@ router.get("/getbooksfromowner/:owner", async (req, res) => {
   }
 });
 
+const axios = require('axios');
+
 router.get("/getreccobooksfromowner/:owner", async (req, res) => {
-  const { owner } = req.params;
-  try {
-    const books = await sequelize.query(
-      `SELECT * FROM recco_book WHERE owner = ?`,
-      {
-        replacements: [owner],
-        type: Sequelize.QueryTypes.SELECT
-      }
-    );
-    res.status(200).json(books);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
+    const { owner } = req.params;
+    
+    try {
+        // Envoyer une requête POST au serveur Python pour obtenir des recommandations supplémentaires
+        const pythonServerResponse = await axios.post('http://127.0.0.1:8000', { mail: owner });
+        // Récupérer les livres recommandés depuis la base de données
+        const books = await sequelize.query(
+            `SELECT * FROM recco_book WHERE owner = ?`,
+            {
+                replacements: [owner],
+                type: Sequelize.QueryTypes.SELECT
+            }
+        );
+
+        res.status(200).json(books);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 });
+
 
 router.post("/deletebook", async (req, res) => {
   const {title, owner} = req.body;
