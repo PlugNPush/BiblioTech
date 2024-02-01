@@ -11,7 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { ThemeProvider } from './src/contexts/ThemeContext';
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 
 import StartScreen from './src/screens/StartScreen';
 import HomeScreen from './src/screens/HomeScreen';
