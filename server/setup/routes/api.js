@@ -138,10 +138,10 @@ router.post("/notebook", async (req, res) => {
   const { title, owner, note } = req.body;
   try {
     console.log(title, owner, note)
-    const checkBook = await sequelize.query(`Select * From recco_book where owner=? and title=?`,
+    const checkBook = await sequelize.query(`Select * From book where owner=? and title=?`,
     {replacements:[owner,title], type: Sequelize.QueryTypes.SELECT});
     
-    if(checkBook[0].length === 0) {
+    if(checkBook.length === 0) {
       res.status(404).json({message: "No book found"})
       return
     }
