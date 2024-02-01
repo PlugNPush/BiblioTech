@@ -18,6 +18,7 @@ import time
 
 
 def book_recommendation_system():
+    print("Training recommendation system start...")
     start_time = time.time()
     ## PREPROCESSING
     book_data = pd.read_csv("books_metadata_Amazon.csv", delimiter=',', on_bad_lines='skip')
@@ -33,8 +34,8 @@ def book_recommendation_system():
             return []
 
     # Replace NaN with empty strings
-    book_data['authors'].fillna('[]', inplace=True)
-    book_data['categories'].fillna('[]', inplace=True)
+    book_data['authors'] = book_data['authors'].fillna('[]')
+    book_data['categories'] = book_data['categories'].fillna('[]')
 
     # Convert strings that look like lists into actual lists
     book_data['authors'] = book_data['authors'].apply(str_to_list)
@@ -66,7 +67,7 @@ def book_recommendation_system():
     print("Size of 'UserId' column:", len(df['UserId']))
 
     # Define the threshold values
-    product_id_threshold = 20 
+    product_id_threshold = 200 
     user_id_threshold = 10
 
     # Count the occurrences of ProductId and UserId
@@ -87,9 +88,8 @@ def book_recommendation_system():
         # Load user's read and liked books from the database
         query = text(f"SELECT * FROM user WHERE email = '{user_email}';")
         user_data = pd.read_sql_query(query, engine)
-        
         return user_data
-    user_data = get_user_data('john.doe@example.com')
+    # user_data = get_user_data('john.doe@example.com')
     def get_user_books(user_email):
         """ Récupère les livres d'un utilisateur à partir de la base de données """
         engine = create_engine('mysql+pymysql://'+user+':'+mdp+'@localhost:3306/db_master_project')
@@ -100,7 +100,7 @@ def book_recommendation_system():
         user_books['title'] = user_books['title'].str.strip().str.lower()
         return user_books
 
-    user_books = get_user_books('john.doe@example.com')
+    # user_books = get_user_books('john.doe@example.com')
     def get_all_user_books():
         """ Récupère les livres d'un utilisateur à partir de la base de données """
         engine = create_engine('mysql+pymysql://'+user+':'+mdp+'@localhost:3306/db_master_project')
@@ -144,8 +144,7 @@ def book_recommendation_system():
             if closest_title:
                 filtered_df.at[index, 'ProductId'] = product_ids_by_title[closest_title]
 
-    # filtered_df[filtered_df['UserId'] == 'john.doe@example.com']
-    # filtered_df[filtered_df['ProductId'] == '1565119770']
+    filtered_df = filtered_df.sample(frac=1, random_state=42)
     # Get unique UserIds and ProductIds
     unique_user_ids = filtered_df['UserId'].unique()
     unique_product_ids = filtered_df['ProductId'].unique() #unique ids for books are less
@@ -284,10 +283,12 @@ def book_recommendation_system():
         pickle.dump(VT_train, f)
         
     filtered_df.to_pickle('Model/books_metadata.pkl')
+    
+    print("Recommendation system trained in %s seconds." % (time.time() - start_time))
 
 
 
-# book_recommendation_system()
+book_recommendation_system()
 
 
 
@@ -358,9 +359,12 @@ def get_user_books(user_email):
     #user_books = user_books[user_books['rating'].between(0, 5)]
     # Prendre en compte la casse et les espaces supplémentaires
     user_books['title'] = user_books['title'].str.strip().str.lower()
+    print("User book :",user_books)
     return user_books
 
 def provide_recommendations_for_user(user_id, top_n=35):
+    U_matrix, S_matrix, VT_matrix, user_id_to_index, product_id_to_index, original_matrix, U_train, VT_train, filtered_df = load_model_and_mappings()
+    print("Recommendation for user", user_id)
     # Fetch relevant items for the user
     relevant_items = fetch_relevant_items_for_user(user_id, top_n)
 

@@ -1,3 +1,5 @@
+@import 'main.scss';
+
 .searchPage {
     display: flex;
   flex-direction: column;
@@ -28,7 +30,6 @@
         border: 1px solid #ddd;
         border-radius: 8px;
         overflow: visible;
-        background-color: #fff;
         padding: 10px;
         width: 300px;
         transition: transform 0.3s;

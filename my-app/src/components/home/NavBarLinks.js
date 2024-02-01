@@ -8,28 +8,31 @@ class NavBarLinks extends Component {
     }
 
     componentDidMount() {
-        // Check :root {color-scheme: dark light;
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            this.setState({darkMode: true});
+        // Vérifiez si le mode sombre est préféré par l'utilisateur
+        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+        const currentTheme = localStorage.getItem("theme");
+
+        // Appliquez le thème actuel au corps de la page
+        if (currentTheme === "dark" || (currentTheme === null && prefersDarkScheme.matches)) {
+            console.log("dark mode");
+            document.body.classList.add("dark-theme");
+            this.setState({ darkMode: true });
+        } else {
+            console.log("light mode");
+            document.body.classList.remove("dark-theme");
+            this.setState({ darkMode: false });
         }
     }
 
     handleDarkMode() {
-        // Change :root {color-scheme: dark light;
-        /*
-        if (this.state.darkMode) {
-            document.documentElement.style.colorScheme = "light";
-        } else {
-            document.documentElement.style.colorScheme = "dark";
-        }
-        */
-        // Change prefers-color-scheme
-        if (this.state.darkMode) {
-            document.documentElement.style.setProperty('color-scheme', 'light');
-        } else {
-            document.documentElement.style.setProperty('color-scheme', 'dark');
-        }
-        this.setState({darkMode: !this.state.darkMode});
+        // Inversez l'état du mode sombre et mettez à jour le localStorage
+        const newDarkMode = !this.state.darkMode;
+        const theme = newDarkMode ? "dark" : "light";
+        console.log(theme, " mode");
+        document.body.classList.toggle("dark-theme", newDarkMode);
+        localStorage.setItem("theme", theme);
+
+        this.setState({ darkMode: newDarkMode });
     }
 
     render() {

@@ -2,7 +2,6 @@
 
 .book-card {
     border: 1px solid lightgrey;
-    background-color: $color-background;
     border-radius: 8px;
     overflow: hidden;
     padding: 10px;
@@ -26,7 +25,6 @@
     position: absolute;
     z-index: 1;
     background-color: rgba(0, 0, 0, 0.5);
-    color: $color-text;
     width: auto;
 }
 .noteBook:hover {
