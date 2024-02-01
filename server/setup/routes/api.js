@@ -61,6 +61,7 @@ router.post("/login", async (req, res) => {
     res.status(400).json({ message: "User not found" });
     return
   } else {
+    console.log(user[0])
     const validPassword = await bcrypt.compare(password, user[0][0].password);
     if (validPassword) {
       res.status(200).json({ message: "Login successful" });
@@ -200,7 +201,7 @@ router.post("/deletebook", async (req, res) => {
       res.status(400).json({message: "livre inexistant"})
       return
     }
-    const nbBooks = books[0][0].nbBooks
+    const nbBooks = books[0].nbBooks
     if(nbBooks === 1) {
       // 
       await sequelize.query(`delete from book where owner='${owner}' and title='${title}'`)
