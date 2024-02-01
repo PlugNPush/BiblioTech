@@ -94,7 +94,7 @@ router.post("/addbook", async (req, res) => {
   const { title, owner, author, year, type, publisher} = req.body;
   try {
     const checkBook = await sequelize.query(`Select * From Book where owner='${owner}' and title='${title}'`);
-    if(checkbook.length !== 0 && checkBook[0].length !== 0) {
+    if(checkBook.length !== 0 && checkBook[0].length !== 0) {
       //await sequelize.query(`update book set nbBooks='${checkBook[0][0].nbBooks + 1}' where owner='${owner}' and title='${title}'`);
       await sequelize.query(
         `update book set nbBooks='${checkBook[0][0].nbBooks + 1}' where owner=? and title=?`,
@@ -196,7 +196,7 @@ router.post("/deletebook", async (req, res) => {
     const books = await sequelize.query(`Select * From book where owner=? and title=?`,
     {replacements:[owner,title], type: Sequelize.QueryTypes.SELECT});
 
-    if(books[0].length === 0) {
+    if(books.length === 0) {
       res.status(400).json({message: "livre inexistant"})
       return
     }
@@ -219,11 +219,11 @@ router.get("/getuser/:email", async (req, res) => {
   const { email } = req.params
   try {
     const user = await sequelize.query(`Select * from user where email='${email}'`);    
-    user[0][0].password = undefined
-    if(user[0].length === 0) {
+    if(user.length === 0) {
       res.status(400).json({message: "utilisateur inexistant"})
       return
     }
+    user[0][0].password = undefined
     res.status(200).json(user[0][0])
   }
   catch(err) {
@@ -287,7 +287,7 @@ router.post("/addbookboite", async (req, res) => {
   const { nom_gare, title, author, year, type, publisher} = req.body;
   try {
     const checkBook = await sequelize.query(`Select * From boite_aux_livres where nom_gare='${nom_gare}' and title='${title}'`);
-    if(checkBook[0].length !== 0) {
+    if(checkBook.length !== 0) {
       await sequelize.query(`update boite_aux_livres set nbBooks='${checkBook[0][0].nbBooks + 1}' where nom_gare='${nom_gare}' and title='${title}'`);
     } else {
       const result = await sequelize.query(

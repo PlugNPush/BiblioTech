@@ -5,8 +5,10 @@ Master Project M1
 - VSCode : installer l'extension "Javascript and Typescript Nightly"
 - Les versions les plus anciennes du projet nécéssitaient l'installation d'une exetension Chrome pour altérer le CORS origin, les versions actuelles ne sont plus concernées par ce prérequis.
 
+Pour chaque service, vous retrouverez plus d'informations dans le README.md du dossier correspondant.
+
 # Executer le front :
-- exécuter les lignes (npm i en mode admin) :
+- exécuter les lignes (npm i en mode admin peut être nécessaire) :
 ```zsh
 cd ./my-app
 npm i
