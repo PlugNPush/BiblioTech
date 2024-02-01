@@ -10,12 +10,107 @@ $color-secondary: #7ff7f8;
 $color-icon: blueviolet;
 $color-button: #57d9ef;
 
-$color-background: #1a1a1a;
-$color-text: #ebe6f2;
+$color-background-dark: #1a1a1a;
+$color-text-dark: #ebe6f2;
+$color-card-dark: #333;
 
-@media (prefers-color-scheme: light) {
-  $color-background: #ebe6f2;
-  $color-text: #1a1a1a;
+$color-background-light: #ebe6f2;
+$color-text-light: #1a1a1a;
+$color-card-light: #ebe6f2;
+
+body.dark-theme {
+  background-color: $color-background-dark;
+  color: $color-text-dark;
+  .card {
+    background-color: $color-card-dark;
+  }
+  .noteBookText {
+    color: $color-text-dark;
+  }
+  .book-card {
+    background-color: $color-background-dark;
+  }
+  .navbar {
+    background-color: $color-background-dark;
+    .bar {
+      div:not(.logo):not(.expandIcon) {
+        a {
+          color: $color-text-dark;
+          &:hover {
+            background-color: $color-primary-dark;
+          }
+          &:active {
+            background-color: $color-primary-light;
+          }
+        }
+      }
+    }
+    .reduceButton {
+      background-color: $color-primary-dark;
+      color: $color-text-dark;
+      &:hover {
+        background-color: $color-primary-light;
+      }
+      &:active {
+        background-color: $color-primary-dark;
+      }
+    }
+    &.expanded { // expand navbar
+      div:not(:first-child):not(:last-child) {
+        color: $color-text-dark;
+        > * {
+          color: $color-text-dark;
+        }
+      }
+    }
+  }
+}
+body:not(.dark-theme) { // light theme
+  background-color: $color-background-light;
+  color: $color-text-light;
+  .card {
+    background-color: $color-card-light;
+  }
+  .noteBookText {
+    color: $color-text-light;
+  }
+  .book-card {
+    background-color: $color-background-light;
+  }
+  .navbar {
+    background-color: $color-background-light;
+    .bar {
+      div:not(.logo):not(.expandIcon) {
+        a {
+          color: $color-text-light;
+          &:hover {
+            background-color: $color-primary-light;
+          }
+          &:active {
+            background-color: $color-primary-dark;
+          }
+        }
+      }
+    }
+    .reduceButton {
+      background-color: $color-primary-light;
+      color: $color-text-light;
+      &:hover {
+        background-color: $color-primary-dark;
+      }
+      &:active {
+        background-color: $color-primary-light;
+      }
+    }
+    &.expanded { // expand navbar
+      div:not(:first-child):not(:last-child) {
+        color: $color-text-light;
+        > * {
+          color: $color-text-light;
+        }
+      }
+    }
+  }
 }
 
 // - fonts
