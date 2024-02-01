@@ -52,7 +52,7 @@ router.post("/login", async (req, res) => {
     `SELECT * FROM user WHERE email = '${email}'`
   );
   
-  if (user[0].length === 0) {
+  if (user.length === 0) {
     res.status(400).json({ message: "User not found" });
     return
   } else {
@@ -70,7 +70,7 @@ router.post("/signin", async(req, res) => {
     const query = await sequelize.query(
         `Select * from user where email = '${email}';`
     )
-    if(query[0].length !== 0) {
+    if(query.length !== 0) {
       res.status(400).json({message: "email deja present"})
       return
     }
@@ -89,7 +89,7 @@ router.post("/addbook", async (req, res) => {
   const { title, owner, author, year, type, publisher} = req.body;
   try {
     const checkBook = await sequelize.query(`Select * From Book where owner='${owner}' and title='${title}'`);
-    if(checkBook[0].length !== 0) {
+    if(checkbook.length !== 0 && checkBook[0].length !== 0) {
       //await sequelize.query(`update book set nbBooks='${checkBook[0][0].nbBooks + 1}' where owner='${owner}' and title='${title}'`);
       await sequelize.query(
         `update book set nbBooks='${checkBook[0][0].nbBooks + 1}' where owner=? and title=?`,
@@ -119,7 +119,7 @@ router.post("/addreccobook", async (req, res) => {
     const checkBook = await sequelize.query(`Select * From recco_book where owner=? and title=?`,
     {replacements:[owner,title], type: Sequelize.QueryTypes.SELECT});
     
-    if(checkBook[0].length === 0) {
+    if(checkBook.length === 0) {
       const result = await sequelize.query(
         `INSERT INTO recco_book (title, owner, author, year, type, publisher) VALUES (?, ?, ?, ?, ?, ?)`,
         {
@@ -138,10 +138,10 @@ router.post("/notebook", async (req, res) => {
   const { title, owner, note } = req.body;
   try {
     console.log(title, owner, note)
-    const checkBook = await sequelize.query(`Select * From recco_book where owner=? and title=?`,
+    const checkBook = await sequelize.query(`Select * From book where owner=? and title=?`,
     {replacements:[owner,title], type: Sequelize.QueryTypes.SELECT});
     
-    if(checkBook[0].length === 0) {
+    if(checkBook.length === 0) {
       res.status(404).json({message: "No book found"})
       return
     }
