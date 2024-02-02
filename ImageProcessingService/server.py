@@ -422,7 +422,7 @@ def read_ocr_text(image_path, indexes):
             # Remove the last space
             finished_text = finished_text[:-1]
 
-        with open(os.path.join(f"{image_folder}", "sam_ocr", f"{i}.txt"), "w") as f:
+        with open(os.path.join(f"{image_folder}", "sam_ocr", f"{i}.txt"), "w", encoding="utf-8") as f:
             f.write(finished_text)
     print("OCR text read.")
 
@@ -433,11 +433,11 @@ def merge_ocr_text(image_path, indexes):
     result = ""
     for i in indexes:
         print("Merging OCR text for mask " + str(i) + ".png")
-        with open(os.path.join(f"{image_folder}", "sam_ocr", f"{i}.txt"), "r") as f:
+        with open(os.path.join(f"{image_folder}", "sam_ocr", f"{i}.txt", encoding="utf-8"), "r") as f:
             content = f.read()
             if content != "":
                 result += content + "\n"
-    with open(os.path.join(f"{image_folder}", "final.txt"), "w") as f:
+    with open(os.path.join(f"{image_folder}", "final.txt", encoding="utf-8"), "w") as f:
         f.write(result)
     print("OCR text merged.")
 
@@ -454,7 +454,7 @@ def get_book_google(title):
 def get_books(image_path):
     print("Getting books...")
     image_folder = os.path.dirname(image_path)
-    with open(os.path.join(f"{image_folder}", "final.txt"), "r") as f:
+    with open(os.path.join(f"{image_folder}", "final.txt"), "r", encoding="utf-8") as f:
         content = f.read()
         titles = content.split("\n")
         books = []
