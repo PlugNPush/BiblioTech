@@ -57,7 +57,7 @@ router.post("/login", async (req, res) => {
     `SELECT * FROM user WHERE email = '${email}'`
   );
   
-  if (user.length === 0) {
+  if (user.length === 0 || user[0].length === 0) {
     res.status(400).json({ message: "User not found" });
     return
   } else {
@@ -228,7 +228,7 @@ router.get("/getuser/:email", async (req, res) => {
   const { email } = req.params
   try {
     const user = await sequelize.query(`Select * from user where email='${email}'`);    
-    if(user.length === 0) {
+    if(user.length === 0 || user[0].length === 0) {
       res.status(400).json({message: "utilisateur inexistant"})
       return
     }
@@ -296,7 +296,7 @@ router.post("/addbookboite", async (req, res) => {
   const { nom_gare, title, author, year, type, publisher} = req.body;
   try {
     const checkBook = await sequelize.query(`Select * From boite_aux_livres where nom_gare='${nom_gare}' and title='${title}'`);
-    if(checkBook.length !== 0) {
+    if(checkBook.length !== 0 && checkBook[0].length !== 0) {
       await sequelize.query(`update boite_aux_livres set nbBooks='${checkBook[0][0].nbBooks + 1}' where nom_gare='${nom_gare}' and title='${title}'`);
     } else {
       const result = await sequelize.query(

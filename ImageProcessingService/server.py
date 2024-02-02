@@ -181,6 +181,11 @@ def generate_masks(image_path):
     print("Generating masks... This may take a while.")
     os.makedirs(os.path.join(f"{image_folder}", "sam_masks"), exist_ok=True)
     #os.makedirs(os.path.join(f"{image_folder}", "sam_masks_trained"), exist_ok=True)
+
+    # If masks already exist, skip to the next step
+    if len(os.listdir(os.path.join(f"{image_folder}", "sam_masks"))) > 0:
+        print("Masks already exist.")
+        return
     
     image = cv2.imread(image_path)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -211,6 +216,12 @@ def overlay_masks(image_path, indexes):
     print("Overlaying masks...")
     image_folder = os.path.dirname(image_path)
     os.makedirs(os.path.join(f"{image_folder}", "sam_overlays"), exist_ok=True)
+
+    # If masks already exist, skip to the next step
+    if len(os.listdir(os.path.join(f"{image_folder}", "sam_overlays"))) > 0:
+        print("Overlays already exist.")
+        return
+
     # load images
     img_org  = cv2.imread(image_path)
     b, g, r = cv2.split(img_org)
@@ -242,6 +253,12 @@ def crop_masks(image_path, indexes):
     print("Cropping masks...")
     image_folder = os.path.dirname(image_path)
     os.makedirs(os.path.join(f"{image_folder}", "sam_cropped"), exist_ok=True)
+
+    # If cropped masks already exist, skip to the next step
+    if len(os.listdir(os.path.join(f"{image_folder}", "sam_cropped"))) > 0:
+        print("Cropped masks already exist.")
+        return
+
     for i in indexes:
         print("Cropping mask " + str(i) + ".png")
         # Load image
@@ -281,11 +298,25 @@ def filter_masks(image_path, masks):
 """
 
 
+def get_list_of_filtered_masks(image_path):
+    image_folder = os.path.dirname(image_path)
+    filtered_masks = os.listdir(os.path.join(f"{image_folder}", "sam_filtered"))
+    filtered_indexes = []
+    for mask in filtered_masks:
+        filtered_indexes.append(int(mask.split(".")[0]))
+    return filtered_indexes
+
+
 def filter_masks(image_path, masks):
     print("Filtering masks...")
     image_folder = os.path.dirname(image_path)
     image = cv2.imread(image_path)
     os.makedirs(os.path.join(f"{image_folder}", "sam_filtered"), exist_ok=True)
+
+    # If filtered masks already exist, return them
+    if len(os.listdir(os.path.join(f"{image_folder}", "sam_filtered"))) > 0:
+        print("Filtered masks already exist.")
+        return get_list_of_filtered_masks(image_path)
 
     for idk, _ in enumerate(masks):
         print("Assigning ID to mask " + str(idk) + ".png")
@@ -360,6 +391,12 @@ def read_ocr_text(image_path, indexes):
     image_folder = os.path.dirname(image_path)
     os.makedirs(os.path.join(f"{image_folder}", "sam_ocr"), exist_ok=True)
     os.makedirs(os.path.join(f"{image_folder}", "sam_ocrblocks"), exist_ok=True)
+
+    # If OCR text already exists, skip to the next step
+    if len(os.listdir(os.path.join(f"{image_folder}", "sam_ocr"))) > 0:
+        print("OCR text already exists.")
+        return
+
     allowlist = "abcdefghijklmnopqrstuvwxyz" \
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
             "áàâäãåāæçćčďéèêëēėęíìîïīįðñńňóòôöõøōœßśšťúùûüūůýÿžźż" \
@@ -430,14 +467,20 @@ def merge_ocr_text(image_path, indexes):
     print("Merging OCR text...")
     image_folder = os.path.dirname(image_path)
     os.makedirs(os.path.join(f"{image_folder}", "sam_ocr"), exist_ok=True)
+
+    # If final.txt already exists, skip to the next step
+    if os.path.exists(os.path.join(f"{image_folder}", "final.txt")):
+        print("OCR text already merged.")
+        return
+
     result = ""
     for i in indexes:
         print("Merging OCR text for mask " + str(i) + ".png")
-        with open(os.path.join(f"{image_folder}", "sam_ocr", f"{i}.txt", "r", encoding="utf-8")) as f:
+        with open(os.path.join(f"{image_folder}", "sam_ocr", f"{i}.txt"), "r", encoding="utf-8") as f:
             content = f.read()
             if content != "":
                 result += content + "\n"
-    with open(os.path.join(f"{image_folder}", "final.txt", "w", encoding="utf-8")) as f:
+    with open(os.path.join(f"{image_folder}", "final.txt"), "w", encoding="utf-8") as f:
         f.write(result)
     print("OCR text merged.")
 
