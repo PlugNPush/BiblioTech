@@ -15,6 +15,17 @@ import BoiteLivres from "./components/home/pages/BoiteLivres";
 
 
 function App() {
+
+  // check color-scheme to set theme, if dark then add class "dark-theme" to body
+  const checkColorScheme = () => {
+    if ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem("theme")) || localStorage.getItem("theme") === "dark") {
+      document.body.classList.add('dark-theme');
+    }
+  }
+
+  // check color-scheme on load
+  checkColorScheme();
+
   return (
       <BrowserRouter>
       <Routes>

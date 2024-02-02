@@ -31,9 +31,9 @@ class RequestHandler(SimpleHTTPRequestHandler):
             json_data = json.loads(data)  # Convertir les données JSON en un objet Python
             mail = json_data.get('mail', '')  # Récupérer l'adresse e-mail de l'objet JSON
             print("mail:", mail)
-
-            recommendation.get_user_books(mail)
-            recommended_books = recommendation.provide_recommendations_for_user(mail, 35)
+            if mail:
+                recommendation.get_user_books(mail)
+                recommended_books = recommendation.provide_recommendations_for_user(mail, 35)
             self.wfile.write(b'OK')
         except json.JSONDecodeError as e:
             print("Erreur lors de la conversion JSON:", str(e))
