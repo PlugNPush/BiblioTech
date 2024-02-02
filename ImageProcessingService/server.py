@@ -433,11 +433,11 @@ def merge_ocr_text(image_path, indexes):
     result = ""
     for i in indexes:
         print("Merging OCR text for mask " + str(i) + ".png")
-        with open(os.path.join(f"{image_folder}", "sam_ocr", f"{i}.txt", encoding="utf-8"), "r") as f:
+        with open(os.path.join(f"{image_folder}", "sam_ocr", f"{i}.txt", "r", encoding="utf-8")) as f:
             content = f.read()
             if content != "":
                 result += content + "\n"
-    with open(os.path.join(f"{image_folder}", "final.txt", encoding="utf-8"), "w") as f:
+    with open(os.path.join(f"{image_folder}", "final.txt", "w", encoding="utf-8")) as f:
         f.write(result)
     print("OCR text merged.")
 
