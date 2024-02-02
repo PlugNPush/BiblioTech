@@ -73,14 +73,17 @@ router.post("/login", async (req, res) => {
 
 router.post("/signin", async(req, res) => {
     const {firstname, lastname, email, password} = req.body;
+    console.log("user", email)
     const query = await sequelize.query(
         `Select * from user where email = '${email}';`
     )
-    if(query.length !== 0) {
+    console.log("query", query)
+    if(query.length !== 0 && query[0].length !== 0) {
       res.status(400).json({message: "email deja present"})
       return
     }
     try {
+      console.log("user", email)
       const newPassword = await bcrypt.hash(password, 10)
       await sequelize.query( `insert into user (firstname, lastname, email, password) values ('${firstname}', '${lastname}', '${email}', '${newPassword}')`)
       res.status(200).json({message:"Values inserted"})
