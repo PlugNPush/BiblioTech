@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { AiOutlineCheck } from 'react-icons/ai'
+import loading from "assets/loading.gif"
 
 import NavBar from '../NavBar'
 import { getBookGoogle, addBook } from 'utils/sendBook'
@@ -60,6 +61,10 @@ class ReccoPage extends Component {
             <NavBar />
             <div className="reccoPage">
                 <h1>Recommandations de livres :</h1>
+                {this.state.books.length === 0 && <div className="spinner-border" role="status">
+                    <img src={loading} alt="loading" style={{ height: "12px" }}/>
+                    <span className="sr-only">   Chargement des recommandations...</span>
+                </div>}
                 <div className="searchResults">
                     {this.state.books.sort((a, b) => a.title.localeCompare(b.title)).map((book) => (
                         <div className="card" key={book.id}>
