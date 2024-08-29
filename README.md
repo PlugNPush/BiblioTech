@@ -3,7 +3,7 @@ Master Project M1
 
 # Prérequis :
 - VSCode : installer l'extension "Javascript and Typescript Nightly"
-- Les versions les plus anciennes du projet nécéssitaient l'installation d'une exetension Chrome pour altérer le CORS origin, les versions actuelles ne sont plus concernées par ce prérequis.
+- Les versions les plus anciennes du projet nécéssitaient l'installation d'une extension Chrome pour altérer le CORS origin, les versions actuelles ne sont plus concernées par ce prérequis.
 
 Pour chaque service, vous retrouverez plus d'informations dans le README.md du dossier correspondant.
 
